@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ancLoading" style="-fx-background-color: #dff9fb;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.drivemaster.controller.LoadingScreenController">
+
+    <children>
+        <StackPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <!-- Animated background elements -->
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#041643" height="517.0" style="-fx-stroke: white; -fx-stroke-width: 3px; -fx-arc-height: 32px; -fx-arc-width: 32px;" width="1143.0" />
+
+                <VBox alignment="CENTER" spacing="20.0">
+
+                    <!-- App title -->
+                    <Label text="Drive Master" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="48.0" />
+                        </font>
+                        <effect>
+                            <DropShadow color="#00b4d8" spread="0.2" />
+                        </effect>
+                    </Label>
+
+                    <!-- Animated progress bar container -->
+                    <VBox alignment="CENTER" spacing="20.0">
+                        <StackPane style="-fx-background-radius: 10; -fx-padding: 2;">
+                            <ProgressBar fx:id="progressBar" prefWidth="350.0" progress="0.0" style="-fx-accent: #00b4d8; -fx-background-radius: 8;" />
+                        </StackPane>
+
+                        <!-- Loading info section -->
+                        <VBox alignment="CENTER" spacing="10.0">
+                            <Label fx:id="lblLoading" text="Initializing Application..." textAlignment="CENTER" textFill="#e6e6e6">
+                                <font>
+                                    <Font size="18.0" />
+                                </font>
+                            </Label>
+                            <Label fx:id="lblStatus" text="Preparing your experience..." textAlignment="CENTER" textFill="#a0a0a0">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                            <Label fx:id="percentageLabel" text="0%" textAlignment="CENTER" textFill="#00b4d8">
+                                <font>
+                                    <Font name="System Bold" size="24.0" />
+                                </font>
+                            </Label>
+                        </VBox>
+                    </VBox>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+        </StackPane>
+    </children>
+</AnchorPane>

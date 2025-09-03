@@ -1,0 +1,22 @@
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.progress-bar {
+    -fx-accent: #e9f1f6;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8;
+}
+
+.progress-bar .track {
+    -fx-background-radius: 8;
+    -fx-background-color: transparent;
+}
+
+.progress-bar .bar {
+    -fx-background-radius: 8;
+    -fx-background-insets: 0;
+    -fx-padding: 0.6em;
+    -fx-effect: dropshadow(three-pass-box, rgb(233, 241, 246), 5, 0, 0, 1);
+}
