@@ -1,4 +1,4 @@
-package lk.ijse.project.drivemaster.entity;
+package lk.ijse.project.drivemaster.enums;
 
 public enum Role {
     ADMIN, RECEPTIONIST
