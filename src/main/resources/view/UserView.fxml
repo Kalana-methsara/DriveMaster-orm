@@ -2,65 +2,66 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ancUserView" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: #0c2461;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.drivemaster.controller.UserViewController">
+<AnchorPane fx:id="ancUserView" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color:  #023c73;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.drivemaster.controller.UserViewController">
     <children>
 
         <!-- Side Menu -->
-        <AnchorPane layoutY="80.0" prefHeight="700.0" prefWidth="200.0" style="-fx-background-color: #023c73; -fx-background-radius: 10;" AnchorPane.leftAnchor="2.0">
+        <AnchorPane layoutY="80.0" prefHeight="700.0" prefWidth="200.0" style="-fx-background-color: #023c73; -fx-background-radius: 10;" AnchorPane.leftAnchor="5.0">
             <children>
-                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #023c73; -fx-background-radius: 10; -fx-border-color: E9F1F6; -fx-border-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <Pane layoutX="5.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #023c73; -fx-background-radius: 10; -fx-border-color: #e9c90e; -fx-border-radius: 10; -fx-border-width: 2px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
 
                         <!-- Menu Buttons -->
-                        <Button fx:id="btnDashboard" layoutX="3.0" layoutY="20.0" onAction="#onDashboard" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #e9c90e;" text="         DASHBOARD" textFill="#e9c90e">
+                        <Button fx:id="btnDashboard" layoutX="10.0" layoutY="20.0" onAction="#onDashboard" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #e9c90e;" text="         DASHBOARD" textFill="#e9c90e">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnProduct" layoutX="3.0" layoutY="60.0" onAction="#onProduct" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="    PRODUCT" textFill="WHITE">
+                        <Button fx:id="btnProduct" layoutX="10.0" layoutY="60.0" onAction="#onProduct" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="    PRODUCT" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnEmployee" layoutX="3.0" layoutY="100.0" onAction="#onEmployee" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="     EMPLOYEE" textFill="WHITE">
+                        <Button fx:id="btnEmployee" layoutX="10.0" layoutY="100.0" onAction="#onEmployee" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="     EMPLOYEE" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnTransport" layoutX="3.0" layoutY="140.0" onAction="#onTransport" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="        TRANSPORT" textFill="WHITE">
+                        <Button fx:id="btnTransport" layoutX="10.0" layoutY="140.0" onAction="#onTransport" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="        TRANSPORT" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnBooking" layoutX="3.0" layoutY="180.0" onAction="#onBooking" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="    BOOKING" textFill="WHITE">
+                        <Button fx:id="btnBooking" layoutX="10.0" layoutY="180.0" onAction="#onBooking" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="    BOOKING" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnPayment" layoutX="3.0" layoutY="220.0" onAction="#onPayment" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="    PAYMENT" textFill="WHITE">
+                        <Button fx:id="btnPayment" layoutX="10.0" layoutY="220.0" onAction="#onPayment" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="    PAYMENT" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnSalary" layoutX="3.0" layoutY="260.0" onAction="#onSalary" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="SALARY" textFill="WHITE">
+                        <Button fx:id="btnSalary" layoutX="10.0" layoutY="260.0" onAction="#onSalary" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="SALARY" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnRegister" layoutX="3.0" layoutY="380.0" onAction="#onRegister" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="  REGISTER" textFill="WHITE">
+                        <Button fx:id="btnRegister" layoutX="10.0" layoutY="380.0" onAction="#onRegister" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="  REGISTER" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnAdminManage" layoutX="3.0" layoutY="420.0" onAction="#onAdminManage" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="                ADMIN MANAGE" textFill="WHITE">
+                        <Button fx:id="btnAdminManage" layoutX="10.0" layoutY="420.0" onAction="#onAdminManage" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="                ADMIN MANAGE" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
                         <Pane layoutX="3.0" layoutY="460.0" opacity="0.19" prefHeight="3.0" prefWidth="195.0" style="-fx-background-color: f5f1f8;" />
 
-                        <Button fx:id="btnReport" layoutX="3.0" layoutY="470.0" onAction="#onReport" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="REPORT" textFill="WHITE">
+                        <Button fx:id="btnReport" layoutX="10.0" layoutY="470.0" onAction="#onReport" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="REPORT" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnLogout" layoutX="3.0" layoutY="540.0" onAction="#onLogout" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="Logout" textFill="WHITE">
+                        <Button fx:id="btnLogout" layoutX="10.0" layoutY="540.0" onAction="#onLogout" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="Logout" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
@@ -98,7 +99,7 @@
                         <ImageView fx:id="pngLogout" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="546.0" preserveRatio="true">
                             <image><Image url="@../images/logout.png" /></image>
                         </ImageView>
-                        <Button fx:id="btnStock" layoutX="3.0" layoutY="300.0" onAction="#onStock" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="STOCK " textFill="WHITE">
+                        <Button fx:id="btnStock" layoutX="10.0" layoutY="300.0" onAction="#onStock" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="STOCK " textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -108,7 +109,7 @@
                                 <Image url="@../images/stock.png" />
                             </image>
                         </ImageView>
-                        <Button fx:id="btnInventory" layoutX="3.0" layoutY="340.0" onAction="#onInventory" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="         INVENTORY" textFill="WHITE">
+                        <Button fx:id="btnInventory" layoutX="10.0" layoutY="340.0" onAction="#onInventory" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="         INVENTORY" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -125,7 +126,7 @@
         </AnchorPane>
 
         <!-- Top Header -->
-        <Pane prefHeight="80.0" prefWidth="1440.0" style="-fx-background-color: #0c2461;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <Pane prefHeight="80.0" prefWidth="1440.0" style="-fx-background-color: #023c73;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
                 <Label fx:id="lblDate" layoutX="1097.0" layoutY="13.0" text="07/Feb/2025" textFill="WHITE">
                     <font><Font name="System Bold" size="18.0" /></font>
@@ -136,16 +137,21 @@
                 <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="1220.0" layoutY="10.0" onMouseClicked="#onLoginUser">
                     <image><Image url="@../images/user.png" /></image>
                 </ImageView>
-                <Label layoutX="111.0" layoutY="15.0" text="LANKA ICE" textFill="WHITE">
-                    <font><Font name="System Bold" size="30.0" /></font>
-                </Label>
-                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="50.0" layoutY="20.0" preserveRatio="true">
-                    <image><Image url="@../images/snowflake.png" /></image>
+                <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="38.0" layoutY="18.0" preserveRatio="true">
+                    <image><Image url="@../images/steering-wheel.png" /></image>
                 </ImageView>
+            <Label layoutX="100.0" layoutY="7.0" text="Drive Master" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+               <effect>
+                  <DropShadow color="#00b4d8" spread="0.2" />
+               </effect>
+            </Label>
             </children>
         </Pane>
 
         <!-- Main Content Area -->
-        <AnchorPane fx:id="ancMainContainer" layoutX="203.0" layoutY="80.0" prefHeight="700.0" prefWidth="1171.0" AnchorPane.leftAnchor="205.0" />
+        <AnchorPane fx:id="ancMainContainer" layoutX="203.0" layoutY="80.0" prefHeight="700.0" prefWidth="1140.0" AnchorPane.leftAnchor="210.0" />
     </children>
 </AnchorPane>
