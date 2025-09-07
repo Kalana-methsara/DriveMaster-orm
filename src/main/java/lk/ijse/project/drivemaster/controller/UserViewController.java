@@ -88,7 +88,7 @@ public class UserViewController implements Initializable {
     void onEmployee(ActionEvent event) {
         resetOtherPages();
         changePage1(btnEmployee, "/images/employee(1).png", pngEmployee);
-        navigateTo("/view/EmployeeMenu.fxml");
+        navigateTo("/view/StudentManage.fxml");
     }
 
     @FXML

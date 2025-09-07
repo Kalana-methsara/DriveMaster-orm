@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -58,33 +57,31 @@
                             <children>
 
                                 <!-- Title -->
-                                <Label style="-fx-font-weight: bold; -fx-text-fill: white;" text="Enrollee's Details">
+                                <Label style="-fx-font-weight: bold; -fx-text-fill: white;" text="Dashboard">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
                             </children>
                         </VBox>
-                        <VBox prefHeight="38.0" prefWidth="347.0">
+                        <VBox prefHeight="54.0" prefWidth="235.0">
                             <children>
-                                <HBox prefHeight="28.0" prefWidth="273.0" spacing="20">
-                                    <children>
-                                        <Button style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: white; -fx-border-radius: 5;" text="Update Status">
-                                            <padding>
-                                                <Insets bottom="10" left="15" right="15" top="10" />
-                                            </padding>
-                                        </Button>
-                                        <Button style="-fx-background-color: #23c323; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: white; -fx-border-radius: 5;" text="+ Payment">
-                                            <padding>
-                                                <Insets bottom="10" left="15" right="15" top="10" />
-                                            </padding>
-                                        </Button>
-                                        <Button style="-fx-background-color: #8f8989; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: white; -fx-border-radius: 5;" text="Print">
-                                            <padding>
-                                                <Insets bottom="10" left="15" right="15" top="10" />
-                                            </padding>
-                                        </Button>
-                                    </children>
+                                <HBox prefHeight="52.0" prefWidth="281.0" spacing="20" style="-fx-background-color: #23c323; -fx-border-color: white; -fx-background-radius: 10px; -fx-border-radius: 10px;">
+                           <children>
+                                          <Label style="-fx-font-weight: bold;" text="Total Students" textFill="WHITE">
+                                              <font>
+                                                  <Font size="18.0" />
+                                              </font>
+                                 <HBox.margin>
+                                    <Insets left="15.0" top="15.0" />
+                                 </HBox.margin>
+                                          </Label>
+                              <Label fx:id="NoOfStudent" alignment="CENTER"  prefHeight="52.0" prefWidth="67.0" text="65" textFill="#8e44ad">
+                                 <font>
+                                    <Font name="System Bold" size="36.0" />
+                                 </font>
+                              </Label>
+                           </children>
                                 </HBox>
                             </children>
                         </VBox>
@@ -162,11 +159,6 @@
                                     <children>
                                         <HBox prefHeight="25.0" prefWidth="124.0" spacing="40.0">
                                             <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Training Package">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
 
                                                 <Label style="-fx-text-fill: #34495e;" text="Automatic Car Training" />
                                             </children>

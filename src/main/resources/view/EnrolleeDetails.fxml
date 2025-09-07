@@ -21,28 +21,30 @@
         <Pane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="1209.0" style="-fx-background-color: #E9F1F6; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Rectangle arcHeight="5.0" arcWidth="5.0" height="700.0" stroke="TRANSPARENT" style="-fx-arc-height: 12px; -fx-arc-width: 12px; -fx-stroke: #e9c90e; -fx-stroke-width: 2px;" width="1211.0">
+                    <effect>
+                        <DropShadow blurType="GAUSSIAN" color="#00000033" height="3.0" radius="3.5" width="0.0" />
+                    </effect>
                     <fill>
                         <LinearGradient endX="1.0" endY="1.0">
                             <stops>
                                 <Stop>
                                     <color>
-                                        <Color red="0.0470588244497776" green="0.1411764770746231" blue="0.3803921639919281" />
-                                    </color></Stop>
+                                        <Color red="0.2788742780685425" green="0.5526315569877625" blue="0.2879995107650757" />
+                                    </color>
+                                </Stop>
                                 <Stop offset="0.006711409395973154">
                                     <color>
-                                        <Color red="0.0470588244497776" green="0.1411764770746231" blue="0.3803921639919281" />
-                                    </color></Stop>
+                                        <Color red="0.13333334028720856" green="0.545098066329956" blue="0.13333334028720856" />
+                                    </color>
+                                </Stop>
                                 <Stop offset="1.0">
                                     <color>
-                                        <Color red="0.20392157137393951" green="0.5960784554481506" blue="0.8588235378265381" />
+                                        <Color red="0.5960784554481506" green="1.0" blue="0.5960784554481506" />
                                     </color>
                                 </Stop>
                             </stops>
                         </LinearGradient>
                     </fill>
-                    <effect>
-                        <DropShadow blurType="GAUSSIAN" color="#00000033" height="3.0" radius="3.5" width="0.0" />
-                    </effect>
                 </Rectangle>
                 <!-- Main Content Container -->
                 <VBox layoutX="30.0" layoutY="30.0" prefHeight="614.0" prefWidth="1125.0" spacing="20">
@@ -65,19 +67,19 @@
                         </VBox>
                         <VBox prefHeight="38.0" prefWidth="347.0">
                             <children>
-                                <HBox prefHeight="38.0" prefWidth="273.0" spacing="20">
+                                <HBox prefHeight="28.0" prefWidth="273.0" spacing="20">
                                     <children>
-                                        <Button style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="Update Status">
+                                        <Button style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: white; -fx-border-radius: 5;" text="Update Status">
                                             <padding>
                                                 <Insets bottom="10" left="15" right="15" top="10" />
                                             </padding>
                                         </Button>
-                                        <Button style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="+ Payment">
+                                        <Button style="-fx-background-color: #23c323; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: white; -fx-border-radius: 5;" text="+ Payment">
                                             <padding>
                                                 <Insets bottom="10" left="15" right="15" top="10" />
                                             </padding>
                                         </Button>
-                                        <Button style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="Print">
+                                        <Button style="-fx-background-color: #8f8989; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-color: white; -fx-border-radius: 5;" text="Print">
                                             <padding>
                                                 <Insets bottom="10" left="15" right="15" top="10" />
                                             </padding>
@@ -206,7 +208,7 @@
                                                         <Font size="14.0" />
                                                     </font>
                                                 </Label>
-                                                <Label alignment="CENTER" prefHeight="21.0" prefWidth="88.0" style="-fx-background-color: green; -fx-background-radius: 5px;" text="Completed" textFill="WHITE" />
+                                                <Label alignment="CENTER" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #23c323; -fx-background-radius: 5px;" text="Completed" textFill="WHITE" />
                                             </children>
                                         </HBox>
                                     </children>

@@ -1,0 +1,94 @@
+/* Set background color of the TableView */
+.table-view {
+    -fx-background-color: #f5f5f5; /* Light Gray */
+    -fx-border-style: none;
+    -fx-background-radius: 10px;   /* Rounded corners */
+    -fx-border-radius: 10px;
+    -fx-padding: 2;
+}
+
+/* Set alternating row colors for better readability */
+.table-row-cell:odd {
+    -fx-background-color: #ffffff; /* White */
+    -fx-border-style: none;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+.table-row-cell:even {
+    -fx-background-color:  #f5f5f5; /* Light Gray */
+    -fx-border-style: none;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+/* Set the column header text color */
+.table-view .column-header {
+    -fx-background-color: #228b22;
+    -fx-border-style: none;
+    -fx-background-radius: 10px 10px 0 0; /* Rounded top corners */
+    -fx-border-radius: 10px 10px 0 0;
+}
+
+.table-view .column-header .label{
+    -fx-text-fill: white;
+}
+
+.table-view .column-header:hover{
+    -fx-background-color:  #23c323;
+    -fx-background-radius: 10px 10px 0 0;
+}
+
+/* Set default cell padding and text color */
+.table-cell {
+    -fx-text-fill: #333333; /* Dark Gray */
+    -fx-font-size: 12px;
+    -fx-border-color: #cdcaca;
+    -fx-border-width: 0 1px 1px 0;
+}
+
+/* Selected row */
+.table-view .table-row-cell:filled:selected{
+    -fx-background-color: #98ff98;
+    -fx-background-radius: 10px;
+}
+
+/* Selection style */
+.table-row-cell:selected {
+    -fx-background-color: #ecf0f1;
+    -fx-text-fill: white;
+    -fx-border-style: none;
+    -fx-background-radius: 10px;
+}
+
+/* Hover effect */
+.table-row-cell:hover {
+    -fx-background-color: #ecf0f1;
+    -fx-background-radius: 10px;
+}
+
+/* Remove focus border */
+.table-view:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Remove grid lines */
+.table-view .table-row-cell {
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10px;
+}
+
+/* Scrollbar transparent */
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-opacity: 0;
+}
+
+.table-view .scroll-bar:vertical:hover,
+.table-view .scroll-bar:horizontal:hover {
+    -fx-background-color: transparent;
+    -fx-opacity: 0;
+}
