@@ -76,7 +76,7 @@
                                     <Insets left="15.0" top="15.0" />
                                  </HBox.margin>
                                           </Label>
-                              <Label fx:id="NoOfStudent" alignment="CENTER"  prefHeight="52.0" prefWidth="67.0" text="65" textFill="#8e44ad">
+                              <Label fx:id="NoOfStudent" alignment="CENTER" prefHeight="52.0" prefWidth="67.0" text="65" textFill="#8e44ad">
                                  <font>
                                     <Font name="System Bold" size="36.0" />
                                  </font>
@@ -87,128 +87,6 @@
                         </VBox>
                     </HBox>
 
-                    <!-- Personal Details Section -->
-                    <VBox prefHeight="183.0" prefWidth="1110.0" spacing="10" style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15;">
-                        <HBox prefHeight="140.0" prefWidth="1080.0" spacing="80.0">
-                            <children>
-                                <VBox prefHeight="145.0" prefWidth="368.0" spacing="5.0">
-                                    <children>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="40.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Full Name">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label style="-fx-text-fill: #34495e;" text="Smith, John D" />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="59.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Gender">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label style="-fx-text-fill: #34495e;" text="Male" />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="50.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Birthday">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label style="-fx-text-fill: #34495e;" text="Jun 23, 1997" />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="54.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Contact">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label style="-fx-text-fill: #34495e;" text="0912456789" />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="70.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Email">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label style="-fx-text-fill: #34495e;" text="jsmith@sample.com" />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="54.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Address">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label style="-fx-text-fill: #34495e;" text="Here Street, There City, Anywhere, 2306" />
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </VBox>
-                                <VBox prefHeight="145.0" prefWidth="606.0" spacing="5.0">
-                                    <children>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="40.0">
-                                            <children>
-
-                                                <Label style="-fx-text-fill: #34495e;" text="Automatic Car Training" />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="80.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Description">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label style="-fx-text-fill: #34495e;" text="Sample car training package for automatic transmission." />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="130.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Cost">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label style="-fx-text-fill: #34495e;" text="5,200.00" />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="35.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Training Duration">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label style="-fx-text-fill: #34495e;" text="30 Days" />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="25.0" prefWidth="124.0" spacing="115.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Status">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                </Label>
-                                                <Label alignment="CENTER" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #23c323; -fx-background-radius: 5px;" text="Completed" textFill="WHITE" />
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </VBox>
-                            </children>
-                        </HBox>
-                    </VBox>
-
                     <!-- Payment History Section -->
                     <VBox prefHeight="235.0" prefWidth="1059.0" spacing="10">
                         <Label style="-fx-font-weight: bold; -fx-text-fill: white;" text="Payment History">
@@ -217,7 +95,7 @@
                             </font>
                         </Label>
 
-                        <TableView prefHeight="200" prefWidth="1100">
+                        <TableView prefHeight="200" prefWidth="1100" stylesheets="@../style/tableViewStyle.css">
                             <columns>
                                 <TableColumn prefWidth="150" text="DateTime" />
                                 <TableColumn prefWidth="300" text="Remarks" />

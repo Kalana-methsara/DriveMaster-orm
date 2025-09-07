@@ -225,7 +225,7 @@
                             </font>
                         </Label>
 
-                        <TableView prefHeight="200" prefWidth="1100">
+                        <TableView prefHeight="200" prefWidth="1100" stylesheets="@../style/tableViewStyle.css">
                             <columns>
                                 <TableColumn prefWidth="150" text="DateTime" />
                                 <TableColumn prefWidth="300" text="Remarks" />

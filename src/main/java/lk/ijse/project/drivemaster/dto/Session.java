@@ -6,6 +6,6 @@ import lombok.Setter;
 public class Session {
     @Getter
     @Setter
-    private static UserDto currentUser;
+    private static UserDTO currentUser;
 }
 

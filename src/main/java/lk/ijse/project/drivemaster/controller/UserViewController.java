@@ -1,6 +1,6 @@
 package lk.ijse.project.drivemaster.controller;
 
-import lk.ijse.project.drivemaster.dto.UserDto;
+import lk.ijse.project.drivemaster.dto.UserDTO;
 import lk.ijse.project.drivemaster.dto.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,37 +31,28 @@ public class UserViewController implements Initializable {
 
     @FXML
     private Button btnAdminManage, btnBooking, btnDashboard, btnEmployee, btnPayment,
-            btnProduct, btnRegister, btnSalary, btnTransport,btnInventory,btnStock,btnLogout;
+            btnProduct, btnRegister, btnSalary, btnTransport, btnInventory, btnStock, btnLogout;
 
     @FXML
     private Label lblDate;
 
     @FXML
     private ImageView pngAdminManage, pngBooking, pngEmployee, pngPayment, pngProduct,
-            pngRegister, pngSalary, pngTransport, pngDashboard,pngInventory,pngStock,pngLogout;
+            pngRegister, pngSalary, pngTransport, pngDashboard, pngInventory, pngStock, pngLogout;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         navigateTo("/view/DashboardPage.fxml");
 
-        UserDto user = Session.getCurrentUser();
-//        String role = user.getRole();
-        String role = "Admin";
+        UserDTO user = Session.getCurrentUser();
+        String role = user.getRole();
+
         switch (role) {
-            case "Admin":
+            case "ADMIN":
                 break;
-            case "Manager":
+            case "RECEPTIONIST":
                 btnAdminManage.setDisable(true);
-                break;
-            case "Supervisor":
-                btnAdminManage.setDisable(true);
-                btnSalary.setDisable(true);
-                btnRegister.setDisable(true);
-                break;
-            case "Cashier":
-                btnAdminManage.setDisable(true);
-                btnSalary.setDisable(true);
                 break;
         }
 
@@ -158,17 +149,17 @@ public class UserViewController implements Initializable {
         resetButtonStyle(btnRegister);
         resetButtonStyle(btnAdminManage);
 
-        changePage( "/images/dashboard.png", pngDashboard);
+        changePage("/images/dashboard.png", pngDashboard);
         changePage("/images/product.png", pngProduct);
         changePage("/images/employee.png", pngEmployee);
-        changePage( "/images/deliver.png", pngTransport);
-        changePage( "/images/booking.png", pngBooking);
-        changePage( "/images/payment.png", pngPayment);
-        changePage( "/images/salary.png", pngSalary);
-        changePage( "/images/stock.png", pngStock);
-        changePage( "/images/inventory.png", pngInventory);
-        changePage( "/images/key.png", pngRegister);
-        changePage( "/images/admin.png", pngAdminManage);
+        changePage("/images/deliver.png", pngTransport);
+        changePage("/images/booking.png", pngBooking);
+        changePage("/images/payment.png", pngPayment);
+        changePage("/images/salary.png", pngSalary);
+        changePage("/images/stock.png", pngStock);
+        changePage("/images/inventory.png", pngInventory);
+        changePage("/images/key.png", pngRegister);
+        changePage("/images/admin.png", pngAdminManage);
 
     }
 
@@ -210,7 +201,8 @@ public class UserViewController implements Initializable {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.centerOnScreen();
-        stage.show();    }
+        stage.show();
+    }
 
     @FXML
     public void onLogout(ActionEvent actionEvent) {

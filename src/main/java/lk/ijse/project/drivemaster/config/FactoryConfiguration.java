@@ -14,7 +14,7 @@ public class FactoryConfiguration {
 
     private FactoryConfiguration() {
         Configuration configuration = new Configuration();
-        configuration.configure(); // 1 (xml) load configuration
+        configuration.configure();
 
 
         configuration.addAnnotatedClass(Course.class);
