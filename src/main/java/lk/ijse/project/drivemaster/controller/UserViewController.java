@@ -31,14 +31,14 @@ public class UserViewController implements Initializable {
 
     @FXML
     private Button btnAdminManage, btnBooking, btnDashboard, btnEmployee, btnPayment,
-            btnProduct, btnRegister, btnReport, btnSalary, btnTransport,btnInventory,btnStock,btnLogout;
+            btnProduct, btnRegister, btnSalary, btnTransport,btnInventory,btnStock,btnLogout;
 
     @FXML
     private Label lblDate;
 
     @FXML
     private ImageView pngAdminManage, pngBooking, pngEmployee, pngPayment, pngProduct,
-            pngRegister, pngReport, pngSalary, pngTransport, pnsDashbord,pngInventory,pngStock,pngLogout;
+            pngRegister, pngSalary, pngTransport, pngDashboard,pngInventory,pngStock,pngLogout;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -73,7 +73,7 @@ public class UserViewController implements Initializable {
     @FXML
     void onDashboard(ActionEvent event) {
         resetOtherPages();
-        changePage1(btnDashboard, "/images/dashboard(1).png", pnsDashbord);
+        changePage1(btnDashboard, "/images/dashboard(1).png", pngDashboard);
         navigateTo("/view/DashboardPage.fxml");
     }
 
@@ -81,7 +81,7 @@ public class UserViewController implements Initializable {
     void onProduct(ActionEvent event) {
         resetOtherPages();
         changePage1(btnProduct, "/images/product(1).png", pngProduct);
-        navigateTo("/view/ProductPage.fxml");
+        navigateTo("/view/EnrolleeDetails.fxml");
     }
 
     @FXML
@@ -117,13 +117,6 @@ public class UserViewController implements Initializable {
         resetOtherPages();
         changePage1(btnSalary, "/images/salary(1).png", pngSalary);
         navigateTo("/view/SalaryPage.fxml");
-    }
-
-    @FXML
-    void onReport(ActionEvent event) {
-        resetOtherPages();
-        changePage1(btnReport, "/images/report(1).png", pngReport);
-        navigateTo("/view/ReportPage.fxml");
     }
 
     @FXML
@@ -164,31 +157,30 @@ public class UserViewController implements Initializable {
         resetButtonStyle(btnInventory);
         resetButtonStyle(btnRegister);
         resetButtonStyle(btnAdminManage);
-        resetButtonStyle(btnReport);
 
-        changePage(btnDashboard, "/images/dashboard.png", pnsDashbord);
-        changePage(btnProduct, "/images/product.png", pngProduct);
-        changePage(btnEmployee, "/images/employee.png", pngEmployee);
-        changePage(btnTransport, "/images/deliver.png", pngTransport);
-        changePage(btnBooking, "/images/booking.png", pngBooking);
-        changePage(btnPayment, "/images/payment.png", pngPayment);
-        changePage(btnSalary, "/images/salary.png", pngSalary);
-        changePage(btnStock, "/images/stock.png", pngStock);
-        changePage(btnInventory, "/images/inventory.png", pngInventory);
-        changePage(btnRegister, "/images/key.png", pngRegister);
-        changePage(btnAdminManage, "/images/admin.png", pngAdminManage);
-        changePage(btnReport, "/images/report.png", pngReport);
+        changePage( "/images/dashboard.png", pngDashboard);
+        changePage("/images/product.png", pngProduct);
+        changePage("/images/employee.png", pngEmployee);
+        changePage( "/images/deliver.png", pngTransport);
+        changePage( "/images/booking.png", pngBooking);
+        changePage( "/images/payment.png", pngPayment);
+        changePage( "/images/salary.png", pngSalary);
+        changePage( "/images/stock.png", pngStock);
+        changePage( "/images/inventory.png", pngInventory);
+        changePage( "/images/key.png", pngRegister);
+        changePage( "/images/admin.png", pngAdminManage);
+
     }
 
     private void resetButtonStyle(Button button) {
-        button.setStyle("-fx-text-fill: white; -fx-background-color: #023c73; -fx-border-color: #023c73;");
+        button.setStyle("-fx-text-fill: white; -fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;");
     }
 
     private void setActiveButtonStyle(Button button) {
-        button.setStyle("-fx-text-fill: #e9c90e; -fx-background-color: #023c73; -fx-border-color: #e9c90e;");
+        button.setStyle("-fx-text-fill: #e9c90e; -fx-background-color: #228b22; -fx-border-color: #e9c90e; -fx-border-radius: 10px;");
     }
 
-    private void changePage(Button button, String imagePath, ImageView imageView) {
+    private void changePage(String imagePath, ImageView imageView) {
         imageView.setImage(new Image(imagePath));
     }
 

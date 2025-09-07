@@ -9,64 +9,60 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ancUserView" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color:  #023c73;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.drivemaster.controller.UserViewController">
+<AnchorPane fx:id="ancUserView" prefHeight="900.0" prefWidth="1440.0" style="-fx-background-color: #228b22;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.drivemaster.controller.UserViewController">
     <children>
 
         <!-- Side Menu -->
         <AnchorPane layoutY="80.0" prefHeight="700.0" prefWidth="200.0" style="-fx-background-color: #023c73; -fx-background-radius: 10;" AnchorPane.leftAnchor="5.0">
             <children>
-                <Pane layoutX="5.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #023c73; -fx-background-radius: 10; -fx-border-color: #e9c90e; -fx-border-radius: 10; -fx-border-width: 2px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <Pane layoutX="5.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #228b22; -fx-background-radius: 10; -fx-border-color: #e9c90e; -fx-border-radius: 10; -fx-border-width: 2px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
 
                         <!-- Menu Buttons -->
-                        <Button fx:id="btnDashboard" layoutX="10.0" layoutY="20.0" onAction="#onDashboard" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #e9c90e;" text="         DASHBOARD" textFill="#e9c90e">
+                        <Button fx:id="btnDashboard" layoutX="10.0" layoutY="20.0" onAction="#onDashboard" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #e9c90e; -fx-border-radius: 10px;" text="         DASHBOARD" textFill="#e9c90e">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnProduct" layoutX="10.0" layoutY="60.0" onAction="#onProduct" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="    PRODUCT" textFill="WHITE">
+                        <Button fx:id="btnProduct" layoutX="10.0" layoutY="60.0" onAction="#onProduct" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="    PRODUCT" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnEmployee" layoutX="10.0" layoutY="100.0" onAction="#onEmployee" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="     EMPLOYEE" textFill="WHITE">
+                        <Button fx:id="btnEmployee" layoutX="10.0" layoutY="100.0" onAction="#onEmployee" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="     EMPLOYEE" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnTransport" layoutX="10.0" layoutY="140.0" onAction="#onTransport" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="        TRANSPORT" textFill="WHITE">
+                        <Button fx:id="btnTransport" layoutX="10.0" layoutY="140.0" onAction="#onTransport" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="        TRANSPORT" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnBooking" layoutX="10.0" layoutY="180.0" onAction="#onBooking" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="    BOOKING" textFill="WHITE">
+                        <Button fx:id="btnBooking" layoutX="10.0" layoutY="180.0" onAction="#onBooking" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="    BOOKING" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnPayment" layoutX="10.0" layoutY="220.0" onAction="#onPayment" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="    PAYMENT" textFill="WHITE">
+                        <Button fx:id="btnPayment" layoutX="10.0" layoutY="220.0" onAction="#onPayment" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="    PAYMENT" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnSalary" layoutX="10.0" layoutY="260.0" onAction="#onSalary" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="SALARY" textFill="WHITE">
+                        <Button fx:id="btnSalary" layoutX="10.0" layoutY="260.0" onAction="#onSalary" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="SALARY" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnRegister" layoutX="10.0" layoutY="380.0" onAction="#onRegister" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="  REGISTER" textFill="WHITE">
+                        <Button fx:id="btnRegister" layoutX="10.0" layoutY="380.0" onAction="#onRegister" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="    REGISTER" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnAdminManage" layoutX="10.0" layoutY="420.0" onAction="#onAdminManage" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="                ADMIN MANAGE" textFill="WHITE">
+                        <Button fx:id="btnAdminManage" layoutX="10.0" layoutY="420.0" onAction="#onAdminManage" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="            ADMIN MNGE" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
                         <Pane layoutX="3.0" layoutY="460.0" opacity="0.19" prefHeight="3.0" prefWidth="195.0" style="-fx-background-color: f5f1f8;" />
 
-                        <Button fx:id="btnReport" layoutX="10.0" layoutY="470.0" onAction="#onReport" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="REPORT" textFill="WHITE">
-                            <font><Font name="System Bold" size="14.0" /></font>
-                        </Button>
-
-                        <Button fx:id="btnLogout" layoutX="10.0" layoutY="540.0" onAction="#onLogout" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="Logout" textFill="WHITE">
+                        <Button fx:id="btnLogout" layoutX="10.0" layoutY="520.0" onAction="#onLogout" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="Logout" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
                         <!-- Icons -->
-                        <ImageView fx:id="pnsDashbord" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="25.0" preserveRatio="true">
+                        <ImageView fx:id="pngDashboard" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="25.0" preserveRatio="true">
                             <image><Image url="@../images/dashboard(1).png" /></image>
                         </ImageView>
                         <ImageView fx:id="pngProduct" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="66.0" preserveRatio="true">
@@ -93,13 +89,10 @@
                         <ImageView fx:id="pngAdminManage" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="426.0" preserveRatio="true">
                             <image><Image url="@../images/admin.png" /></image>
                         </ImageView>
-                        <ImageView fx:id="pngReport" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="476.0" preserveRatio="true">
-                            <image><Image url="@../images/report.png" /></image>
-                        </ImageView>
-                        <ImageView fx:id="pngLogout" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="546.0" preserveRatio="true">
+                        <ImageView fx:id="pngLogout" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="526.0" preserveRatio="true">
                             <image><Image url="@../images/logout.png" /></image>
                         </ImageView>
-                        <Button fx:id="btnStock" layoutX="10.0" layoutY="300.0" onAction="#onStock" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="STOCK " textFill="WHITE">
+                        <Button fx:id="btnStock" layoutX="10.0" layoutY="300.0" onAction="#onStock" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="STOCK " textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -109,7 +102,7 @@
                                 <Image url="@../images/stock.png" />
                             </image>
                         </ImageView>
-                        <Button fx:id="btnInventory" layoutX="10.0" layoutY="340.0" onAction="#onInventory" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #023c73; -fx-border-color: #023c73;" text="         INVENTORY" textFill="WHITE">
+                        <Button fx:id="btnInventory" layoutX="10.0" layoutY="340.0" onAction="#onInventory" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="          INVENTORY" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -126,7 +119,7 @@
         </AnchorPane>
 
         <!-- Top Header -->
-        <Pane prefHeight="80.0" prefWidth="1440.0" style="-fx-background-color: #023c73;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <Pane prefHeight="80.0" prefWidth="1440.0" style="-fx-background-color: #228b22;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
                 <Label fx:id="lblDate" layoutX="1097.0" layoutY="13.0" text="07/Feb/2025" textFill="WHITE">
                     <font><Font name="System Bold" size="18.0" /></font>
@@ -140,9 +133,9 @@
                 <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="38.0" layoutY="18.0" preserveRatio="true">
                     <image><Image url="@../images/steering-wheel.png" /></image>
                 </ImageView>
-            <Label layoutX="100.0" layoutY="7.0" text="Drive Master" textFill="WHITE">
+            <Label layoutX="100.0" layoutY="15.0" text="Drive Master" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="48.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
                <effect>
                   <DropShadow color="#00b4d8" spread="0.2" />

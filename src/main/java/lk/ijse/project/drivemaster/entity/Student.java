@@ -27,6 +27,15 @@ public class Student {
     private String firstName;
     @NotBlank private String lastName;
 
+    @NotNull
+    private LocalDate birthday;
+
+    @NotBlank
+    private String gender;
+
+    @NotBlank
+    private String address;
+
     @Email
     @NotBlank @Column(unique=true) private String email;
     @Pattern(regexp="^(?:0|\\+94)7\\d{8}$") @NotBlank private String phone; // Sri Lanka mobile

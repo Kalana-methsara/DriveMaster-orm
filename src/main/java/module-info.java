@@ -15,6 +15,8 @@ module lk.ijse.project.drivemaster {
 
     opens lk.ijse.project.drivemaster.config to jakarta.persistence;
     opens lk.ijse.project.drivemaster.entity to org.hibernate.orm.core;
+    opens images;
+
 
     opens lk.ijse.project.drivemaster.controller to javafx.fxml;
     exports lk.ijse.project.drivemaster;
