@@ -5,6 +5,7 @@ import lk.ijse.project.drivemaster.dao.custom.UserDAO;
 import lk.ijse.project.drivemaster.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
@@ -95,8 +96,8 @@ public class UserDAOImpl implements UserDAO {
     public User search(String userName, String password) {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<User> query = session.createQuery(
-                    "FROM User u WHERE u.username = :username",
+            NativeQuery<User> query = session.createNativeQuery(
+                    "SELECT * FROM users WHERE BINARY username = :username",
                     User.class
             );
             query.setParameter("username", userName);
@@ -123,8 +124,8 @@ public class UserDAOImpl implements UserDAO {
     public User findPassword(String userName, String email) {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<User> query = session.createQuery(
-                    "FROM User u WHERE u.username = :username",
+            NativeQuery<User> query = session.createNativeQuery(
+                    "SELECT * FROM users WHERE BINARY username = :username",
                     User.class
             );
             query.setParameter("username", userName);
