@@ -4,10 +4,16 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Entity
 @Table(name="instructors")
 public class Instructor {
@@ -23,4 +29,6 @@ public class Instructor {
 
     @OneToMany(mappedBy="instructor")
     private List<Lesson> lessons = new ArrayList<>();
+
+
 }

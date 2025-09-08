@@ -83,7 +83,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Optional<User> findById(Long id) throws SQLException {
+    public Optional<User> findById(Long id) {
         Session session = factoryConfiguration.getSession();
         try {
             User user = session.get(User.class, id);

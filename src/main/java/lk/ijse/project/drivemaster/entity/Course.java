@@ -24,7 +24,6 @@ public class Course {
     private String duration; // "12 weeks", "6 months"
     @NotNull
     @Column(precision=10, scale=2) private BigDecimal fee;
-    private String description;
 
     @OneToMany(mappedBy="course")
     private List<Enrollment> enrollments = new ArrayList<>();

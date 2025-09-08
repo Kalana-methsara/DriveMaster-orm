@@ -82,7 +82,7 @@
                         </VBox>
                     </HBox>
                 </VBox>
-            <TableView fx:id="tableView" layoutX="34.0" layoutY="173.0" onMouseClicked="#setData" prefHeight="414.0" prefWidth="1100.0" style="-fx-border-color: #1d4ed8;">
+            <TableView fx:id="tableView" layoutX="34.0" layoutY="173.0" onMouseClicked="#setData" prefHeight="382.0" prefWidth="1100.0" style="-fx-border-color: #1d4ed8;">
                <columns>
                   <TableColumn fx:id="colProductId" prefWidth="166.0" style="-fx-alignment: CENTER;" text="Product Id" />
                   <TableColumn fx:id="colProductName" prefWidth="288.0" text="Product Name" />

@@ -15,6 +15,7 @@ module lk.ijse.project.drivemaster {
     requires jakarta.transaction;
     requires jbcrypt;
     requires java.mail;
+    requires lk.ijse.project.drivemaster;
 
     opens lk.ijse.project.drivemaster.config to jakarta.persistence;
     opens lk.ijse.project.drivemaster.entity to org.hibernate.orm.core;
