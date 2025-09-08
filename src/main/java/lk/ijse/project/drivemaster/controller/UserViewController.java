@@ -31,14 +31,14 @@ public class UserViewController implements Initializable {
 
     @FXML
     private Button btnAdminManage, btnBooking, btnDashboard, btnStudent, btnPayment,
-             btnRegister, btnSalary, btnTransport, btnInventory, btnStock, btnLogout;
+             btnRegister, btnSalary, btnCourse, btnInventory, btnStock, btnLogout;
 
     @FXML
     private Label lblDate;
 
     @FXML
     private ImageView pngAdminManage, pngBooking, pngStudent, pngPayment,
-            pngRegister, pngSalary, pngTransport, pngDashboard, pngInventory, pngStock, pngLogout;
+            pngRegister, pngSalary, pngCourse, pngDashboard, pngInventory, pngStock, pngLogout;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -85,8 +85,8 @@ public class UserViewController implements Initializable {
     @FXML
     void onTransport(ActionEvent event) {
         resetOtherPages();
-        changePage1(btnTransport, "/images/deliver(1).png", pngTransport);
-        navigateTo("/view/PaymentPage.fxml");
+        changePage1(btnCourse, "/images/course(1).png", pngCourse);
+        navigateTo("/view/CoursePage.fxml");
     }
 
     @FXML
@@ -134,7 +134,7 @@ public class UserViewController implements Initializable {
         resetButtonStyle(btnDashboard);
         resetButtonStyle(btnRegister);
         resetButtonStyle(btnStudent);
-        resetButtonStyle(btnTransport);
+        resetButtonStyle(btnCourse);
         resetButtonStyle(btnBooking);
         resetButtonStyle(btnPayment);
         resetButtonStyle(btnSalary);
@@ -145,7 +145,7 @@ public class UserViewController implements Initializable {
         changePage("/images/dashboard.png", pngDashboard);
         changePage("/images/registration.png", pngRegister);
         changePage("/images/students.png", pngStudent);
-        changePage("/images/deliver.png", pngTransport);
+        changePage("/images/course.png", pngCourse);
         changePage("/images/booking.png", pngBooking);
         changePage("/images/payment.png", pngPayment);
         changePage("/images/salary.png", pngSalary);

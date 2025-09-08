@@ -2,25 +2,29 @@ package lk.ijse.project.drivemaster.bo.custom.impl;
 
 import lk.ijse.project.drivemaster.bo.custom.StudentBO;
 import lk.ijse.project.drivemaster.bo.exception.DuplicateException;
-import lk.ijse.project.drivemaster.bo.exception.InUseException;
+import lk.ijse.project.drivemaster.bo.exception.NotFoundException;
 import lk.ijse.project.drivemaster.bo.util.EntityDTOConverter;
 import lk.ijse.project.drivemaster.dao.custom.StudentDAO;
 import lk.ijse.project.drivemaster.dao.util.DAOFactoryImpl;
 import lk.ijse.project.drivemaster.dao.util.DAOType;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
 import lk.ijse.project.drivemaster.entity.Student;
+import lk.ijse.project.drivemaster.entity.User;
 
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 
 public class StudentBOImpl implements StudentBO {
 
     private final StudentDAO studentDAO = DAOFactoryImpl.getInstance().getDAO(DAOType.STUDENT);
     private final EntityDTOConverter converter = new EntityDTOConverter();
 
+
     @Override
-    public List<StudentDTO> getAllStudent() throws SQLException, ClassNotFoundException {
+    public List<StudentDTO> getAllUsers() throws Exception {
         List<Student> students = studentDAO.getAll();
         List<StudentDTO> studentDTOS = new ArrayList<>();
         for (Student student : students) {
@@ -30,19 +34,32 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public void saveCustomer(StudentDTO dto) throws DuplicateException, Exception {
-
+    public boolean saveStudent(StudentDTO dto) throws Exception {
+        Optional<Student> optionalStudent = studentDAO.findById(dto.getId());
+        if (optionalStudent.isPresent()) {
+            throw new DuplicateException("Duplicate student id");
+        }
+        Student student = converter.getStudent(dto);
+        return studentDAO.save(student);
     }
 
     @Override
-    public void updateCustomer(StudentDTO dto) {
-
+    public boolean updateStudent(StudentDTO dto) throws Exception {
+        Optional<Student> optionalStudent = studentDAO.findById(dto.getId());
+        if (optionalStudent.isPresent()) {
+            throw new RuntimeException("Student not found");
+        }
+        Student student = converter.getStudent(dto);
+        return studentDAO.update(student);
     }
 
     @Override
-    public boolean deleteCustomer(String id) throws InUseException, Exception {
-        return false;
-    }
+    public boolean deleteStudent(String id) throws Exception {
+        Optional<Student> optionalStudent = studentDAO.findById(Long.valueOf(id));
+        if (optionalStudent.isEmpty()) {
+            throw new NotFoundException("Customer not found..!");
+        }
+        return studentDAO.delete(id);    }
 
     @Override
     public List<String> getAllIds(String id) {

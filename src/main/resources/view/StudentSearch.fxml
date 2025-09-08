@@ -56,7 +56,7 @@
                     </padding>
 
                     <!-- Buttons Section -->
-                    <HBox alignment="CENTER_LEFT" spacing="51.0">
+                    <HBox alignment="BOTTOM_LEFT" spacing="51.0">
                         <VBox prefHeight="38.0" prefWidth="267.0">
                             <children>
 
@@ -69,9 +69,9 @@
                             </children>
                         </VBox>
                   <TextField fx:id="txtSearch" onAction="#txtSearchOnAction" prefHeight="28.0" prefWidth="293.0" promptText="Search" style="-fx-background-color: #98ff98; -fx-background-radius: 5; -fx-border-color: #98ff98; -fx-border-radius: 5;" />
-                        <VBox prefHeight="38.0" prefWidth="370.0">
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="370.0">
                             <children>
-                                <HBox alignment="TOP_RIGHT" prefHeight="28.0" prefWidth="273.0" spacing="20">
+                                <HBox alignment="BOTTOM_RIGHT" prefHeight="28.0" prefWidth="273.0" spacing="20">
                                     <children>
                                         <Button fx:id="btnConfirm11" mnemonicParsing="false" onAction="#onActionConfirm" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#0575e6, #021b79); -fx-text-fill: white; -fx-font-weight: bold;" text=" +  Save  " />
                                         <Button fx:id="btnConfirm1" mnemonicParsing="false" onAction="#onActionConfirm" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#7b4397, #dc2430); -fx-text-fill: white; -fx-font-weight: bold;" text="^ Update" />
@@ -82,7 +82,7 @@
                         </VBox>
                     </HBox>
                 </VBox>
-            <TableView fx:id="tableView" layoutX="34.0" layoutY="173.0" onMouseClicked="#setData" prefHeight="382.0" prefWidth="1100.0" style="-fx-border-color: #1d4ed8;">
+            <TableView fx:id="tableView" layoutX="34.0" layoutY="186.0" onMouseClicked="#setData" prefHeight="352.0" prefWidth="1100.0" style="-fx-border-color: #1d4ed8;">
                <columns>
                   <TableColumn fx:id="colProductId" prefWidth="166.0" style="-fx-alignment: CENTER;" text="Product Id" />
                   <TableColumn fx:id="colProductName" prefWidth="288.0" text="Product Name" />

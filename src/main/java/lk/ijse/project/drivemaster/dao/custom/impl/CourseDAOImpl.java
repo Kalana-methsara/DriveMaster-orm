@@ -3,11 +3,13 @@ package lk.ijse.project.drivemaster.dao.custom.impl;
 import lk.ijse.project.drivemaster.config.FactoryConfiguration;
 import lk.ijse.project.drivemaster.dao.custom.CourseDAO;
 import lk.ijse.project.drivemaster.entity.Course;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CourseDAOImpl implements CourseDAO {
     private final FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
@@ -84,6 +86,17 @@ public class CourseDAOImpl implements CourseDAO {
         try {
             Query<String> query = session.createQuery("SELECT c.id FROM Course c", String.class);
             return query.list();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public Optional<Course> findById(Long id) {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Course course = session.get(Course.class, id);
+            return Optional.ofNullable(course);
         } finally {
             session.close();
         }

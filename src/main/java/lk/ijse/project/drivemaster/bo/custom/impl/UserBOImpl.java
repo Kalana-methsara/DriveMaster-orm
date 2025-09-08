@@ -36,8 +36,8 @@ public class UserBOImpl implements UserBO {
         if (optionalUser.isPresent()) {
             throw new DuplicateException("Duplicate customer id");
         }
-        User customer = converter.getUser(dto);
-        return userDAO.save(customer);
+        User user = converter.getUser(dto);
+        return userDAO.save(user);
     }
 
     @Override

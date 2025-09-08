@@ -2,21 +2,20 @@ package lk.ijse.project.drivemaster.dao.custom.impl;
 
 import lk.ijse.project.drivemaster.config.FactoryConfiguration;
 import lk.ijse.project.drivemaster.dao.custom.StudentDAO;
-import lk.ijse.project.drivemaster.entity.Course;
 import lk.ijse.project.drivemaster.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class StudentDAOImpl implements StudentDAO {
 
     private final FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
 
     @Override
-    public List<Student> getAll() throws SQLException, ClassNotFoundException {
+    public List<Student> getAll()  {
         Session session = factoryConfiguration.getSession();
         try {
             Query<Student> query = session.createQuery("from Student", Student.class);
@@ -28,7 +27,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean save(Student student) throws SQLException, ClassNotFoundException {
+    public boolean save(Student student)  {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
@@ -43,7 +42,7 @@ public class StudentDAOImpl implements StudentDAO {
         }      }
 
     @Override
-    public boolean update(Student student) throws SQLException, ClassNotFoundException {
+    public boolean update(Student student) {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
@@ -60,7 +59,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean delete(String id)  {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
@@ -89,4 +88,15 @@ public class StudentDAOImpl implements StudentDAO {
         } finally {
             session.close();
         }    }
+
+    @Override
+    public Optional<Student> findById(Long id) {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Student student = session.get(Student.class, id);
+            return Optional.ofNullable(student);
+        } finally {
+            session.close();
+        }
+    }
 }
