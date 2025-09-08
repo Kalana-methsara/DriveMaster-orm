@@ -30,14 +30,14 @@ public class UserViewController implements Initializable {
     private AnchorPane ancUserView;
 
     @FXML
-    private Button btnAdminManage, btnBooking, btnDashboard, btnEmployee, btnPayment,
-            btnProduct, btnRegister, btnSalary, btnTransport, btnInventory, btnStock, btnLogout;
+    private Button btnAdminManage, btnBooking, btnDashboard, btnStudent, btnPayment,
+             btnRegister, btnSalary, btnTransport, btnInventory, btnStock, btnLogout;
 
     @FXML
     private Label lblDate;
 
     @FXML
-    private ImageView pngAdminManage, pngBooking, pngEmployee, pngPayment, pngProduct,
+    private ImageView pngAdminManage, pngBooking, pngStudent, pngPayment,
             pngRegister, pngSalary, pngTransport, pngDashboard, pngInventory, pngStock, pngLogout;
 
     @Override
@@ -69,31 +69,31 @@ public class UserViewController implements Initializable {
     }
 
     @FXML
-    void onProduct(ActionEvent event) {
+    void onRegistration(ActionEvent event) {
         resetOtherPages();
-        changePage1(btnProduct, "/images/product(1).png", pngProduct);
-        navigateTo("/view/EnrolleeDetails.fxml");
+        changePage1(btnRegister, "/images/registration(1).png", pngRegister);
+        navigateTo("/view/StudentRegistration.fxml");
     }
 
     @FXML
-    void onEmployee(ActionEvent event) {
+    void onStudent(ActionEvent event) {
         resetOtherPages();
-        changePage1(btnEmployee, "/images/employee(1).png", pngEmployee);
-        navigateTo("/view/StudentManage.fxml");
+        changePage1(btnStudent, "/images/students(1).png", pngStudent);
+        navigateTo("/view/StudentSearch.fxml");
     }
 
     @FXML
     void onTransport(ActionEvent event) {
         resetOtherPages();
         changePage1(btnTransport, "/images/deliver(1).png", pngTransport);
-        navigateTo("/view/TransportPage.fxml");
+        navigateTo("/view/PaymentPage.fxml");
     }
 
     @FXML
     void onBooking(ActionEvent event) {
         resetOtherPages();
         changePage1(btnBooking, "/images/booking(1).png", pngBooking);
-        navigateTo("/view/BookingPage.fxml");
+        navigateTo("/view/EnrolleeDetails.fxml");
     }
 
     @FXML
@@ -129,36 +129,28 @@ public class UserViewController implements Initializable {
         navigateTo("/view/InventoryPage.fxml");
     }
 
-    @FXML
-    void onRegister(ActionEvent event) {
-        resetOtherPages();
-        changePage1(btnRegister, "/images/key(1).png", pngRegister);
-        navigateTo("/view/RegisterPage.fxml");
-    }
 
     private void resetOtherPages() {
         resetButtonStyle(btnDashboard);
-        resetButtonStyle(btnProduct);
-        resetButtonStyle(btnEmployee);
+        resetButtonStyle(btnRegister);
+        resetButtonStyle(btnStudent);
         resetButtonStyle(btnTransport);
         resetButtonStyle(btnBooking);
         resetButtonStyle(btnPayment);
         resetButtonStyle(btnSalary);
         resetButtonStyle(btnStock);
         resetButtonStyle(btnInventory);
-        resetButtonStyle(btnRegister);
         resetButtonStyle(btnAdminManage);
 
         changePage("/images/dashboard.png", pngDashboard);
-        changePage("/images/product.png", pngProduct);
-        changePage("/images/employee.png", pngEmployee);
+        changePage("/images/registration.png", pngRegister);
+        changePage("/images/students.png", pngStudent);
         changePage("/images/deliver.png", pngTransport);
         changePage("/images/booking.png", pngBooking);
         changePage("/images/payment.png", pngPayment);
         changePage("/images/salary.png", pngSalary);
         changePage("/images/stock.png", pngStock);
-        changePage("/images/inventory.png", pngInventory);
-        changePage("/images/key.png", pngRegister);
+        changePage("/images/key.png", pngInventory);
         changePage("/images/admin.png", pngAdminManage);
 
     }

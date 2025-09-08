@@ -23,11 +23,11 @@
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnProduct" layoutX="10.0" layoutY="60.0" onAction="#onProduct" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="    PRODUCT" textFill="WHITE">
+                        <Button fx:id="btnRegister" layoutX="10.0" layoutY="60.0" onAction="#onRegistration" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="   REGISTER" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnEmployee" layoutX="10.0" layoutY="100.0" onAction="#onEmployee" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="     EMPLOYEE" textFill="WHITE">
+                        <Button fx:id="btnStudent" layoutX="10.0" layoutY="100.0" onAction="#onStudent" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="      STUDENTS" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
@@ -47,7 +47,7 @@
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnRegister" layoutX="10.0" layoutY="380.0" onAction="#onRegister" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="    REGISTER" textFill="WHITE">
+                        <Button layoutX="10.0" layoutY="380.0" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="    REGISTER" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
@@ -65,11 +65,11 @@
                         <ImageView fx:id="pngDashboard" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="25.0" preserveRatio="true">
                             <image><Image url="@../images/dashboard(1).png" /></image>
                         </ImageView>
-                        <ImageView fx:id="pngProduct" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="66.0" preserveRatio="true">
-                            <image><Image url="@../images/product.png" /></image>
+                        <ImageView fx:id="pngRegister" fitHeight="25.0" fitWidth="22.0" layoutX="38.0" layoutY="65.0" preserveRatio="true">
+                            <image><Image url="@../images/registration.png" /></image>
                         </ImageView>
-                        <ImageView fx:id="pngEmployee" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="106.0" preserveRatio="true">
-                            <image><Image url="@../images/employee.png" /></image>
+                        <ImageView fx:id="pngStudent" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="106.0" preserveRatio="true">
+                            <image><Image url="@../images/students.png" /></image>
                         </ImageView>
                         <ImageView fx:id="pngTransport" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="146.0" preserveRatio="true">
                             <image><Image url="@../images/deliver.png" /></image>
@@ -83,7 +83,7 @@
                         <ImageView fx:id="pngSalary" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="266.0" preserveRatio="true">
                             <image><Image url="@../images/salary.png" /></image>
                         </ImageView>
-                        <ImageView fx:id="pngRegister" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="386.0" preserveRatio="true">
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="386.0" preserveRatio="true">
                             <image><Image url="@../images/key.png" /></image>
                         </ImageView>
                         <ImageView fx:id="pngAdminManage" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="426.0" preserveRatio="true">
@@ -109,7 +109,7 @@
                         </Button>
                         <ImageView fx:id="pngInventory" fitHeight="22.0" fitWidth="25.0" layoutX="39.0" layoutY="346.0" preserveRatio="true">
                             <image>
-                                <Image url="@../images/inventory.png" />
+                                <Image url="@../images/password.png" />
                             </image>
                         </ImageView>
 
