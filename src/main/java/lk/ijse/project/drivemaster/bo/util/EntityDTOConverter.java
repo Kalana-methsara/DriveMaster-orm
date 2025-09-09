@@ -34,9 +34,10 @@ public class EntityDTOConverter {
                 student.getId(),
                 student.getFirstName(),
                 student.getLastName(),
-                student.getBirthday(), // fixed name
+                student.getBirthday(),
                 student.getGender(),
                 student.getAddress(),
+                student.getNic(),
                 student.getEmail(),
                 student.getPhone(),
                 student.getRegDate()

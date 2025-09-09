@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +28,7 @@ import java.util.ResourceBundle;
 
 public class StudentSearchController implements Initializable {
 
+
     @FXML
     private Button btnDelete;
 
@@ -37,10 +39,13 @@ public class StudentSearchController implements Initializable {
     private Button btnUpdate;
 
     @FXML
+    private TableColumn<StudentDTO, String> colNic;
+
+    @FXML
     private TableColumn<StudentDTO, String> colAddress;
 
     @FXML
-    private TableColumn<StudentDTO, String> colBirthday;
+    private TableColumn<StudentDTO, LocalDate> colBirthday;
 
     @FXML
     private TableColumn<StudentDTO, String> colContact;
@@ -70,7 +75,7 @@ public class StudentSearchController implements Initializable {
     private ComboBox<String> textYear;
 
     @FXML
-    private TextField txtSearch,textFirstName, textSecondName, textNic, textEmail, textContact, textAddress, textFirstPayment;
+    private TextField txtSearch,textFirstName, textSecondName, textNic, textEmail, textContact, textAddress;
 
     @FXML
     private DatePicker textDateOfBirth;
@@ -122,8 +127,21 @@ public class StudentSearchController implements Initializable {
 
     @FXML
     void setData(MouseEvent event) {
-
+        StudentDTO selected = tableView.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            textFirstName.setText(selected.getFirstName());
+            textSecondName.setText(selected.getLastName());
+            textEmail.setText(selected.getEmail());
+            textContact.setText(selected.getPhone());
+            textAddress.setText(selected.getAddress());
+            textGender.setValue(selected.getGender());
+            textNic.setText(selected.getNic());
+            textDateOfBirth.setValue(selected.getBirthday());
+//            textCity.setValue(selected.getCity());
+//            textProvince.setValue(selected.getProvince());
+        }
     }
+
 
     @FXML
     void txtSearchOnAction(ActionEvent event) {
@@ -143,13 +161,15 @@ public class StudentSearchController implements Initializable {
         colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colNic.setCellValueFactory(new PropertyValueFactory<>("nic"));
         colContact.setCellValueFactory(new PropertyValueFactory<>("phone"));
         colJoinDate.setCellValueFactory(new PropertyValueFactory<>("regDate"));
 
+
         try {
             loadTableData();
-//            initComboBoxes();
-//            clearStudentFields();
+            initComboBoxes();
+            clearStudentFields();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -346,6 +366,21 @@ public class StudentSearchController implements Initializable {
 
     private void initComboBoxes() {
         textGender.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
+        textMonth.setItems(FXCollections.observableArrayList(
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+        ));
+        textMonth.getSelectionModel().select(LocalDate.now().getMonthValue() - 1);
+        ObservableList<String> years = FXCollections.observableArrayList();
+
+        int currentYear = LocalDate.now().getYear();
+        for (int i = 2000; i <= currentYear; i++) {
+            years.add(String.valueOf(i));
+        }
+
+        textYear.setItems(years);
+
+        textYear.getSelectionModel().select(String.valueOf(currentYear));
         textCity.setItems(FXCollections.observableArrayList(
                 "Colombo", "Gampaha", "Kalutara",
                 "Kandy", "Matale", "Nuwara Eliya",
@@ -383,6 +418,7 @@ public class StudentSearchController implements Initializable {
                                 StudentDTO.getBirthday(),
                                 StudentDTO.getGender(),
                                 StudentDTO.getAddress(),
+                                StudentDTO.getNic(),
                                 StudentDTO.getEmail(),
                                 StudentDTO.getPhone(),
                                 StudentDTO.getRegDate()

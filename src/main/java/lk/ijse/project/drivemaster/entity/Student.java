@@ -36,6 +36,9 @@ public class Student {
     @NotBlank
     private String address;
 
+    @NotBlank
+    private String nic;
+
     @Email
     @NotBlank @Column(unique=true) private String email;
     @Pattern(regexp="^(?:0|\\+94)7\\d{8}$") @NotBlank private String phone; // Sri Lanka mobile
