@@ -39,15 +39,7 @@ public class EntityDTOConverter {
                 student.getAddress(),
                 student.getEmail(),
                 student.getPhone(),
-                student.getRegDate(),
-                student.getEnrollments() != null ? student.getEnrollments()
-                        .stream()
-                        .map(this::getEnrollmentDTO) // convert to DTO
-                        .toList() : null,
-                student.getPayments() != null ? student.getPayments()
-                        .stream()
-                        .map(this::getPaymentDTO) // convert to DTO
-                        .toList() : null
+                student.getRegDate()
         );
     }
 
@@ -56,27 +48,12 @@ public class EntityDTOConverter {
         student.setId(dto.getId());
         student.setFirstName(dto.getFirstName());
         student.setLastName(dto.getLastName());
-        student.setBirthday(dto.getBirthDate()); // fixed name
+        student.setBirthday(dto.getBirthday()); // fixed name
         student.setGender(dto.getGender());
         student.setAddress(dto.getAddress());
         student.setEmail(dto.getEmail());
         student.setPhone(dto.getPhone());
         student.setRegDate(dto.getRegDate());
-
-        if (dto.getEnrollments() != null) {
-            student.setEnrollments(dto.getEnrollments()
-                    .stream()
-                    .map(this::getEnrollment) // convert back to entity
-                    .toList());
-        }
-
-        if (dto.getPayments() != null) {
-            student.setPayments(dto.getPayments()
-                    .stream()
-                    .map(this::getPayment) // convert back to entity
-                    .toList());
-        }
-
         return student;
     }
 

@@ -42,7 +42,7 @@ public class Student {
     @NotNull
     private LocalDate regDate;
 
-    @OneToMany(mappedBy="student", cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy="student", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.EAGER)
     private List<Enrollment> enrollments = new ArrayList<>();
 
     @OneToMany(mappedBy="student", cascade=CascadeType.ALL, orphanRemoval=true)

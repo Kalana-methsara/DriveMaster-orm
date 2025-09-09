@@ -24,13 +24,16 @@ public class StudentBOImpl implements StudentBO {
 
 
     @Override
-    public List<StudentDTO> getAllUsers() throws Exception {
+    public List<StudentDTO> getAllStudent() throws Exception {
         List<Student> students = studentDAO.getAll();
         List<StudentDTO> studentDTOS = new ArrayList<>();
         for (Student student : students) {
             studentDTOS.add(converter.getStudentDTO(student));
         }
+        System.out.println(studentDTOS);
         return studentDTOS;
+
+
     }
 
     @Override

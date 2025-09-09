@@ -18,14 +18,13 @@ public class StudentDTO {
     private Long id;
     private String firstName;
     private String lastName;
-    private LocalDate birthDate;
+    private LocalDate birthday;
     private String gender;
     private String address;
     private String email;
     private String phone;
     private LocalDate regDate;
-    private List<EnrollmentDTO> enrollments;
-    private List<PaymentDTO> payments;
+
 
 
 }

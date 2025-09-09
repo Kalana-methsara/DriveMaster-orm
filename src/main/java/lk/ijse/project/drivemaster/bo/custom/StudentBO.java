@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface StudentBO extends SuperBO {
-    List<StudentDTO> getAllUsers() throws Exception;
+    List<StudentDTO> getAllStudent() throws Exception;
 
     boolean saveStudent(StudentDTO studentDTO) throws Exception;
 

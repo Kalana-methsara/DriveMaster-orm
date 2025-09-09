@@ -15,7 +15,7 @@ public class StudentDAOImpl implements StudentDAO {
     private final FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
 
     @Override
-    public List<Student> getAll()  {
+    public List<Student> getAll() {
         Session session = factoryConfiguration.getSession();
         try {
             Query<Student> query = session.createQuery("from Student", Student.class);
