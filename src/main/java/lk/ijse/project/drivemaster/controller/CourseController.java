@@ -10,5 +10,6 @@ public class CourseController {
     }
 
     public void onActionDelete(ActionEvent actionEvent) {
+        
     }
 }

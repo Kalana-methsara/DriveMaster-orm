@@ -14,4 +14,11 @@ public class CourseDTO {
     private String name;
     private String duration;
     private BigDecimal fee;
+
+    @Override
+    public String toString() {
+        return id + " - " + name + " | Duration: " + duration + " | Fee: " + fee;
+    }
+
+
 }

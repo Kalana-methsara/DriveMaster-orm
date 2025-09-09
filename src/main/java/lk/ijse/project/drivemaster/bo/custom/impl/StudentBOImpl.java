@@ -63,6 +63,11 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public List<String> getAllIds(String id) {
-        return List.of();
+        List<Student> students = studentDAO.getAll();
+        List<String> ids = new ArrayList<>();
+        for (Student student : students) {
+            ids.add(String.valueOf(student.getId()));
+        }
+        return ids;
     }
 }
