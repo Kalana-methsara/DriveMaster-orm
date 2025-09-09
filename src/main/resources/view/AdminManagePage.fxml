@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1209.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.drivemaster.controller.AdminManageController">
+    <children>
+        <Pane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="1209.0" style="-fx-background-color: #E9F1F6; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" height="700.0" stroke="TRANSPARENT" style="-fx-arc-height: 12px; -fx-arc-width: 12px; -fx-stroke: #e9c90e; -fx-stroke-width: 2px;" width="1211.0">
+                    <effect>
+                        <DropShadow blurType="GAUSSIAN" color="#00000033" height="3.0" radius="3.5" width="0.0" />
+                    </effect>
+                    <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                            <stops>
+                                <Stop>
+                                    <color>
+                                        <Color red="0.2788742780685425" green="0.5526315569877625" blue="0.2879995107650757" />
+                                    </color>
+                                </Stop>
+                                <Stop offset="0.006711409395973154">
+                                    <color>
+                                        <Color red="0.13333334028720856" green="0.545098066329956" blue="0.13333334028720856" />
+                                    </color>
+                                </Stop>
+                                <Stop offset="1.0">
+                                    <color>
+                                        <Color red="0.5960784554481506" green="1.0" blue="0.5960784554481506" />
+                                    </color>
+                                </Stop>
+                            </stops>
+                        </LinearGradient>
+                    </fill>
+                </Rectangle>
+                <!-- Main Content Container -->
+                <VBox layoutX="30.0" layoutY="30.0" prefHeight="614.0" prefWidth="1125.0" spacing="20">
+                    <padding>
+                        <Insets bottom="20" left="20" right="20" top="20" />
+                    </padding>
+
+                    <!-- Buttons Section -->
+                    <HBox spacing="500.0">
+                        <VBox prefHeight="38.0" prefWidth="267.0">
+                            <children>
+
+                                <!-- Title -->
+                                <Label prefHeight="35.0" prefWidth="257.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Admin Manage">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox prefHeight="38.0" prefWidth="347.0">
+                            <children>
+                                <HBox prefHeight="28.0" prefWidth="273.0" spacing="20">
+                                    <children>
+                                        <Button fx:id="btnConfirm11" mnemonicParsing="false" onAction="#onActionConfirm" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#0575e6, #021b79); -fx-text-fill: white; -fx-font-weight: bold;" text=" +  Save  " />
+                                        <Button fx:id="btnConfirm1" mnemonicParsing="false" onAction="#onActionConfirm" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#7b4397, #dc2430); -fx-text-fill: white; -fx-font-weight: bold;" text="^ Update" />
+                                        <Button fx:id="btnConfirm12" mnemonicParsing="false" onAction="#onActionConfirm" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#e52d27, #b31217); -fx-text-fill: white; -fx-font-weight: bold;" text="-  Delete" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </HBox>
+                </VBox>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

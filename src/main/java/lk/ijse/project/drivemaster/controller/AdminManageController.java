@@ -2,8 +2,7 @@ package lk.ijse.project.drivemaster.controller;
 
 import javafx.event.ActionEvent;
 
-public class EnrolleeDetailsController {
+public class AdminManageController {
     public void onActionConfirm(ActionEvent actionEvent) {
-
     }
 }
