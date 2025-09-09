@@ -75,18 +75,12 @@ public class StudentSearchController implements Initializable {
     private ComboBox<String> textYear;
 
     @FXML
-    private TextField txtSearch,textFirstName, textSecondName, textNic, textEmail, textContact, textAddress;
+    private TextField txtSearch, textFirstName, textSecondName, textNic, textEmail, textContact, textAddress;
 
     @FXML
-    private DatePicker textDateOfBirth;
+    private DatePicker textDateOfBirth, textJoinDate;
     @FXML
     private ChoiceBox<String> textGender, textCity, textProvince;
-
-
-    private final String namePattern = "^[A-Za-z ]+$";
-    private final String nicPattern = "^[0-9]{9}[vVxX]||[0-9]{12}$";
-    private final String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-    private final String phonePattern = "^(\\d+)||((\\d+\\.)(\\d){2})$";
 
 
     private final StudentBO studentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.STUDENT);
@@ -137,6 +131,7 @@ public class StudentSearchController implements Initializable {
             textGender.setValue(selected.getGender());
             textNic.setText(selected.getNic());
             textDateOfBirth.setValue(selected.getBirthday());
+            textJoinDate.setValue(selected.getRegDate());
 //            textCity.setValue(selected.getCity());
 //            textProvince.setValue(selected.getProvince());
         }
@@ -183,10 +178,14 @@ public class StudentSearchController implements Initializable {
         String phone = textContact.getText() != null ? textContact.getText().trim() : "";
         String address = textAddress.getText() != null ? textAddress.getText().trim() : "";
 
+        String namePattern = "^[A-Za-z ]+$";
         boolean isValidFirstName = !firstName.isEmpty() && firstName.matches(namePattern);
         boolean isValidSecondName = !secondName.isEmpty() && secondName.matches(namePattern);
+        String nicPattern = "^[0-9]{9}[vVxX]||[0-9]{12}$";
         boolean isValidNic = !nic.isEmpty() && nic.matches(nicPattern);
+        String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         boolean isValidEmail = !email.isEmpty() && email.matches(emailPattern);
+        String phonePattern = "^(\\d+)||((\\d+\\.)(\\d){2})$";
         boolean isValidPhone = !phone.isEmpty() && phone.matches(phonePattern);
 
         boolean isValidAddress = !address.isEmpty();
@@ -360,6 +359,7 @@ public class StudentSearchController implements Initializable {
         textAddress.clear();
         textCity.getSelectionModel().clearSelection();
         textProvince.getSelectionModel().clearSelection();
+        textJoinDate.setValue(LocalDate.now());
 
 
     }
@@ -425,5 +425,9 @@ public class StudentSearchController implements Initializable {
                         )).toList()
         ));
 
+    }
+
+    public void onRefresh(MouseEvent mouseEvent) {
+        clearStudentFields();
     }
 }
