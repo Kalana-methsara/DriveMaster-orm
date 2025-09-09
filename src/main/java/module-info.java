@@ -17,6 +17,7 @@ module lk.ijse.project.drivemaster {
     requires java.mail;
 
 
+
     opens lk.ijse.project.drivemaster.config to jakarta.persistence;
     opens lk.ijse.project.drivemaster.entity to org.hibernate.orm.core;
     opens images;
