@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.ijse.project.drivemaster.util.DateTimeUtil;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,9 @@ public class UserViewController implements Initializable {
 
     @FXML
     private AnchorPane ancMainContainer;
+
+    @FXML
+    private Label lblTime;
 
     @FXML
     private AnchorPane ancUserView;
@@ -42,6 +46,8 @@ public class UserViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        DateTimeUtil.updateRealTime(lblTime);
+
 
         navigateTo("/view/DashboardPage.fxml");
 

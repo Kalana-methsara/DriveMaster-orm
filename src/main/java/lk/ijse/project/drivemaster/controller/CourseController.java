@@ -1,15 +1,184 @@
 package lk.ijse.project.drivemaster.controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import lk.ijse.project.drivemaster.bo.BOFactoryImpl;
+import lk.ijse.project.drivemaster.bo.BOType;
+import lk.ijse.project.drivemaster.bo.custom.CourseBO;
+import lk.ijse.project.drivemaster.dto.CourseDTO;
+import lk.ijse.project.drivemaster.dto.StudentDTO;
 
-public class CourseController {
-    public void onActionSave(ActionEvent actionEvent) {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class CourseController implements Initializable {
+
+    @FXML
+    private Button btnDelete;
+
+    @FXML
+    private Button btnSave;
+
+    @FXML
+    private Button btnUpdate;
+
+    @FXML
+    private TableColumn<CourseDTO, Double> colCost;
+
+    @FXML
+    private TableColumn<CourseDTO, String> colCourseID;
+
+    @FXML
+    private TableColumn<CourseDTO, String> colCourseName;
+
+    @FXML
+    private TableColumn<CourseDTO, String> colDuration;
+
+    @FXML
+    private TableView<CourseDTO> tblCourse;
+
+    @FXML
+    private TextField textCourseFee;
+
+    @FXML
+    private Label textCourseId;
+
+    @FXML
+    private TextField textCourseName;
+
+    @FXML
+    private TextField textDuration;
+
+    private final CourseBO courseBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.COURSE);
+
+
+    @FXML
+    void onActionDelete(ActionEvent event) {
+
     }
 
-    public void onActionUpdate(ActionEvent actionEvent) {
+    @FXML
+    void onActionSave(ActionEvent event) {
+        if (!validateInputs()) {
+            showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
+            return;
+        }
     }
 
-    public void onActionDelete(ActionEvent actionEvent) {
-        
+
+    @FXML
+    void onActionUpdate(ActionEvent event) {
+        if (!validateInputs()) {
+            showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
+            return;
+        }
+    }
+
+    @FXML
+    void onRefresh(MouseEvent event) {
+        clearCourseFields();
+
+    }
+
+    private void showAlert(Alert.AlertType type, String header, String content) {
+        Alert alert = new Alert(type);
+        alert.initStyle(StageStyle.UNDECORATED);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.getDialogPane().setStyle("-fx-border-color: linear-gradient(#7b4397, #dc2430); -fx-border-width: 3px;");
+        alert.showAndWait();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        colCourseID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        colCourseName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colCost.setCellValueFactory(new PropertyValueFactory<>("fee"));
+
+        try {
+            loadTableData();
+            clearCourseFields();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void clearCourseFields() {
+        loadNextId();
+        textCourseName.clear();
+        textCourseFee.clear();
+        textDuration.clear();
+    }
+
+    private void loadNextId() {
+        String nextId = courseBO.getNextId();
+        textCourseId.setText(nextId);
+    }
+
+    private void loadTableData() throws Exception {
+        tblCourse.setItems(FXCollections.observableArrayList(
+                courseBO.getAllCourses().stream().map(CourseDTO ->
+                        new CourseDTO(
+                                CourseDTO.getId(),
+                                CourseDTO.getName(),
+                                CourseDTO.getDuration(),
+                                CourseDTO.getFee()
+                        )).toList()
+        ));
+
+    }
+
+    public void setData(MouseEvent mouseEvent) {
+        CourseDTO selected = tblCourse.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            textCourseId.setText(selected.getId());
+            textCourseName.setText(selected.getName());
+            textDuration.setText(selected.getDuration());
+            textCourseFee.setText(String.valueOf(selected.getFee()));
+        }
+    }
+    private boolean validateInputs() {
+        String name = textCourseName.getText() != null ? textCourseName.getText().trim() : "";
+        String duration = textDuration.getText() != null ? textDuration.getText().trim() : "";
+        String feeText = textCourseFee.getText() != null ? textCourseFee.getText().trim() : "";
+
+        boolean isValidName = !name.isEmpty();
+        boolean isValidDuration = !duration.isEmpty();
+        boolean isValidFee = false;
+
+        try {
+            double fee = Double.parseDouble(feeText);
+            isValidFee = fee > 0;
+        } catch (NumberFormatException e) {
+            isValidFee = false;
+        }
+
+        if (!isValidName) showErrorWithTimeout(textCourseName);
+        if (!isValidDuration) showErrorWithTimeout(textDuration);
+        if (!isValidFee) showErrorWithTimeout(textCourseFee);
+
+        return  isValidName && isValidDuration && isValidFee;
+    }
+
+    private void showErrorWithTimeout(TextField resetFieldStyles) {
+        resetFieldStyles.setStyle("-fx-background-color: #f3e3e5; -fx-border-width: 0 0 2 0; -fx-border-color: #f3214b;");
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(5), e -> {
+                    resetFieldStyles.setStyle("-fx-background-color: #e9f1f6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;");
+                })
+        );
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 }

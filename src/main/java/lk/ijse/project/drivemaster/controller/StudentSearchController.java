@@ -7,33 +7,35 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import lk.ijse.project.drivemaster.bo.BOFactoryImpl;
 import lk.ijse.project.drivemaster.bo.BOType;
-import lk.ijse.project.drivemaster.bo.custom.CourseBO;
 import lk.ijse.project.drivemaster.bo.custom.StudentBO;
-import lk.ijse.project.drivemaster.dto.CourseDTO;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
+import lombok.Getter;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class StudentSearchController implements Initializable {
 
 
     @FXML
+    private AnchorPane ancStudentSearch;
+    @FXML
     private Button btnDelete;
 
     @FXML
-    private Button btnSave;
+    private Button btnPayment;
 
     @FXML
     private Button btnUpdate;
@@ -80,7 +82,10 @@ public class StudentSearchController implements Initializable {
     @FXML
     private DatePicker textDateOfBirth, textJoinDate;
     @FXML
-    private ChoiceBox<String> textGender, textCity, textProvince;
+    private ChoiceBox<String> textGender;
+
+    @Getter
+    private long studentId;
 
 
     private final StudentBO studentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.STUDENT);
@@ -97,10 +102,23 @@ public class StudentSearchController implements Initializable {
     }
 
     @FXML
-    void onActionSave(ActionEvent event) {
-        if (!validateInputs()) {
-            showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
+    void onActionPayment(ActionEvent event) {
+        var selectedStudent = tableView.getSelectionModel().getSelectedItem();
+        if (selectedStudent == null) {
+            showAlert(Alert.AlertType.WARNING, "No Student Selected", "Please select a student before proceeding.");
             return;
+        }
+        studentId = selectedStudent.getId();
+        try {
+            ancStudentSearch.getChildren().clear();
+            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/EnrolleeDetails.fxml"));
+            anchorPane.prefWidthProperty().bind(ancStudentSearch.widthProperty());
+            anchorPane.prefHeightProperty().bind(ancStudentSearch.heightProperty());
+            ancStudentSearch.getChildren().add(anchorPane);
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Page Not Found", "The requested page could not be loaded. Please check and try again.");
+
+            e.printStackTrace();
         }
 
     }
@@ -132,8 +150,7 @@ public class StudentSearchController implements Initializable {
             textNic.setText(selected.getNic());
             textDateOfBirth.setValue(selected.getBirthday());
             textJoinDate.setValue(selected.getRegDate());
-//            textCity.setValue(selected.getCity());
-//            textProvince.setValue(selected.getProvince());
+
         }
     }
 
@@ -190,8 +207,7 @@ public class StudentSearchController implements Initializable {
 
         boolean isValidAddress = !address.isEmpty();
         boolean isValidGender = textGender.getValue() != null;
-        boolean isValidCity = textCity.getValue() != null;
-        boolean isValidProvince = textProvince.getValue() != null;
+
 
         if (!isValidFirstName) showErrorWithTimeout(textFirstName);
         if (!isValidSecondName) showErrorWithTimeout(textSecondName);
@@ -200,8 +216,7 @@ public class StudentSearchController implements Initializable {
         if (!isValidPhone) showErrorWithTimeout(textContact);
         if (!isValidAddress) showErrorWithTimeout(textAddress);
         if (!isValidGender) showErrorWithTimeout(textGender);
-        if (!isValidCity) showErrorWithTimeout(textCity);
-        if (!isValidProvince) showErrorWithTimeout(textProvince);
+
 
         return isValidFirstName &&
                 isValidSecondName &&
@@ -209,9 +224,7 @@ public class StudentSearchController implements Initializable {
                 isValidEmail &&
                 isValidPhone &&
                 isValidAddress &&
-                isValidGender &&
-                isValidCity &&
-                isValidProvince;
+                isValidGender;
     }
 
     private void showErrorWithTimeout(ChoiceBox<String> resetFieldStyles) {
@@ -268,7 +281,7 @@ public class StudentSearchController implements Initializable {
                 if (textSecondName.getText().isEmpty()) {
                     showErrorWithTimeout(textSecondName);
                 } else {
-                    textGender.requestFocus();
+                    textAddress.requestFocus();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -299,7 +312,7 @@ public class StudentSearchController implements Initializable {
                 if (textEmail.getText().isEmpty()) {
                     showErrorWithTimeout(textEmail);
                 } else {
-                    textContact.requestFocus();
+                    textNic.requestFocus();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -314,7 +327,7 @@ public class StudentSearchController implements Initializable {
                 if (textContact.getText().isEmpty()) {
                     showErrorWithTimeout(textContact);
                 } else {
-                    textDateOfBirth.requestFocus();
+                    textEmail.requestFocus();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -326,7 +339,7 @@ public class StudentSearchController implements Initializable {
     public void onKeyBirthday(KeyEvent keyEvent) {
         if (keyEvent.getCode().toString().equals("ENTER")) {
             try {
-                textAddress.requestFocus();
+                textJoinDate.requestFocus();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -339,7 +352,7 @@ public class StudentSearchController implements Initializable {
                 if (textAddress.getText().isEmpty()) {
                     showErrorWithTimeout(textAddress);
                 } else {
-                    textCity.requestFocus();
+                    textContact.requestFocus();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -357,8 +370,6 @@ public class StudentSearchController implements Initializable {
         textContact.clear();
         textDateOfBirth.setValue(LocalDate.now());
         textAddress.clear();
-        textCity.getSelectionModel().clearSelection();
-        textProvince.getSelectionModel().clearSelection();
         textJoinDate.setValue(LocalDate.now());
 
 
@@ -381,30 +392,6 @@ public class StudentSearchController implements Initializable {
         textYear.setItems(years);
 
         textYear.getSelectionModel().select(String.valueOf(currentYear));
-        textCity.setItems(FXCollections.observableArrayList(
-                "Colombo", "Gampaha", "Kalutara",
-                "Kandy", "Matale", "Nuwara Eliya",
-                "Galle", "Matara", "Hambantota",
-                "Jaffna", "Kilinochchi", "Mannar",
-                "Vavuniya", "Mullaitivu", "Batticaloa",
-                "Ampara", "Trincomalee", "Kurunegala",
-                "Puttalam", "Anuradhapura", "Polonnaruwa",
-                "Badulla", "Monaragala", "Ratnapura",
-                "Kegalle"
-        ));
-        textProvince.setItems(FXCollections.observableArrayList(
-                "Western",
-                "Central",
-                "Southern",
-                "Northern",
-                "Eastern",
-                "North Western",
-                "North Central",
-                "Uva",
-                "Sabaragamuwa"
-        ));
-
-
     }
 
 

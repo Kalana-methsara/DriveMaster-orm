@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -86,7 +88,7 @@
                   <children>
                           <VBox prefHeight="94.0" prefWidth="1085.0" spacing="10" style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15;">
                               <children>
-                                  <HBox prefHeight="76.0" prefWidth="1055.0" spacing="80.0">
+                                  <HBox prefHeight="76.0" prefWidth="1055.0" spacing="60.0">
                                       <children>
                                  <VBox prefHeight="64.0" prefWidth="439.0" spacing="8.0">
                                     <children>
@@ -100,7 +102,7 @@
                                                    <Insets top="5.0" />
                                                 </padding>
                                              </Label>
-                                             <TextField fx:id="textCourseId" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                             <Label fx:id="textCourseId" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3; -fx-padding: 0 0 0 20px;"   />
                                           </children>
                                        </HBox>
                                        <HBox prefHeight="25.0" prefWidth="368.0" spacing="42.0">
@@ -148,6 +150,14 @@
                                        </HBox>
                                     </children>
                                  </VBox>
+                                 <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#onRefresh" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../images/refesh.png" />
+                                    </image>
+                                    <HBox.margin>
+                                       <Insets right="20.0" top="50.0" />
+                                    </HBox.margin>
+                                 </ImageView>
                                       </children>
                                   </HBox>
                               </children>
@@ -159,13 +169,12 @@
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <TableView prefHeight="246.0" prefWidth="1085.0" stylesheets="@../style/tableViewStyle.css">
+                                <TableView fx:id="tblCourse" onMouseClicked="#setData" prefHeight="246.0" prefWidth="1085.0" stylesheets="@../style/tableViewStyle.css">
                                     <columns>
-                                        <TableColumn prefWidth="150" text="DateTime" />
-                                        <TableColumn prefWidth="300" text="Remarks" />
-                                        <TableColumn prefWidth="150" text="Paid Amount" />
-                                        <TableColumn prefWidth="150" text="Balance" />
-                                        <TableColumn prefWidth="100" text="Action" />
+                                        <TableColumn fx:id="colCourseID" prefWidth="150" style="-fx-alignment: CENTER;" text="Course ID" />
+                                        <TableColumn fx:id="colCourseName" prefWidth="300" style="-fx-padding: 0 0 0 40px;" text="Course Name" />
+                                        <TableColumn fx:id="colDuration" prefWidth="150" style="-fx-alignment: CENTER;" text="Duration" />
+                                        <TableColumn fx:id="colCost" prefWidth="150" style="-fx-alignment: CENTER;" text="Fee (LKR)" />
                                     </columns>
                                     <columnResizePolicy>
                                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

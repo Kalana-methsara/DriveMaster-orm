@@ -16,4 +16,6 @@ public interface CourseBO extends SuperBO {
     boolean deleteCourse(String id) throws Exception;
 
     List<String> getAllIds(String id) ;
+
+    String getNextId();
 }

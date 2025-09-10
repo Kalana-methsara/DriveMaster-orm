@@ -4,5 +4,6 @@ import javafx.event.ActionEvent;
 
 public class AdminManageController {
     public void onActionConfirm(ActionEvent actionEvent) {
+        
     }
 }

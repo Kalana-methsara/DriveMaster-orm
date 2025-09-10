@@ -66,4 +66,18 @@ public class CourseBOImpl implements CourseBO {
             ids.add(String.valueOf(course.getId()));
         }
         return ids;    }
-}
+
+    @Override
+    public String getNextId() {
+        String lastId = courseDAO.getLastId();
+        char tableChar = 'C';
+        if (lastId != null) {
+            String lastIdNumberString = lastId.substring(1);
+            int lastIdNumber = Integer.parseInt(lastIdNumberString);
+            int nextIdNumber = lastIdNumber + 1;
+            return String.format(tableChar + "%03d", nextIdNumber);
+        }
+        return tableChar + "001";
+    }
+    }
+

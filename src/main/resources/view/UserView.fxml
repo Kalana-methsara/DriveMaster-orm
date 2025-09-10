@@ -124,7 +124,7 @@
                 <Label fx:id="lblDate" layoutX="1097.0" layoutY="13.0" text="07/Feb/2025" textFill="WHITE">
                     <font><Font name="System Bold" size="18.0" /></font>
                 </Label>
-                <Label layoutX="1127.0" layoutY="41.0" text="8AM - 5PM" textFill="WHITE">
+                <Label fx:id="lblTime" alignment="CENTER_RIGHT" layoutX="1094.0" layoutY="41.0" prefHeight="21.0" prefWidth="109.0" text="12:11:15 PM" textFill="WHITE">
                     <font><Font size="15.0" /></font>
                 </Label>
                 <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="1220.0" layoutY="10.0" onMouseClicked="#onLoginUser">

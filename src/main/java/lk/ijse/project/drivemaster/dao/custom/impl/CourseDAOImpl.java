@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -101,5 +102,22 @@ public class CourseDAOImpl implements CourseDAO {
             session.close();
         }
     }
+    @Override
+    public String getLastId()  {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<String> query = session.createQuery(
+                    "SELECT c.id FROM Course c ORDER BY c.id DESC",
+                    String.class
+            ).setMaxResults(1);
+            List<String> list = query.list();
+            if (list.isEmpty()) {
+                return null;
+            }
+            return list.get(0);
+        } finally {
+            session.close();
+        }
 
+    }
 }
