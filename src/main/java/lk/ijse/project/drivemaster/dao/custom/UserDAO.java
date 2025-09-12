@@ -12,7 +12,5 @@ public interface UserDAO extends CrudDAO<User> {
 
     User findPassword(String userName, String email);
 
-    String password(long id);
-
     boolean updatePassword(Long id, String password);
 }

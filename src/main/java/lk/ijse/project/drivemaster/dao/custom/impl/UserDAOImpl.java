@@ -143,19 +143,6 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-    @Override
-    public String password(long id) {
-        Session session = factoryConfiguration.getSession();
-        try {
-            Query<String> query = session.createQuery(
-                    "SELECT u.passwordHash FROM User u WHERE u.id = :id", String.class
-            );
-            query.setParameter("id", id);
-            return query.uniqueResult();
-        } finally {
-            session.close();
-        }
-    }
 
     @Override
     public boolean updatePassword(Long id, String password) {
