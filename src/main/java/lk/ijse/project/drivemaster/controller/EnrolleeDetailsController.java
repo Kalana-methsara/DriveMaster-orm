@@ -15,6 +15,8 @@ import lk.ijse.project.drivemaster.bo.custom.StudentBO;
 import lk.ijse.project.drivemaster.dto.CourseDTO;
 import lk.ijse.project.drivemaster.dto.CourseDetailsDTO;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -121,6 +123,13 @@ public class EnrolleeDetailsController implements Initializable {
     @FXML
     private ChoiceBox<?> textPaymentMethod;
 
+    private StudentDTO student;
+
+    public void setStudent(StudentDTO student) {
+        this.student = student;
+        setStudentData();
+    }
+
     private final List<CourseDetailsDTO> courses = new ArrayList<>();
     private int currentIndex = 0;
 
@@ -177,13 +186,15 @@ public class EnrolleeDetailsController implements Initializable {
     }
 
     private void setStudentData() {
-        StudentSearchController studentSearch = new StudentSearchController();
-       long id = studentSearch.getStudentId();
-       StudentDTO student = studentBO.getStudentById(id);
-       lblStudentName.setText(student.getLastName()+" "+student.getFirstName());
+        if (student == null) return;
+        lblStudentName.setText(student.getFirstName()+" "+student.getLastName());
+       lblGender.setText(student.getGender());
+       lblBirthday.setText(String.valueOf(student.getBirthday()));
+       lblContact.setText(student.getPhone());
+       lblNic.setText(student.getNic());
+       lblJoinDate.setText(String.valueOf(student.getRegDate()));
+       lblEmail.setText(student.getEmail());
        lblAddress.setText(student.getAddress());
-
-
 
     }
 

@@ -21,6 +21,7 @@ import lk.ijse.project.drivemaster.bo.BOType;
 import lk.ijse.project.drivemaster.bo.custom.StudentBO;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -84,10 +85,6 @@ public class StudentSearchController implements Initializable {
     @FXML
     private ChoiceBox<String> textGender;
 
-    @Getter
-    private long studentId;
-
-
     private final StudentBO studentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.STUDENT);
 
 
@@ -108,19 +105,25 @@ public class StudentSearchController implements Initializable {
             showAlert(Alert.AlertType.WARNING, "No Student Selected", "Please select a student before proceeding.");
             return;
         }
-        studentId = selectedStudent.getId();
+
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EnrolleeDetails.fxml"));
+            AnchorPane anchorPane = loader.load();
+
+            // Get controller and pass student
+            EnrolleeDetailsController controller = loader.getController();
+            controller.setStudent(selectedStudent);
+
+            // Load into parent
             ancStudentSearch.getChildren().clear();
-            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/EnrolleeDetails.fxml"));
             anchorPane.prefWidthProperty().bind(ancStudentSearch.widthProperty());
             anchorPane.prefHeightProperty().bind(ancStudentSearch.heightProperty());
             ancStudentSearch.getChildren().add(anchorPane);
+
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Page Not Found", "The requested page could not be loaded. Please check and try again.");
-
             e.printStackTrace();
         }
-
     }
 
     @FXML

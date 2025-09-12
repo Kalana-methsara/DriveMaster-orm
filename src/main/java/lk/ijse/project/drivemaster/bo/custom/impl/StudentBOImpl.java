@@ -76,7 +76,6 @@ public class StudentBOImpl implements StudentBO {
     @Override
     public StudentDTO getStudentById(Long id) {
         Optional<Student> optionalStudent = studentDAO.findById(id);
-
         if (optionalStudent.isPresent()) {
             Student student = optionalStudent.get();
             return new StudentDTO(
