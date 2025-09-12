@@ -52,8 +52,8 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public boolean deleteUser(String id) throws Exception {
-        Optional<User> optionalCustomer = userDAO.findById(Long.valueOf(id));
-        if (optionalCustomer.isEmpty()) {
+        Optional<User> optionalUser = userDAO.findById(Long.valueOf(id));
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("Customer not found..!");
         }
         return userDAO.delete(id);
@@ -90,9 +90,15 @@ public class UserBOImpl implements UserBO {
             return null;
         }    }
 
+
     @Override
-    public String password(long id) {
-        return userDAO.password(id);
+    public boolean updatePassword(Long id, String password) {
+        try {
+            return userDAO.updatePassword(id, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 

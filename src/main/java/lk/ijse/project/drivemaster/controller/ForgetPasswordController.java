@@ -30,6 +30,14 @@ import java.util.logging.Logger;
 public class ForgetPasswordController implements Initializable {
 
     private final UserBO userBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.USER);
+    public Label lblPassword;
+    public ImageView showPassword;
+    public Label lblPassword1;
+    public TextField txtVisiblePassword1;
+    public ImageView showPassword1;
+    public PasswordField passwordField;
+    public PasswordField passwordField1;
+    public TextField txtVisiblePassword;
 
 
     @FXML
@@ -58,6 +66,10 @@ public class ForgetPasswordController implements Initializable {
     private String generatedOTP;
     private String storedPassword;
     private String storedRole;
+
+    private boolean isPasswordVisible = false;
+    private boolean isPasswordVisible1 = false;
+
 
     public void onKeyEmail(KeyEvent keyEvent) {
         if (keyEvent.getCode().toString().equals("ENTER")) {
@@ -128,17 +140,41 @@ public class ForgetPasswordController implements Initializable {
         timeline.setCycleCount(1);
         timeline.play();
     }
+    private void showErrorWithTimeout1(String message) {
+        lblError.setText(message);
+        lblError.setVisible(true);
+        setFieldStyleError1();
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(5), e -> {
+                    lblError.setVisible(false);
+                    setFieldStyleSuccess1();
+                })
+        );
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
 
     private void setFieldStyleError() {
         String style = "-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color:  #dfe4ea;";
         lblUsername.setStyle(style);
         lblEmail.setStyle(style);
     }
+    private void setFieldStyleError1() {
+        String style = "-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color:  #dfe4ea;";
+        lblPassword.setStyle(style);
+        lblPassword1.setStyle(style);
+    }
 
     private void setFieldStyleSuccess() {
         String style = "-fx-border-color: #3DAF3BFF; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color:  #dfe4ea;";
         lblUsername.setStyle(style);
         lblEmail.setStyle(style);
+    }
+    private void setFieldStyleSuccess1() {
+        String style = "-fx-border-color: #3DAF3BFF; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8; -fx-background-color:  #dfe4ea;";
+        lblPassword.setStyle(style);
+        lblPassword1.setStyle(style);
     }
 
     public void onKeyCheck(KeyEvent keyEvent) {
@@ -151,7 +187,42 @@ public class ForgetPasswordController implements Initializable {
             }
         }
     }
+    public void PasswordVisibility(MouseEvent mouseEvent) {
+        if (isPasswordVisible) {
+            passwordField.setText(txtVisiblePassword.getText());
+            txtVisiblePassword.setVisible(false);
+            txtVisiblePassword.setManaged(false);
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+            isPasswordVisible = false;
+        } else {
+            txtVisiblePassword.setText(passwordField.getText());
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+            txtVisiblePassword.setVisible(true);
+            txtVisiblePassword.setManaged(true);
+            isPasswordVisible = true;
+        }
 
+    }
+    public void PasswordVisibility1(MouseEvent mouseEvent) {
+        if (isPasswordVisible1) {
+            passwordField1.setText(txtVisiblePassword1.getText());
+            txtVisiblePassword1.setVisible(false);
+            txtVisiblePassword1.setManaged(false);
+            passwordField1.setVisible(true);
+            passwordField1.setManaged(true);
+            isPasswordVisible1 = false;
+        } else {
+            txtVisiblePassword1.setText(passwordField1.getText());
+            passwordField1.setVisible(false);
+            passwordField1.setManaged(false);
+            txtVisiblePassword1.setVisible(true);
+            txtVisiblePassword1.setManaged(true);
+            isPasswordVisible1 = true;
+        }
+
+    }
 
     @FXML
     void onVerifyOTP() {
@@ -197,11 +268,36 @@ public class ForgetPasswordController implements Initializable {
     private void sendOTP() {
         String username = txtUserName.getText().trim();
         String email = txtEmail.getText().trim();
+        String password;
+        if (!isPasswordVisible) {
+            password = passwordField.getText();
+        } else {
+            password = txtVisiblePassword.getText();
+        }
+        String confirmPassword;
+        if (!isPasswordVisible1) {
+            confirmPassword = passwordField1.getText();
+        } else {
+            confirmPassword = txtVisiblePassword1.getText();
+        }
 
         if (username.isEmpty() || email.isEmpty()) {
             showErrorWithTimeout("Username or Email cannot be empty!");
             return;
         }
+        if (password.isEmpty() || confirmPassword.isEmpty()) {
+            showErrorWithTimeout1("Password or ConformPassword cannot be empty!");
+            return;
+        }
+        if (password.length() < 8 || confirmPassword.length() < 8) {
+            showErrorWithTimeout1("Password and ConfirmPassword must be at least 8 characters!");
+            return;
+        }
+        if (!password.equals(confirmPassword)) {
+            showErrorWithTimeout1("Passwords do not match!");
+            return;
+        }
+
 
         UserDTO user = userBO.findPassword(username, email);
 
@@ -209,7 +305,13 @@ public class ForgetPasswordController implements Initializable {
             if (user != null) {
                 setLblCount();
 
-                storedPassword = BCrypt.withDefaults().hashToString(12, userBO.password(user.getId()).toCharArray());
+                boolean isUpdate =userBO.updatePassword(user.getId(),password);
+                if (!isUpdate) {
+                    showErrorWithTimeout("Password update failed. Please try again.");
+                    return;
+                }
+
+                storedPassword = password;
 
                 storedRole = user.getRole();
 
@@ -300,6 +402,28 @@ public class ForgetPasswordController implements Initializable {
 
         } else {
             showAlert(Alert.AlertType.ERROR, "Invalid OTP. Please try again!");
+        }
+    }
+
+    public void onKeyPassword(KeyEvent keyEvent) {
+        if (keyEvent.getCode().toString().equals("ENTER")) {
+            try {
+                passwordField.requestFocus();
+            } catch (Exception e) {
+                e.printStackTrace();
+                showErrorWithTimeout("Error");
+            }
+        }
+    }
+
+    public void onKeyConformPassword(KeyEvent keyEvent) {
+        if (keyEvent.getCode().toString().equals("ENTER")) {
+            try {
+                passwordField1.requestFocus();
+            } catch (Exception e) {
+                e.printStackTrace();
+                showErrorWithTimeout("Error");
+            }
         }
     }
 

@@ -9,7 +9,6 @@ import lk.ijse.project.drivemaster.dao.util.DAOFactoryImpl;
 import lk.ijse.project.drivemaster.dao.util.DAOType;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
 import lk.ijse.project.drivemaster.entity.Student;
-import lk.ijse.project.drivemaster.entity.User;
 
 
 import java.util.ArrayList;
@@ -73,4 +72,29 @@ public class StudentBOImpl implements StudentBO {
         }
         return ids;
     }
+
+    @Override
+    public StudentDTO getStudentById(Long id) {
+        Optional<Student> optionalStudent = studentDAO.findById(id);
+
+        if (optionalStudent.isPresent()) {
+            Student student = optionalStudent.get();
+            return new StudentDTO(
+                    student.getId(),
+                    student.getFirstName(),
+                    student.getLastName(),
+                    student.getBirthday(),
+                    student.getGender(),
+                    student.getAddress(),
+                    student.getNic(),
+                    student.getEmail(),
+                    student.getPhone(),
+                    student.getRegDate()
+            );
+        } else {
+            return null; // or throw exception
+        }
+    }
+
+
 }

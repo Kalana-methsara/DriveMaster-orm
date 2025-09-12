@@ -157,6 +157,31 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    @Override
+    public boolean updatePassword(Long id, String password) {
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            User user = session.get(User.class, id);
+            if (user != null) {
+                user.setRawPassword(password);
+
+                session.merge(user);
+                transaction.commit();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+    }
+
+
+
 }
 
 

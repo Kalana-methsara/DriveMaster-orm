@@ -1,13 +1,10 @@
 package lk.ijse.project.drivemaster.bo.custom;
 
 import lk.ijse.project.drivemaster.bo.SuperBO;
-import lk.ijse.project.drivemaster.bo.exception.DuplicateException;
-import lk.ijse.project.drivemaster.bo.exception.InUseException;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
-import lk.ijse.project.drivemaster.dto.UserDTO;
 
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public interface StudentBO extends SuperBO {
     List<StudentDTO> getAllStudent() throws Exception;
@@ -20,4 +17,5 @@ public interface StudentBO extends SuperBO {
 
     List<String> getAllIds(String id) ;
 
+     StudentDTO getStudentById(Long id);
 }

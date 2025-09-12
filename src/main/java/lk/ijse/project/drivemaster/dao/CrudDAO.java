@@ -8,4 +8,5 @@ public interface CrudDAO<T> extends SuperDAO {
     boolean save(T t);
     boolean update(T t) ;
     boolean delete(String id);
+
 }

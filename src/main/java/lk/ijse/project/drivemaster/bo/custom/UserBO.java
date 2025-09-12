@@ -18,5 +18,5 @@ public interface UserBO extends SuperBO {
 
     UserDTO findPassword(String userName, String email);
 
-    String password(long id);
+    boolean updatePassword(Long id, String password);
 }
