@@ -95,5 +95,10 @@ public class StudentBOImpl implements StudentBO {
         }
     }
 
+    @Override
+    public Long getLastId() {
+        return studentDAO.getLastId();
+    }
+
 
 }

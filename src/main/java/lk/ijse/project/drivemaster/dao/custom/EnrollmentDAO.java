@@ -1,12 +1,12 @@
 package lk.ijse.project.drivemaster.dao.custom;
 
 import lk.ijse.project.drivemaster.dao.CrudDAO;
-import lk.ijse.project.drivemaster.entity.Payment;
+import lk.ijse.project.drivemaster.entity.Enrollment;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface PaymentDAO extends CrudDAO<Payment> {
+public interface EnrollmentDAO extends CrudDAO<Enrollment> {
     List<Long> getAllIds();
-    Optional<Payment> findById(Long id);
+    Optional<Enrollment> findById(Long id);
 }

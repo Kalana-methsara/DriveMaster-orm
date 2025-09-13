@@ -19,8 +19,7 @@ public class StudentDAOImpl implements StudentDAO {
         Session session = factoryConfiguration.getSession();
         try {
             Query<Student> query = session.createQuery("from Student", Student.class);
-            List<Student> studentList = query.list();
-            return studentList;
+            return query.list();
         } finally {
             session.close();
         }
@@ -35,11 +34,12 @@ public class StudentDAOImpl implements StudentDAO {
             transaction.commit();
             return true;
         } catch (Exception e) {
-            transaction.rollback();
+            if (transaction != null) transaction.rollback();
             return false;
         } finally {
             session.close();
-        }      }
+        }
+    }
 
     @Override
     public boolean update(Student student) {
@@ -63,7 +63,7 @@ public class StudentDAOImpl implements StudentDAO {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            Student student = session.get(Student.class, id);
+            Student student = session.get(Student.class, Long.valueOf(id)); // convert String → Long
             if (student != null) {
                 session.remove(student);
                 transaction.commit();
@@ -83,11 +83,12 @@ public class StudentDAOImpl implements StudentDAO {
     public List<String> getAllIds(String id) {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<String> query = session.createQuery("SELECT s.id FROM Student s", String.class);
+            Query<String> query = session.createQuery("SELECT CAST(s.id as string) FROM Student s", String.class);
             return query.list();
         } finally {
             session.close();
-        }    }
+        }
+    }
 
     @Override
     public Optional<Student> findById(Long id) {
@@ -100,4 +101,23 @@ public class StudentDAOImpl implements StudentDAO {
         }
     }
 
+    @Override
+    public Long getLastId() {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<Long> query = session.createQuery(
+                    "SELECT s.id FROM Student s ORDER BY s.id DESC",
+                    Long.class
+            ).setMaxResults(1);
+
+            List<Long> list = query.list();
+            if (list.isEmpty()) {
+                return null;
+            }
+            return list.get(0);
+
+        } finally {
+            session.close();
+        }
+    }
 }

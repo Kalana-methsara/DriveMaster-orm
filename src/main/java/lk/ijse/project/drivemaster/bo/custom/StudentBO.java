@@ -18,4 +18,6 @@ public interface StudentBO extends SuperBO {
     List<String> getAllIds(String id) ;
 
      StudentDTO getStudentById(Long id);
+
+    Long getLastId();
 }

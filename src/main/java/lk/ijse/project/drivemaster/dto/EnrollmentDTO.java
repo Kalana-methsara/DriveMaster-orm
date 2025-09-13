@@ -1,5 +1,6 @@
 package lk.ijse.project.drivemaster.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,11 +11,11 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnrollmentDTO { private Long id;
+public class EnrollmentDTO {
+    private Long id;
     private Long studentId;
     private String courseId;
     private LocalDate regDate;
     private BigDecimal upfrontPaid;
 
-    private CourseDTO course;
 }

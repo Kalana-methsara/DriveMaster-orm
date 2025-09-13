@@ -4,5 +4,6 @@ public enum BOType {
     COURSE,
     PAYMENT,
     STUDENT,
+    REGISTER,
     USER
 }

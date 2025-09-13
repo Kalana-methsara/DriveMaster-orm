@@ -28,7 +28,7 @@ public class Instructor {
     @Pattern(regexp="^(?:0|\\+94)7\\d{8}$") @NotBlank private String phone;
 
     @OneToMany(mappedBy="instructor")
-    private List<Lesson> lessons = new ArrayList<>();
+    private List<Lesson> lessons;
 
 
 }

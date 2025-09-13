@@ -52,6 +52,7 @@ public class EntityDTOConverter {
         student.setBirthday(dto.getBirthday()); // fixed name
         student.setGender(dto.getGender());
         student.setAddress(dto.getAddress());
+        student.setNic(dto.getNic());
         student.setEmail(dto.getEmail());
         student.setPhone(dto.getPhone());
         student.setRegDate(dto.getRegDate());
@@ -99,8 +100,7 @@ public class EntityDTOConverter {
                 enrollment.getStudent() != null ? enrollment.getStudent().getId() : null,
                 enrollment.getCourse() != null ? enrollment.getCourse().getId() : null,
                 enrollment.getRegDate(),
-                enrollment.getUpfrontPaid(),
-                enrollment.getCourse() != null ? getCourseDTO(enrollment.getCourse()) : null
+                enrollment.getUpfrontPaid()
         );
     }
 

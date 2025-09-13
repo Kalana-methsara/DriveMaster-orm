@@ -46,13 +46,13 @@ public class Student {
     private LocalDate regDate;
 
     @OneToMany(mappedBy="student", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.EAGER)
-    private List<Enrollment> enrollments = new ArrayList<>();
+    private List<Enrollment> enrollments ;
 
     @OneToMany(mappedBy="student", cascade=CascadeType.ALL, orphanRemoval=true)
-    private List<Payment> payments = new ArrayList<>();
+    private List<Payment> payments ;
 
     @OneToMany(mappedBy="student", cascade=CascadeType.ALL, orphanRemoval=true)
-    private List<Lesson> lessons = new ArrayList<>();
+    private List<Lesson> lessons;
 
 
 }

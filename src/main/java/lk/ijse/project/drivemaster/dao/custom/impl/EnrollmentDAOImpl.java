@@ -1,8 +1,8 @@
 package lk.ijse.project.drivemaster.dao.custom.impl;
 
 import lk.ijse.project.drivemaster.config.FactoryConfiguration;
-import lk.ijse.project.drivemaster.dao.custom.PaymentDAO;
-import lk.ijse.project.drivemaster.entity.Payment;
+import lk.ijse.project.drivemaster.dao.custom.EnrollmentDAO;
+import lk.ijse.project.drivemaster.entity.Enrollment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -10,15 +10,15 @@ import org.hibernate.query.Query;
 import java.util.List;
 import java.util.Optional;
 
-public class PaymentDAOImpl implements PaymentDAO {
+public class EnrollmentDAOImpl implements EnrollmentDAO {
 
     private final FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
 
     @Override
-    public List<Payment> getAll() {
+    public List<Enrollment> getAll() {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<Payment> query = session.createQuery("from Payment", Payment.class);
+            Query<Enrollment> query = session.createQuery("from Enrollment", Enrollment.class);
             return query.list();
         } finally {
             session.close();
@@ -26,11 +26,11 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public boolean save(Payment payment) {
+    public boolean save(Enrollment enrollment) {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.persist(payment);
+            session.persist(enrollment);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -43,11 +43,11 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public boolean update(Payment payment) {
+    public boolean update(Enrollment enrollment) {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.merge(payment);
+            session.merge(enrollment);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -64,9 +64,9 @@ public class PaymentDAOImpl implements PaymentDAO {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            Payment payment = session.get(Payment.class, Long.valueOf(id)); // Payment PK = Long
-            if (payment != null) {
-                session.remove(payment);
+            Enrollment enrollment = session.get(Enrollment.class, Long.valueOf(id)); // Enrollment PK = Long
+            if (enrollment != null) {
+                session.remove(enrollment);
                 transaction.commit();
                 return true;
             }
@@ -81,11 +81,11 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public Optional<Payment> findById(Long id) {
+    public Optional<Enrollment> findById(Long id) {
         Session session = factoryConfiguration.getSession();
         try {
-            Payment payment = session.get(Payment.class, id);
-            return Optional.ofNullable(payment);
+            Enrollment enrollment = session.get(Enrollment.class, id);
+            return Optional.ofNullable(enrollment);
         } finally {
             session.close();
         }
@@ -95,7 +95,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     public List<Long> getAllIds() {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<Long> query = session.createQuery("SELECT p.id FROM Payment p", Long.class);
+            Query<Long> query = session.createQuery("SELECT e.id FROM Enrollment e", Long.class);
             return query.list();
         } finally {
             session.close();

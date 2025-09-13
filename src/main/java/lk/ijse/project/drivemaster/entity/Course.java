@@ -26,6 +26,6 @@ public class Course {
     @Column(precision=10, scale=2) private BigDecimal fee;
 
     @OneToMany(mappedBy="course")
-    private List<Enrollment> enrollments = new ArrayList<>();
+    private List<Enrollment> enrollments;
 }
 

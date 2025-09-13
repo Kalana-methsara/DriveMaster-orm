@@ -17,10 +17,18 @@ import javafx.util.Duration;
 import lk.ijse.project.drivemaster.bo.BOFactoryImpl;
 import lk.ijse.project.drivemaster.bo.BOType;
 import lk.ijse.project.drivemaster.bo.custom.CourseBO;
+import lk.ijse.project.drivemaster.bo.custom.RegisterStudentBO;
+import lk.ijse.project.drivemaster.bo.custom.StudentBO;
 import lk.ijse.project.drivemaster.dto.CourseDTO;
+import lk.ijse.project.drivemaster.dto.EnrollmentDTO;
+import lk.ijse.project.drivemaster.dto.PaymentDTO;
+import lk.ijse.project.drivemaster.dto.StudentDTO;
+import lk.ijse.project.drivemaster.enums.PaymentStatus;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -50,6 +58,8 @@ public class StudentRegistrationController implements Initializable {
     private final String phonePattern = "^(\\d+)||((\\d+\\.)(\\d){2})$";
 
     private final CourseBO courseBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.COURSE);
+    private final StudentBO studentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.STUDENT);
+    private final RegisterStudentBO registerStudentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.REGISTER);
     private final ObservableList<CourseDTO> selectedCourses = FXCollections.observableArrayList();
 
 
@@ -113,10 +123,6 @@ public class StudentRegistrationController implements Initializable {
     }
 
 
-
-
-
-
     private void showErrorWithTimeout(ChoiceBox<String> resetFieldStyles) {
         resetFieldStyles.setStyle("-fx-background-color: #f3e3e5; -fx-border-width: 0 0 2 0; -fx-border-color: #f3214b;");
 
@@ -128,7 +134,6 @@ public class StudentRegistrationController implements Initializable {
         timeline.setCycleCount(1);
         timeline.play();
     }
-
 
 
     private void updateTotalFee() {
@@ -181,7 +186,48 @@ public class StudentRegistrationController implements Initializable {
         }
 
         showAlert(Alert.AlertType.INFORMATION, "Success", "Registration confirmed with: " + paymentMethod);
+
+
+        Long studentId = studentBO.getLastId() + 1;
+        String firstName = textFirstName.getText() != null ? textFirstName.getText().trim() : "";
+        String secondName = textSecondName.getText() != null ? textSecondName.getText().trim() : "";
+        LocalDate birthday = textDateOfBirth.getValue();
+        String gender = textGender.getValue();
+        String address = textAddress.getText() != null ? textAddress.getText().trim() : "";
+        String nic = textNic.getText();
+        String email = textEmail.getText() != null ? textEmail.getText().trim() : "";
+        String phone = textContact.getText() != null ? textContact.getText().trim() : "";
+        LocalDate regDate = LocalDate.now();
+
+
+        String courseId = lblCourseId.getText();
+        String courseName = lblCourseName.getText();
+        String duration = lblCourseDuration.getText();
+        BigDecimal cost = selectedCourses.get(0).getFee(); // if only 1 course
+
+        BigDecimal upfrontPaid = new BigDecimal(textFirstPayment.getText());
+
+        BigDecimal totalAmount = new BigDecimal(lblTotal.getText());
+        String method = textPaymentMethod.getValue();
+        String status = String.valueOf(PaymentStatus.PENDING);
+        String reference ="1001";
+
+
+
+        long id = 1L;
+
+//        StudentDTO studentDTO = new StudentDTO(studentId, firstName, secondName, birthday, gender, address, nic, email, phone, regDate);
+//        CourseDTO courseDTO = new CourseDTO(courseId, courseName, duration, cost);
+//        EnrollmentDTO enrollmentDTO =new EnrollmentDTO(id, studentId, courseId, regDate, upfrontPaid,courseDTO);
+//        PaymentDTO paymentDTO = new PaymentDTO(id,studentId,totalAmount,method, LocalDateTime.now(),status,reference);
+        try {
+//            registerStudentBO.StudentRegistration(studentDTO, courseDTO, enrollmentDTO, paymentDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
 
 
 
@@ -268,6 +314,7 @@ public class StudentRegistrationController implements Initializable {
 
         }
     }
+
     private void showErrorWithTimeout(TextField resetFieldStyles) {
         resetFieldStyles.setStyle("-fx-background-color: #f3e3e5; -fx-border-width: 0 0 2 0; -fx-border-color: #f3214b;");
 
@@ -310,7 +357,6 @@ public class StudentRegistrationController implements Initializable {
             }
         }
     }
-
 
 
     public void onKeyNic(KeyEvent keyEvent) {
@@ -398,7 +444,6 @@ public class StudentRegistrationController implements Initializable {
         textAddress.clear();
         textCity.getSelectionModel().clearSelection();
         textProvince.getSelectionModel().clearSelection();
-
 
 
     }
