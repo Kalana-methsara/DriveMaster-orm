@@ -24,6 +24,36 @@ public class PaymentDAOImpl implements PaymentDAO {
             session.close();
         }
     }
+    @Override
+   public boolean save(Payment payment,Session session){
+       try {
+           session.merge(payment);
+           return true;
+       } catch (Exception e) {
+           e.printStackTrace();
+           return false;
+       }
+    }
+
+    @Override
+    public Long getLastId() {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<Long> query = session.createQuery(
+                    "SELECT p.id FROM Payment p ORDER BY p.id DESC",
+                    Long.class
+            ).setMaxResults(1);
+
+            List<Long> list = query.list();
+            if (list.isEmpty()) {
+                return null;
+            }
+            return list.get(0);
+
+        } finally {
+            session.close();
+        }
+    }
 
     @Override
     public boolean save(Payment payment) {

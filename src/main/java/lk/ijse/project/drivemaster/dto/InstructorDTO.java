@@ -15,15 +15,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InstructorDTO {
+    public Long getId;
     private Long id;
     private String name;
+    private String nic;
     private String email;
     private String phone;
     private List<Lesson> lessons;
 
-    public InstructorDTO(Long id, String name, String email, String phone) {
+    public InstructorDTO(Long id, String name, String nic, String email, String phone) {
         this.id = id;
         this.name = name;
+        this.nic = nic;
         this.email = email;
         this.phone = phone;
     }

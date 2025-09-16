@@ -81,7 +81,7 @@
                             </children>
                         </VBox>
                         <VBox.margin>
-                            <Insets bottom="50.0" />
+                            <Insets bottom="30.0" />
                         </VBox.margin>
                         <padding>
                             <Insets bottom="10.0" />
@@ -93,9 +93,9 @@
                                 <children>
                                     <VBox prefHeight="400.0" prefWidth="700.0" spacing="8.0">
                                         <children>
-                                            <HBox layoutY="5.0" prefHeight="25.0" spacing="40.0">
+                                            <HBox layoutY="5.0" prefHeight="25.0" spacing="19.0">
                                                 <children>
-                                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Frist Name">
+                                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Instructors Id">
                                                         <font>
                                                             <Font size="14.0" />
                                                         </font>
@@ -103,12 +103,15 @@
                                                             <Insets top="5.0" />
                                                         </padding>
                                                     </Label>
-                                                    <TextField fx:id="textFirstName" onKeyReleased="#onKeyFirstName" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                    <Label fx:id="lblId" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" text="0">
+                                          <padding>
+                                             <Insets left="10.0" />
+                                          </padding></Label>
                                                 </children>
                                             </HBox>
-                                            <HBox prefHeight="25.0" spacing="20.0">
+                                            <HBox prefHeight="25.0" spacing="45.0">
                                                 <children>
-                                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Second Name">
+                                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Full Name">
                                                         <font>
                                                             <Font size="14.0" />
                                                         </font>
@@ -116,10 +119,10 @@
                                                             <Insets top="5.0" />
                                                         </padding>
                                                     </Label>
-                                                    <TextField fx:id="textSecondName" onKeyReleased="#onKeySecondName" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                    <TextField fx:id="textName" onKeyReleased="#onKeyName" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                                 </children>
                                             </HBox>
-                                            <HBox prefHeight="25.0" spacing="94.0">
+                                            <HBox prefHeight="25.0" spacing="92.0">
                                                 <children>
                                                     <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Nic">
                                                         <font>
@@ -191,10 +194,10 @@
                     </VBox>
                     <TableView fx:id="tableView" onMouseClicked="#setData" prefHeight="260.0" prefWidth="1085.0" style="-fx-border-color: #1d4ed8;">
                         <columns>
-                            <TableColumn fx:id="colStudentId" prefWidth="89.0" style="-fx-alignment: CENTER;" text="Student Id" />
-                            <TableColumn fx:id="colStudentName" prefWidth="150.0" text="Student Name" />
-                            <TableColumn fx:id="colNic" prefWidth="120.0" text="Nic" />
-                            <TableColumn fx:id="colEmail" prefWidth="209.0" text="Email" />
+                            <TableColumn fx:id="colInstructorId" prefWidth="89.0" style="-fx-alignment: CENTER;" text="Instructor Id" />
+                            <TableColumn fx:id="colInstructorName" prefWidth="150.0" style="-fx-padding: 0 0 0 40px;" text="Instructor Name" />
+                            <TableColumn fx:id="colNic" prefWidth="120.0" style="-fx-padding: 0 0 0 40px;" text="Nic" />
+                            <TableColumn fx:id="colEmail" prefWidth="209.0" style="-fx-padding: 0 0 0 40px;" text="Email" />
                             <TableColumn fx:id="colContact" prefWidth="110.0" style="-fx-alignment: CENTER;" text="Contact" />
                         </columns>
                         <stylesheets>

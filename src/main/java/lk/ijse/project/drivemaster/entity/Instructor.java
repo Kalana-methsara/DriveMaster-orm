@@ -23,6 +23,10 @@ public class Instructor {
 
     @NotBlank
     private String name;
+
+    @NotBlank
+    private String nic;
+
     @Email
     @NotBlank @Column(unique=true) private String email;
     @Pattern(regexp="^(?:0|\\+94)7\\d{8}$") @NotBlank private String phone;

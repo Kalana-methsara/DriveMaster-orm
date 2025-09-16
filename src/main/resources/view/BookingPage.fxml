@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1209.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.drivemaster.controller.PaymentController">
+<AnchorPane prefHeight="700.0" prefWidth="1209.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.project.drivemaster.controller.BookingPageController">
     <children>
         <Pane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="1209.0" style="-fx-background-color: #E9F1F6; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -56,7 +56,7 @@
                             <children>
 
                                 <!-- Title -->
-                                <Label prefHeight="35.0" prefWidth="257.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Student Payment">
+                                <Label prefHeight="35.0" prefWidth="257.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Lesson Booking">
                                     <font>
                                         <Font size="24.0" />
                                     </font>

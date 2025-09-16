@@ -31,31 +31,27 @@
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnCourse" layoutX="10.0" layoutY="140.0" onAction="#onTransport" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="  COURSE" textFill="WHITE">
+                        <Button fx:id="btnCourse" layoutX="10.0" layoutY="260.0" onAction="#onCourse" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="   COURSE" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnBooking" layoutX="10.0" layoutY="180.0" onAction="#onBooking" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="      BOOKING" textFill="WHITE">
+                        <Button fx:id="btnBooking" layoutX="10.0" layoutY="140.0" onAction="#onBooking" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="      BOOKING" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnPayment" layoutX="10.0" layoutY="220.0" onAction="#onPayment" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="      PAYMENT" textFill="WHITE">
+                        <Button fx:id="btnPayment" layoutX="10.0" layoutY="180.0" onAction="#onPayment" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="      PAYMENT" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnSalary" layoutX="10.0" layoutY="260.0" onAction="#onSalary" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="  SALARY" textFill="WHITE">
+                        <Button fx:id="btnInstructor" layoutX="10.0" layoutY="220.0" onAction="#onInstructor" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="            INSTRUCTOR" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button layoutX="10.0" layoutY="380.0" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="    REGISTER" textFill="WHITE">
+                        <Button fx:id="btnAdminManage" layoutX="10.0" layoutY="310.0" onAction="#onAdminManage" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="            ADMIN MNGE" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
                         </Button>
 
-                        <Button fx:id="btnAdminManage" layoutX="10.0" layoutY="420.0" onAction="#onAdminManage" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="            ADMIN MNGE" textFill="WHITE">
-                            <font><Font name="System Bold" size="14.0" /></font>
-                        </Button>
-
-                        <Pane layoutX="3.0" layoutY="460.0" opacity="0.19" prefHeight="3.0" prefWidth="195.0" style="-fx-background-color: f5f1f8;" />
+                        <Pane layoutX="3.0" layoutY="300.0" opacity="0.19" prefHeight="3.0" prefWidth="195.0" style="-fx-background-color: f5f1f8;" />
 
                         <Button fx:id="btnLogout" layoutX="10.0" layoutY="520.0" onAction="#onLogout" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="Logout" textFill="WHITE">
                             <font><Font name="System Bold" size="14.0" /></font>
@@ -71,46 +67,23 @@
                         <ImageView fx:id="pngStudent" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="106.0" preserveRatio="true">
                             <image><Image url="@../images/students.png" /></image>
                         </ImageView>
-                        <ImageView fx:id="pngCourse" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="146.0" preserveRatio="true">
+                        <ImageView fx:id="pngCourse" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="266.0" preserveRatio="true">
                             <image><Image url="@../images/course.png" /></image>
                         </ImageView>
-                        <ImageView fx:id="pngBooking" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="186.0" preserveRatio="true">
+                        <ImageView fx:id="pngBooking" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="146.0" preserveRatio="true">
                             <image><Image url="@../images/booking.png" /></image>
                         </ImageView>
-                        <ImageView fx:id="pngPayment" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="226.0" preserveRatio="true">
+                        <ImageView fx:id="pngPayment" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="186.0" preserveRatio="true">
                             <image><Image url="@../images/payment.png" /></image>
                         </ImageView>
-                        <ImageView fx:id="pngSalary" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="266.0" preserveRatio="true">
-                            <image><Image url="@../images/salary.png" /></image>
+                        <ImageView fx:id="pngInstructor" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="226.0" preserveRatio="true">
+                            <image><Image url="@../images/report.png" /></image>
                         </ImageView>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="386.0" preserveRatio="true">
-                            <image><Image url="@../images/key.png" /></image>
-                        </ImageView>
-                        <ImageView fx:id="pngAdminManage" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="426.0" preserveRatio="true">
+                        <ImageView fx:id="pngAdminManage" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="316.0" preserveRatio="true">
                             <image><Image url="@../images/admin.png" /></image>
                         </ImageView>
                         <ImageView fx:id="pngLogout" fitHeight="20.0" fitWidth="20.0" layoutX="38.0" layoutY="526.0" preserveRatio="true">
                             <image><Image url="@../images/logout.png" /></image>
-                        </ImageView>
-                        <Button fx:id="btnStock" layoutX="10.0" layoutY="300.0" onAction="#onStock" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="STOCK " textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Button>
-                        <ImageView fx:id="pngStock" fitHeight="25.0" fitWidth="25.0" layoutX="37.0" layoutY="304.0" preserveRatio="true">
-                            <image>
-                                <Image url="@../images/stock.png" />
-                            </image>
-                        </ImageView>
-                        <Button fx:id="btnInventory" layoutX="10.0" layoutY="340.0" onAction="#onInventory" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #228b22; -fx-border-color: #98ff98; -fx-border-radius: 10px;" text="          INVENTORY" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Button>
-                        <ImageView fx:id="pngInventory" fitHeight="22.0" fitWidth="25.0" layoutX="39.0" layoutY="346.0" preserveRatio="true">
-                            <image>
-                                <Image url="@../images/password.png" />
-                            </image>
                         </ImageView>
 
                     </children>
@@ -144,7 +117,7 @@
             </children>
         </Pane>
 
-        <!-- Main Content Area -->
+                    <!-- Main Content Area -->
         <AnchorPane fx:id="ancMainContainer" layoutX="203.0" layoutY="80.0" prefHeight="700.0" prefWidth="1140.0" AnchorPane.leftAnchor="210.0" />
     </children>
 </AnchorPane>

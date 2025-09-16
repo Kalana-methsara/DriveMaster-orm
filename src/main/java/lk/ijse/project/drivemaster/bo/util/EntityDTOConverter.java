@@ -117,7 +117,7 @@ public class EntityDTOConverter {
 
         if (dto.getCourseId() != null) {
             Course course = new Course();
-            course.setId(dto.getCourseId());
+            course.setId(String.valueOf(dto.getCourseId()));
             enrollment.setCourse(course);
         }
 
@@ -189,6 +189,7 @@ public class EntityDTOConverter {
         return new InstructorDTO(
                 instructor.getId(),
                 instructor.getName(),
+                instructor.getNic(),
                 instructor.getEmail(),
                 instructor.getPhone()
         );
@@ -197,6 +198,7 @@ public class EntityDTOConverter {
         Instructor instructor = new Instructor();
         instructor.setId(dto.getId());
         instructor.setName(dto.getName());
+        instructor.setNic(dto.getNic());
         instructor.setEmail(dto.getEmail());
         instructor.setPhone(dto.getPhone());
         return instructor;

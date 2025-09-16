@@ -16,19 +16,19 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import lk.ijse.project.drivemaster.bo.BOFactoryImpl;
 import lk.ijse.project.drivemaster.bo.BOType;
-import lk.ijse.project.drivemaster.bo.custom.CourseBO;
-import lk.ijse.project.drivemaster.bo.custom.RegisterStudentBO;
-import lk.ijse.project.drivemaster.bo.custom.StudentBO;
+import lk.ijse.project.drivemaster.bo.custom.*;
 import lk.ijse.project.drivemaster.dto.CourseDTO;
 import lk.ijse.project.drivemaster.dto.EnrollmentDTO;
 import lk.ijse.project.drivemaster.dto.PaymentDTO;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
+import lk.ijse.project.drivemaster.entity.Enrollment;
 import lk.ijse.project.drivemaster.enums.PaymentStatus;
 
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -59,8 +59,12 @@ public class StudentRegistrationController implements Initializable {
 
     private final CourseBO courseBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.COURSE);
     private final StudentBO studentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.STUDENT);
+    private final PaymentBO paymentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.PAYMENT);
+    private final EnrollmentBO enrollmentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.ENROLLMENT);
     private final RegisterStudentBO registerStudentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.REGISTER);
     private final ObservableList<CourseDTO> selectedCourses = FXCollections.observableArrayList();
+
+
 
 
     public void onActionAddCourse(ActionEvent actionEvent) {
@@ -188,7 +192,7 @@ public class StudentRegistrationController implements Initializable {
         showAlert(Alert.AlertType.INFORMATION, "Success", "Registration confirmed with: " + paymentMethod);
 
 
-        Long studentId = studentBO.getLastId() + 1;
+        Long studentId = studentBO.getLastId();
         String firstName = textFirstName.getText() != null ? textFirstName.getText().trim() : "";
         String secondName = textSecondName.getText() != null ? textSecondName.getText().trim() : "";
         LocalDate birthday = textDateOfBirth.getValue();
@@ -199,32 +203,35 @@ public class StudentRegistrationController implements Initializable {
         String phone = textContact.getText() != null ? textContact.getText().trim() : "";
         LocalDate regDate = LocalDate.now();
 
-
-        String courseId = lblCourseId.getText();
-        String courseName = lblCourseName.getText();
-        String duration = lblCourseDuration.getText();
-        BigDecimal cost = selectedCourses.get(0).getFee(); // if only 1 course
-
+        Long enrollmentId = enrollmentBO.getLastId() + 1;
+        List<EnrollmentDTO> enrollmentDTOS = new ArrayList<>();
         BigDecimal upfrontPaid = new BigDecimal(textFirstPayment.getText());
 
-        BigDecimal totalAmount = new BigDecimal(lblTotal.getText());
+        ObservableList<CourseDTO> courses = tableSelectedCourses.getItems();
+        for (CourseDTO course : courses) {
+            EnrollmentDTO dto = new EnrollmentDTO(enrollmentId, studentId, course.getId(), regDate, upfrontPaid);
+            enrollmentDTOS.add(dto);
+            enrollmentId++;
+        }
+
+
+        Long paymentId = paymentBO.getLastId() + 1;
         String method = textPaymentMethod.getValue();
         String status = String.valueOf(PaymentStatus.PENDING);
-        String reference ="1001";
+        String reference = "100"+paymentId;
 
+        StudentDTO studentDTO = new StudentDTO(studentId, firstName, secondName, birthday, gender, address, nic, email, phone, regDate);
+        PaymentDTO paymentDTO = new PaymentDTO(paymentId,studentId, upfrontPaid, method, LocalDateTime.now(), status, reference);
 
-
-        long id = 1L;
-
-//        StudentDTO studentDTO = new StudentDTO(studentId, firstName, secondName, birthday, gender, address, nic, email, phone, regDate);
-//        CourseDTO courseDTO = new CourseDTO(courseId, courseName, duration, cost);
-//        EnrollmentDTO enrollmentDTO =new EnrollmentDTO(id, studentId, courseId, regDate, upfrontPaid,courseDTO);
-//        PaymentDTO paymentDTO = new PaymentDTO(id,studentId,totalAmount,method, LocalDateTime.now(),status,reference);
         try {
-//            registerStudentBO.StudentRegistration(studentDTO, courseDTO, enrollmentDTO, paymentDTO);
+         boolean isRegister =  registerStudentBO.StudentRegistration(studentDTO, enrollmentDTOS, paymentDTO);
+         if (isRegister){
+
+         }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 

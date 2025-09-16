@@ -14,11 +14,12 @@ import java.time.LocalDateTime;
 public class PaymentDTO {
     private Long id;
     private Long studentId;
-    private double amount;
+    private BigDecimal amount;
     private String method;
     private LocalDateTime createdAt;
     private String status;       // "PENDING","COMPLETE","FAILED"
     private String reference;
+
 
 
 }

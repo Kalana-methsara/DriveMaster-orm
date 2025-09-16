@@ -101,5 +101,14 @@ public class UserBOImpl implements UserBO {
         }
     }
 
+    @Override
+    public Long getNextId() {
+        Long lastId = userDAO.getLastId();
+        if (lastId != null) {
+            return lastId + 1;
+        }
+        return 1001L;
+    }
+
 
 }

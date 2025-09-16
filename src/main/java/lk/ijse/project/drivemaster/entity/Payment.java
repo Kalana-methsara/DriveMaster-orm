@@ -23,7 +23,7 @@ public class Payment {
 
     @ManyToOne(optional=false) @JoinColumn(name="student_id") private Student student;
     @NotNull
-    @Column(precision=10, scale=2) private double amount;
+    @Column(precision=10, scale=2) private BigDecimal amount;
     @NotBlank
     private String method; // 'CASH','CARD','ONLINE'
     @NotNull private LocalDateTime createdAt = LocalDateTime.now();

@@ -6,5 +6,6 @@ public enum DAOType {
     STUDENT,
     USER,
     ENROLLMENT,
+    INSTRUCTOR,
     QUERY
 }

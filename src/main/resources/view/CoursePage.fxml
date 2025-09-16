@@ -84,7 +84,7 @@
                             </children>
                         </VBox>
                     </HBox>
-               <VBox prefHeight="454.0" prefWidth="1085.0" spacing="30.0">
+               <VBox prefHeight="454.0" prefWidth="1085.0" spacing="20.0">
                   <children>
                           <VBox prefHeight="94.0" prefWidth="1085.0" spacing="10" style="-fx-background-color: white; -fx-background-radius: 5; -fx-padding: 15;">
                               <children>
@@ -102,7 +102,7 @@
                                                    <Insets top="5.0" />
                                                 </padding>
                                              </Label>
-                                             <Label fx:id="textCourseId" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3; -fx-padding: 0 0 0 20px;"   />
+                                             <Label fx:id="textCourseId" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3; -fx-padding: 0 0 0 20px;" />
                                           </children>
                                        </HBox>
                                        <HBox prefHeight="25.0" prefWidth="368.0" spacing="42.0">

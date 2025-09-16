@@ -1,8 +1,8 @@
 package lk.ijse.project.drivemaster.dao.custom.impl;
 
 import lk.ijse.project.drivemaster.config.FactoryConfiguration;
-import lk.ijse.project.drivemaster.dao.custom.EnrollmentDAO;
-import lk.ijse.project.drivemaster.entity.Enrollment;
+import lk.ijse.project.drivemaster.dao.custom.InstructorDAO;
+import lk.ijse.project.drivemaster.entity.Instructor;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -10,27 +10,43 @@ import org.hibernate.query.Query;
 import java.util.List;
 import java.util.Optional;
 
-public class EnrollmentDAOImpl implements EnrollmentDAO {
-
+public class InstructorDAOImpl implements InstructorDAO {
     private final FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
 
+
     @Override
-    public List<Enrollment> getAll() {
+    public List<Instructor> getAll() {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<Enrollment> query = session.createQuery("from Enrollment", Enrollment.class);
-            return query.list();
+            Query<Instructor> query = session.createQuery("from Instructor", Instructor.class);
+            List<Instructor> instructorList = query.list();
+            return instructorList;
         } finally {
             session.close();
         }
     }
 
     @Override
-    public boolean save(Enrollment enrollment) {
+    public boolean save(Instructor instructor) {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.persist(enrollment);
+            session.persist(instructor);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            return false;
+        } finally {
+            session.close();
+        }     }
+
+    @Override
+    public boolean update(Instructor instructor) {
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.merge(instructor);
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -39,34 +55,16 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
             return false;
         } finally {
             session.close();
-        }
-    }
-
-    @Override
-    public boolean update(Enrollment enrollment) {
-        Session session = factoryConfiguration.getSession();
-        Transaction transaction = session.beginTransaction();
-        try {
-            session.merge(enrollment);
-            transaction.commit();
-            return true;
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            e.printStackTrace();
-            return false;
-        } finally {
-            session.close();
-        }
-    }
+        }    }
 
     @Override
     public boolean delete(String id) {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            Enrollment enrollment = session.get(Enrollment.class, Long.valueOf(id)); // Enrollment PK = Long
-            if (enrollment != null) {
-                session.remove(enrollment);
+            Instructor instructor = session.get(Instructor.class, id);
+            if (instructor != null) {
+                session.remove(instructor);
                 transaction.commit();
                 return true;
             }
@@ -77,37 +75,35 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
             return false;
         } finally {
             session.close();
-        }
-    }
+        }    }
 
     @Override
-    public Optional<Enrollment> findById(Long id) {
+    public List<String> getAllIds(String id) {
         Session session = factoryConfiguration.getSession();
         try {
-            Enrollment enrollment = session.get(Enrollment.class, id);
-            return Optional.ofNullable(enrollment);
+            Query<String> query = session.createQuery("SELECT i.id FROM Instructor i", String.class);
+            return query.list();
         } finally {
             session.close();
         }
     }
 
     @Override
-    public boolean save(Enrollment enrollment, Session session) {
+    public Optional<Instructor> findById(Long id) {
+        Session session = factoryConfiguration.getSession();
         try {
-            session.merge(enrollment);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+            Instructor instructor = session.get(Instructor.class, id);
+            return Optional.ofNullable(instructor);
+        } finally {
+            session.close();
+        }    }
 
     @Override
     public Long getLastId() {
         Session session = factoryConfiguration.getSession();
         try {
             Query<Long> query = session.createQuery(
-                    "SELECT e.id FROM Enrollment e ORDER BY e.id DESC",
+                    "SELECT i.id FROM Instructor i ORDER BY i.id DESC",
                     Long.class
             ).setMaxResults(1);
 
@@ -117,17 +113,6 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
             }
             return list.get(0);
 
-        } finally {
-            session.close();
-        }
-    }
-
-    @Override
-    public List<Long> getAllIds() {
-        Session session = factoryConfiguration.getSession();
-        try {
-            Query<Long> query = session.createQuery("SELECT e.id FROM Enrollment e", Long.class);
-            return query.list();
         } finally {
             session.close();
         }

@@ -75,9 +75,9 @@ public class CourseBOImpl implements CourseBO {
             String lastIdNumberString = lastId.substring(1);
             int lastIdNumber = Integer.parseInt(lastIdNumberString);
             int nextIdNumber = lastIdNumber + 1;
-            return String.format(tableChar + "%03d", nextIdNumber);
+            return String.format("%c%04d", tableChar, nextIdNumber);
         }
-        return tableChar + "001";
+        return tableChar + "1001"; // start from C1001
     }
     }
 

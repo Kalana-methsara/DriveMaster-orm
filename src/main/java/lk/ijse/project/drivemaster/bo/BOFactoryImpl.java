@@ -20,6 +20,8 @@ public class BOFactoryImpl implements BOFactory{
             case PAYMENT ->  (T) new PaymentBOImpl();
             case STUDENT ->   (T) new StudentBOImpl();
             case REGISTER ->   (T) new RegisterStudentBOImpl();
+            case ENROLLMENT ->  (T) new EnrollmentBOImpl();
+            case INSTRUCTOR ->   (T) new InstructorBOImpl();
             case USER -> (T) new UserBOImpl();
         };
     }

@@ -167,6 +167,26 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    @Override
+    public Long getLastId() {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<Long> query = session.createQuery(
+                    "SELECT u.id FROM User u ORDER BY u.id DESC",
+                    Long.class
+            ).setMaxResults(1);
+
+            List<Long> list = query.list();
+            if (list.isEmpty()) {
+                return null;
+            }
+            return list.get(0);
+
+        } finally {
+            session.close();
+        }
+
+    }
 
 
 }
