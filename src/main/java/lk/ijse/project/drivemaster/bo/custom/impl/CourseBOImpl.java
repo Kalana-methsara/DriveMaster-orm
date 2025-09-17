@@ -31,7 +31,7 @@ public class CourseBOImpl implements CourseBO {
 
     @Override
     public boolean saveCourse(CourseDTO dto) throws Exception {
-        Optional<Course> optionalCourse = courseDAO.findById(Long.valueOf(dto.getId()));
+        Optional<Course> optionalCourse = courseDAO.findById(dto.getId());
         if (optionalCourse.isPresent()) {
             throw new DuplicateException("Duplicate course id");
         }
@@ -41,8 +41,8 @@ public class CourseBOImpl implements CourseBO {
 
     @Override
     public boolean updateCourse(CourseDTO dto) throws Exception {
-        Optional<Course> optionalCourse = courseDAO.findById(Long.valueOf(dto.getId()));
-        if (optionalCourse.isPresent()) {
+        Optional<Course> optionalCourse = courseDAO.findById(dto.getId());
+        if (!optionalCourse.isPresent()) {
             throw new RuntimeException("Course not found");
         }
         Course course = converter.getCourse(dto);
@@ -51,7 +51,7 @@ public class CourseBOImpl implements CourseBO {
 
     @Override
     public boolean deleteCourse(String id) throws Exception {
-        Optional<Course> optionalCourse = courseDAO.findById(Long.valueOf(id));
+        Optional<Course> optionalCourse = courseDAO.findById(id);
         if (optionalCourse.isEmpty()) {
             throw new NotFoundException("Course not found..!");
         }

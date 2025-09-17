@@ -93,7 +93,7 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     @Override
-    public Optional<Course> findById(Long id) {
+    public Optional<Course> findById(String id) {
         Session session = factoryConfiguration.getSession();
         try {
             Course course = session.get(Course.class, id);

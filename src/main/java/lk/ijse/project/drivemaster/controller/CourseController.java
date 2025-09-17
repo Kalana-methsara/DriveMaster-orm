@@ -14,10 +14,15 @@ import javafx.util.Duration;
 import lk.ijse.project.drivemaster.bo.BOFactoryImpl;
 import lk.ijse.project.drivemaster.bo.BOType;
 import lk.ijse.project.drivemaster.bo.custom.CourseBO;
+import lk.ijse.project.drivemaster.bo.exception.DuplicateException;
+import lk.ijse.project.drivemaster.bo.exception.InUseException;
+import lk.ijse.project.drivemaster.bo.exception.NotFoundException;
 import lk.ijse.project.drivemaster.dto.CourseDTO;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
 
+import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CourseController implements Initializable {
@@ -63,8 +68,28 @@ public class CourseController implements Initializable {
 
     @FXML
     void onActionDelete(ActionEvent event) {
+        boolean confirmed = showConfirmation("Confirm Delete", "Are you sure you want to delete this course?");
+        if (confirmed) {
+            try {
+                String courseId = textCourseId.getText();
+                boolean isDeleted = courseBO.deleteCourse(courseId);
 
+                if (isDeleted) {
+                    clearCourseFields();
+                    loadTableData();
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Course deleted successfully!");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Delete Failed", "No course found with this ID.");
+                }
+            } catch (InUseException e) {
+                showAlert(Alert.AlertType.ERROR, "In Use", "This course is currently in use and cannot be deleted.");
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete course. Please try again!");
+            }
+        }
     }
+
 
     @FXML
     void onActionSave(ActionEvent event) {
@@ -72,8 +97,28 @@ public class CourseController implements Initializable {
             showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
             return;
         }
-    }
+        String id = textCourseId.getText() != null ? textCourseId.getText().trim() : "";
+        String name = textCourseName.getText() != null ? textCourseName.getText().trim() : "";
+        String duration = textDuration.getText() != null ? textDuration.getText().trim() : "";
+        BigDecimal feeText = (textCourseFee.getText() != null && !textCourseFee.getText().trim().isEmpty())
+                ? new BigDecimal(textCourseFee.getText().trim())
+                : BigDecimal.ZERO;
 
+        CourseDTO courseDTO = new CourseDTO(id, name, duration, feeText);
+
+        try {
+            courseBO.saveCourse(courseDTO);
+            clearCourseFields();
+            loadTableData();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Course saved successfully!");
+        } catch (DuplicateException e) {
+//            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Duplicate Course", "A course with this ID already exists!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Failed Save", "Failed to save course. Please try again!");
+        }
+    }
 
     @FXML
     void onActionUpdate(ActionEvent event) {
@@ -81,12 +126,49 @@ public class CourseController implements Initializable {
             showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
             return;
         }
+        String id = textCourseId.getText() != null ? textCourseId.getText().trim() : "";
+        String name = textCourseName.getText() != null ? textCourseName.getText().trim() : "";
+        String duration = textDuration.getText() != null ? textDuration.getText().trim() : "";
+        BigDecimal feeText = (textCourseFee.getText() != null && !textCourseFee.getText().trim().isEmpty())
+                ? new BigDecimal(textCourseFee.getText().trim())
+                : BigDecimal.ZERO;
+
+        CourseDTO courseDTO = new CourseDTO(id, name, duration, feeText);
+
+        try {
+            courseBO.updateCourse(courseDTO);
+            clearCourseFields();
+            loadTableData();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Course updated successfully!");
+        } catch (NotFoundException e) {
+//            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Course Not Found", "No course found with this ID!");
+        } catch (DuplicateException e) {
+//            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Duplicate Course", "A course with this name or ID already exists!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Failed Update", "Failed to update course. Please try again!");
+        }
     }
+
 
     @FXML
     void onRefresh(MouseEvent event) {
         clearCourseFields();
 
+    }
+    private boolean showConfirmation(String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, content, ButtonType.YES, ButtonType.NO);
+        alert.initStyle(StageStyle.UNDECORATED);
+        alert.setHeaderText(header);
+        alert.getDialogPane().setStyle(
+                "-fx-border-color: linear-gradient(#7b4397, #dc2430); -fx-border-width: 3px;"
+        );
+
+        // Show and wait for user response
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.YES;
     }
 
     private void showAlert(Alert.AlertType type, String header, String content) {
