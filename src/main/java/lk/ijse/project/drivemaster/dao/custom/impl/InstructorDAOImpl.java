@@ -89,7 +89,7 @@ public class InstructorDAOImpl implements InstructorDAO {
     }
 
     @Override
-    public Optional<Instructor> findById(Long id) {
+    public Optional<Instructor> findById(String id) {
         Session session = factoryConfiguration.getSession();
         try {
             Instructor instructor = session.get(Instructor.class, id);
@@ -99,20 +99,18 @@ public class InstructorDAOImpl implements InstructorDAO {
         }    }
 
     @Override
-    public Long getLastId() {
+    public String getLastId() {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<Long> query = session.createQuery(
+            Query<String> query = session.createQuery(
                     "SELECT i.id FROM Instructor i ORDER BY i.id DESC",
-                    Long.class
+                    String.class
             ).setMaxResults(1);
-
-            List<Long> list = query.list();
+            List<String> list = query.list();
             if (list.isEmpty()) {
                 return null;
             }
             return list.get(0);
-
         } finally {
             session.close();
         }

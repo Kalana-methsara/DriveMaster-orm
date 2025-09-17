@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentDTO {
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
     private LocalDate birthday;
@@ -30,7 +30,7 @@ public class StudentDTO {
     private ArrayList<Lesson> lessons;
 
 
-    public StudentDTO(Long id, String firstName,  String lastName,  LocalDate birthday,  String gender,  String address,String nic,  String email, String phone,  LocalDate regDate) {
+    public StudentDTO(String id, String firstName,  String lastName,  LocalDate birthday,  String gender,  String address,String nic,  String email, String phone,  LocalDate regDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

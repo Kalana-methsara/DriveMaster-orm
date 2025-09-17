@@ -36,20 +36,18 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public Long getLastId() {
+    public String getLastId() {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<Long> query = session.createQuery(
+            Query<String> query = session.createQuery(
                     "SELECT p.id FROM Payment p ORDER BY p.id DESC",
-                    Long.class
+                    String.class
             ).setMaxResults(1);
-
-            List<Long> list = query.list();
+            List<String> list = query.list();
             if (list.isEmpty()) {
                 return null;
             }
             return list.get(0);
-
         } finally {
             session.close();
         }
@@ -111,7 +109,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public Optional<Payment> findById(Long id) {
+    public Optional<Payment> findById(String id) {
         Session session = factoryConfiguration.getSession();
         try {
             Payment payment = session.get(Payment.class, id);
@@ -122,10 +120,10 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
-    public List<Long> getAllIds() {
+    public List<String> getAllIds() {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<Long> query = session.createQuery("SELECT p.id FROM Payment p", Long.class);
+            Query<String> query = session.createQuery("SELECT p.id FROM Payment p", String.class);
             return query.list();
         } finally {
             session.close();

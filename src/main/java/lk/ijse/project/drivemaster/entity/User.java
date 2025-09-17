@@ -20,9 +20,9 @@ import lk.ijse.project.drivemaster.enums.Role;
         @UniqueConstraint(columnNames={"email"})
 })
 public class User {
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-
+    @Id
+    private String id; // U001
+    
     @NotBlank private String username;
 
     @Email

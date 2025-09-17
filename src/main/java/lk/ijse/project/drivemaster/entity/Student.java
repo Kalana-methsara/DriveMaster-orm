@@ -20,8 +20,7 @@ import java.util.List;
 @Table(name="students")
 public class Student {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private String id; // S001
 
     @NotBlank
     private String firstName;

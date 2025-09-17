@@ -16,8 +16,7 @@ import java.time.LocalDateTime;
 @Table(name="lessons")
 public class Lesson {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private String id; // L001
 
     @ManyToOne(optional=false) @JoinColumn(name="student_id") private Student student;
     @ManyToOne(optional=false) @JoinColumn(name="course_id") private Course course;

@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
-    private Long id;
+    private String id;
     private String username;
     private String email;
     private String role;
     private boolean active;
 
-    public UserDTO(Long id, String username, String email, String role) {
+    public UserDTO(String id, String username, String email, String role) {
         this.id = id;
         this.username = username;
         this.email = email;

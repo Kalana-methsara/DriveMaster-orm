@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PaymentDAO extends CrudDAO<Payment> {
-    List<Long> getAllIds();
-    Optional<Payment> findById(Long id);
+    List<String> getAllIds();
+    Optional<Payment> findById(String id);
 
     boolean save(Payment payment, Session session);
-    Long getLastId();
+    String getLastId();
 }

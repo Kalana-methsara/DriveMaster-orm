@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface InstructorDAO extends CrudDAO<Instructor> {
     List<String> getAllIds(String id) ;
-    Optional<Instructor> findById(Long id);
-    Long getLastId();
+    Optional<Instructor> findById(String id);
+    String getLastId();
 }

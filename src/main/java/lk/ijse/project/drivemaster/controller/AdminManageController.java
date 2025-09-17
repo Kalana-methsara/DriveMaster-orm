@@ -132,7 +132,7 @@ public class AdminManageController implements Initializable {
     }
 
     private void loadNextId() {
-        String nextId = String.valueOf(userBO.getNextId());
+        String nextId = userBO.getNextId();
         textUserId.setText(nextId);
     }
 

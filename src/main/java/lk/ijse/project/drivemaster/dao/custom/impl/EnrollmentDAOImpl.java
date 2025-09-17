@@ -81,7 +81,7 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
     }
 
     @Override
-    public Optional<Enrollment> findById(Long id) {
+    public Optional<Enrollment> findById(String id) {
         Session session = factoryConfiguration.getSession();
         try {
             Enrollment enrollment = session.get(Enrollment.class, id);
@@ -103,30 +103,28 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
     }
 
     @Override
-    public Long getLastId() {
+    public String getLastId() {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<Long> query = session.createQuery(
+            Query<String> query = session.createQuery(
                     "SELECT e.id FROM Enrollment e ORDER BY e.id DESC",
-                    Long.class
+                    String.class
             ).setMaxResults(1);
-
-            List<Long> list = query.list();
+            List<String> list = query.list();
             if (list.isEmpty()) {
                 return null;
             }
             return list.get(0);
-
         } finally {
             session.close();
         }
     }
 
     @Override
-    public List<Long> getAllIds() {
+    public List<String> getAllIds() {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<Long> query = session.createQuery("SELECT e.id FROM Enrollment e", Long.class);
+            Query<String> query = session.createQuery("SELECT e.id FROM Enrollment e", String.class);
             return query.list();
         } finally {
             session.close();

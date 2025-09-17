@@ -18,8 +18,7 @@ import java.util.List;
 @Table(name="instructors")
 public class Instructor {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private String id; // I001
 
     @NotBlank
     private String name;

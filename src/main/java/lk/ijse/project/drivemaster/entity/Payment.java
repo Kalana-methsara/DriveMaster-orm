@@ -18,8 +18,7 @@ import java.time.LocalDateTime;
 @Table(name="payments")
 public class Payment {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private String id; // P001
 
     @ManyToOne(optional=false) @JoinColumn(name="student_id") private Student student;
     @NotNull

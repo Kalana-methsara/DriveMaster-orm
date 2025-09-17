@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LessonDTO {
-    private Long id;
-    private Long studentId;
+    private String id;
+    private String studentId;
     private String courseId;
-    private Long instructorId;
+    private String  instructorId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String status;

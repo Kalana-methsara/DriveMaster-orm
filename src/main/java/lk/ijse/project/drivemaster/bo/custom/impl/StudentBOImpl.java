@@ -57,7 +57,7 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public boolean deleteStudent(String id) throws Exception {
-        Optional<Student> optionalStudent = studentDAO.findById(Long.valueOf(id));
+        Optional<Student> optionalStudent = studentDAO.findById(id);
         if (optionalStudent.isEmpty()) {
             throw new NotFoundException("Customer not found..!");
         }
@@ -74,7 +74,7 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public StudentDTO getStudentById(Long id) {
+    public StudentDTO getStudentById(String id) {
         Optional<Student> optionalStudent = studentDAO.findById(id);
         if (optionalStudent.isPresent()) {
             Student student = optionalStudent.get();
@@ -96,12 +96,16 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public Long getLastId() {
-        Long lastId = studentDAO.getLastId();
+    public String getLastId() {
+        String lastId = studentDAO.getLastId();
+        char tableChar = 'S';
         if (lastId != null) {
-            return lastId + 1;
+            String lastIdNumberString = lastId.substring(1);
+            int lastIdNumber = Integer.parseInt(lastIdNumberString);
+            int nextIdNumber = lastIdNumber + 1;
+            return String.format("%c%03d", tableChar, nextIdNumber);
         }
-        return 1001L;
+        return tableChar + "001";
     }
 
 

@@ -11,11 +11,15 @@ public class EnrollmentBOImpl implements EnrollmentBO {
     private final EnrollmentDAO enrollmentDAO = DAOFactoryImpl.getInstance().getDAO(DAOType.ENROLLMENT);
 
     @Override
-    public Long getLastId() {
-        Long lastId = enrollmentDAO.getLastId();
+    public String getLastId() {
+        String lastId = enrollmentDAO.getLastId();
+        char tableChar = 'E';
         if (lastId != null) {
-            return lastId + 1;
+            String lastIdNumberString = lastId.substring(1);
+            int lastIdNumber = Integer.parseInt(lastIdNumberString);
+            int nextIdNumber = lastIdNumber + 1;
+            return String.format("%c%03d", tableChar, nextIdNumber);
         }
-        return 1001L;
+        return tableChar + "001";
     }
 }

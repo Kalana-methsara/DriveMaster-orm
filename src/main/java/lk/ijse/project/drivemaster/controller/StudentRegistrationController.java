@@ -192,7 +192,7 @@ public class StudentRegistrationController implements Initializable {
         showAlert(Alert.AlertType.INFORMATION, "Success", "Registration confirmed with: " + paymentMethod);
 
 
-        Long studentId = studentBO.getLastId();
+        String studentId = studentBO.getLastId();
         String firstName = textFirstName.getText() != null ? textFirstName.getText().trim() : "";
         String secondName = textSecondName.getText() != null ? textSecondName.getText().trim() : "";
         LocalDate birthday = textDateOfBirth.getValue();
@@ -203,7 +203,7 @@ public class StudentRegistrationController implements Initializable {
         String phone = textContact.getText() != null ? textContact.getText().trim() : "";
         LocalDate regDate = LocalDate.now();
 
-        Long enrollmentId = enrollmentBO.getLastId() + 1;
+        String enrollmentId = enrollmentBO.getLastId();
         List<EnrollmentDTO> enrollmentDTOS = new ArrayList<>();
         BigDecimal upfrontPaid = new BigDecimal(textFirstPayment.getText());
 
@@ -211,11 +211,10 @@ public class StudentRegistrationController implements Initializable {
         for (CourseDTO course : courses) {
             EnrollmentDTO dto = new EnrollmentDTO(enrollmentId, studentId, course.getId(), regDate, upfrontPaid);
             enrollmentDTOS.add(dto);
-            enrollmentId++;
         }
 
 
-        Long paymentId = paymentBO.getLastId() + 1;
+        String paymentId = paymentBO.getLastId();
         String method = textPaymentMethod.getValue();
         String status = String.valueOf(PaymentStatus.PENDING);
         String reference = "100"+paymentId;

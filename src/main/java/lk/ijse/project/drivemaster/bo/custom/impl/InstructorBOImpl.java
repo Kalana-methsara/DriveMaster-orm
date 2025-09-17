@@ -31,7 +31,7 @@ public class InstructorBOImpl implements InstructorBO {
 
     @Override
     public boolean saveInstructor(InstructorDTO dto) throws Exception {
-        Optional<Instructor> optionalInstructor = instructorDAO.findById(Long.valueOf(dto.getId()));
+        Optional<Instructor> optionalInstructor = instructorDAO.findById(dto.getId());
         if (optionalInstructor.isPresent()) {
             throw new DuplicateException("Duplicate Instructor id");
         }
@@ -40,7 +40,7 @@ public class InstructorBOImpl implements InstructorBO {
 
     @Override
     public boolean updateInstructor(InstructorDTO dto) throws Exception {
-        Optional<Instructor> optionalInstructor = instructorDAO.findById(Long.valueOf(dto.getId()));
+        Optional<Instructor> optionalInstructor = instructorDAO.findById(dto.getId());
         if (optionalInstructor.isPresent()) {
             throw new RuntimeException("Instructor not found");
         }
@@ -49,7 +49,7 @@ public class InstructorBOImpl implements InstructorBO {
 
     @Override
     public boolean deleteInstructor(String id) throws Exception {
-        Optional<Instructor> optionalInstructor = instructorDAO.findById(Long.valueOf(id));
+        Optional<Instructor> optionalInstructor = instructorDAO.findById(id);
         if (optionalInstructor.isEmpty()) {
             throw new NotFoundException("Instructor not found..!");
         }
@@ -65,10 +65,14 @@ public class InstructorBOImpl implements InstructorBO {
         return ids;      }
 
     @Override
-    public Long getNextId() {
-        Long lastId = instructorDAO.getLastId();
+    public String getNextId() {
+        String lastId = instructorDAO.getLastId();
+        char tableChar = 'I';
         if (lastId != null) {
-            return lastId + 1;
+            String lastIdNumberString = lastId.substring(1);
+            int lastIdNumber = Integer.parseInt(lastIdNumberString);
+            int nextIdNumber = lastIdNumber + 1;
+            return String.format("%c%03d", tableChar, nextIdNumber);
         }
-        return 1001L;  }
+        return tableChar + "001";   }
 }

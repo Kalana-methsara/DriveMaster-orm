@@ -10,8 +10,8 @@ import java.util.Optional;
 public interface StudentDAO extends CrudDAO<Student> {
     List<String> getAllIds(String id) ;
 
-    Optional<Student> findById(Long nic);
+    Optional<Student> findById(String nic);
 
-    Long getLastId();
+    String getLastId();
     boolean save(Student student, Session  session);
 }

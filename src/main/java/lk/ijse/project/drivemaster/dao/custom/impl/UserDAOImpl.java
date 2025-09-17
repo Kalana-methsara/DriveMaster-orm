@@ -8,7 +8,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,7 +82,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Optional<User> findById(Long id) {
+    public Optional<User> findById(String id) {
         Session session = factoryConfiguration.getSession();
         try {
             User user = session.get(User.class, id);
@@ -145,7 +144,7 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public boolean updatePassword(Long id, String password) {
+    public boolean updatePassword(String id, String password) {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
@@ -168,20 +167,18 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Long getLastId() {
+    public String getLastId() {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<Long> query = session.createQuery(
+            Query<String> query = session.createQuery(
                     "SELECT u.id FROM User u ORDER BY u.id DESC",
-                    Long.class
+                    String.class
             ).setMaxResults(1);
-
-            List<Long> list = query.list();
+            List<String> list = query.list();
             if (list.isEmpty()) {
                 return null;
             }
             return list.get(0);
-
         } finally {
             session.close();
         }

@@ -17,8 +17,7 @@ import java.time.LocalDate;
         uniqueConstraints=@UniqueConstraint(columnNames={"student_id","course_id"}))
 public class Enrollment {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private String id; // E001
 
     @ManyToOne(optional=false) @JoinColumn(name="student_id")
     private Student student;

@@ -91,7 +91,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public Optional<Student> findById(Long id) {
+    public Optional<Student> findById(String id) {
         Session session = factoryConfiguration.getSession();
         try {
             Student student = session.get(Student.class, id);
@@ -102,20 +102,18 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public Long getLastId() {
+    public String getLastId() {
         Session session = factoryConfiguration.getSession();
         try {
-            Query<Long> query = session.createQuery(
+            Query<String> query = session.createQuery(
                     "SELECT s.id FROM Student s ORDER BY s.id DESC",
-                    Long.class
+                    String.class
             ).setMaxResults(1);
-
-            List<Long> list = query.list();
+            List<String> list = query.list();
             if (list.isEmpty()) {
                 return null;
             }
             return list.get(0);
-
         } finally {
             session.close();
         }

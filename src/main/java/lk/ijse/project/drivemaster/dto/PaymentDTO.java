@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentDTO {
-    private Long id;
-    private Long studentId;
+    private String id;
+    private String studentId;
     private BigDecimal amount;
     private String method;
     private LocalDateTime createdAt;

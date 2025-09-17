@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnrollmentDTO {
-    private Long id;
-    private Long studentId;
+    private String id;
+    private String studentId;
     private String courseId;
     private LocalDate regDate;
     private BigDecimal upfrontPaid;

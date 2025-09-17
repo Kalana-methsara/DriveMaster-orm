@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EnrollmentDAO extends CrudDAO<Enrollment> {
-    List<Long> getAllIds();
-    Optional<Enrollment> findById(Long id);
+    List<String> getAllIds();
+    Optional<Enrollment> findById(String id);
     boolean save(Enrollment enrollment, Session session);
-    Long getLastId();
+    String getLastId();
 
 }
