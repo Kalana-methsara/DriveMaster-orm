@@ -41,7 +41,7 @@ public class InstructorBOImpl implements InstructorBO {
     @Override
     public boolean updateInstructor(InstructorDTO dto) throws Exception {
         Optional<Instructor> optionalInstructor = instructorDAO.findById(dto.getId());
-        if (optionalInstructor.isPresent()) {
+        if (!optionalInstructor.isPresent()) {
             throw new RuntimeException("Instructor not found");
         }
         Instructor instructor = converter.getInstructor(dto);
