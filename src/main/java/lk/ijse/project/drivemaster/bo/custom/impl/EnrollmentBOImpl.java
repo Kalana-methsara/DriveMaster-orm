@@ -11,7 +11,7 @@ public class EnrollmentBOImpl implements EnrollmentBO {
     private final EnrollmentDAO enrollmentDAO = DAOFactoryImpl.getInstance().getDAO(DAOType.ENROLLMENT);
 
     @Override
-    public String getLastId() {
+    public String getNextId() {
         String lastId = enrollmentDAO.getLastId();
         char tableChar = 'E';
         if (lastId != null) {

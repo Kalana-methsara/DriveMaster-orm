@@ -11,7 +11,7 @@ public class PaymentBOImpl implements PaymentBO {
     private final PaymentDAO paymentDAO = DAOFactoryImpl.getInstance().getDAO(DAOType.PAYMENT);
 
     @Override
-    public String getLastId() {
+    public String getNextId() {
         String lastId = paymentDAO.getLastId();
         char tableChar = 'P';
         if (lastId != null) {

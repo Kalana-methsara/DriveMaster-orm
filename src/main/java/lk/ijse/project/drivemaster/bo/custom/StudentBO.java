@@ -19,5 +19,5 @@ public interface StudentBO extends SuperBO {
 
      StudentDTO getStudentById(String id);
 
-    String getLastId();
+    String getNextId();
 }

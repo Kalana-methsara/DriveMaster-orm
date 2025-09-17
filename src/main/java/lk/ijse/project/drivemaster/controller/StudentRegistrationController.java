@@ -21,7 +21,6 @@ import lk.ijse.project.drivemaster.dto.CourseDTO;
 import lk.ijse.project.drivemaster.dto.EnrollmentDTO;
 import lk.ijse.project.drivemaster.dto.PaymentDTO;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
-import lk.ijse.project.drivemaster.entity.Enrollment;
 import lk.ijse.project.drivemaster.enums.PaymentStatus;
 
 import java.math.BigDecimal;
@@ -192,7 +191,7 @@ public class StudentRegistrationController implements Initializable {
         showAlert(Alert.AlertType.INFORMATION, "Success", "Registration confirmed with: " + paymentMethod);
 
 
-        String studentId = studentBO.getLastId();
+        String studentId = studentBO.getNextId();
         String firstName = textFirstName.getText() != null ? textFirstName.getText().trim() : "";
         String secondName = textSecondName.getText() != null ? textSecondName.getText().trim() : "";
         LocalDate birthday = textDateOfBirth.getValue();
@@ -203,7 +202,7 @@ public class StudentRegistrationController implements Initializable {
         String phone = textContact.getText() != null ? textContact.getText().trim() : "";
         LocalDate regDate = LocalDate.now();
 
-        String enrollmentId = enrollmentBO.getLastId();
+        String enrollmentId = enrollmentBO.getNextId();
         List<EnrollmentDTO> enrollmentDTOS = new ArrayList<>();
         BigDecimal upfrontPaid = new BigDecimal(textFirstPayment.getText());
 
@@ -214,7 +213,7 @@ public class StudentRegistrationController implements Initializable {
         }
 
 
-        String paymentId = paymentBO.getLastId();
+        String paymentId = paymentBO.getNextId();
         String method = textPaymentMethod.getValue();
         String status = String.valueOf(PaymentStatus.PENDING);
         String reference = "100"+paymentId;

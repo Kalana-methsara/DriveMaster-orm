@@ -106,6 +106,19 @@
                         <children>
                            <VBox prefHeight="400.0" prefWidth="700.0" spacing="8.0">
                               <children>
+                                 <HBox prefHeight="25.0" prefWidth="350.0" spacing="42.0">
+                                    <children>
+                                       <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Student ID">
+                                          <font>
+                                             <Font size="14.0" />
+                                          </font>
+                                          <padding>
+                                             <Insets top="5.0" />
+                                          </padding>
+                                       </Label>
+                                       <Label fx:id="textStudentId" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3; -fx-padding: 0 0 0 20px;" />
+                                    </children>
+                                 </HBox>
                                  <HBox layoutY="5.0" prefHeight="25.0" spacing="40.0">
                                     <children>
                                        <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Frist Name">
@@ -119,9 +132,9 @@
                                        <TextField fx:id="textFirstName" onKeyReleased="#onKeyFirstName" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                     </children>
                                  </HBox>
-                                 <HBox prefHeight="25.0" spacing="65.0">
+                                 <HBox prefHeight="25.0" spacing="20.0">
                                     <children>
-                                       <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Gender">
+                                       <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Second Name">
                                           <font>
                                              <Font size="14.0" />
                                           </font>
@@ -129,7 +142,7 @@
                                              <Insets top="5.0" />
                                           </padding>
                                        </Label>
-                                       <ChoiceBox fx:id="textGender" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                       <TextField fx:id="textSecondName" onKeyReleased="#onKeySecondName" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                     </children>
                                  </HBox>
                                  <HBox prefHeight="25.0" spacing="78.0">
@@ -149,9 +162,9 @@
                            </VBox>
                            <VBox prefHeight="296.0" prefWidth="700.0" spacing="8.0">
                               <children>
-                                 <HBox prefHeight="25.0" spacing="20.0">
+                                 <HBox prefHeight="25.0" spacing="65.0">
                                     <children>
-                                       <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Second Name">
+                                       <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Gender">
                                           <font>
                                              <Font size="14.0" />
                                           </font>
@@ -159,7 +172,7 @@
                                              <Insets top="5.0" />
                                           </padding>
                                        </Label>
-                                       <TextField fx:id="textSecondName" onKeyReleased="#onKeySecondName" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                       <ChoiceBox fx:id="textGender" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                     </children>
                                  </HBox>
                                  <HBox prefHeight="25.0" spacing="62.0">

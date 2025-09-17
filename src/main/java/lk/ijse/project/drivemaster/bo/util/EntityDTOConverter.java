@@ -23,6 +23,7 @@ public class EntityDTOConverter {
         User user = new User();
         user.setId(dto.getId());
         user.setUsername(dto.getUsername());
+        user.setRawPassword(dto.getPassword());
         user.setEmail(dto.getEmail());
         user.setRole(Role.valueOf(dto.getRole()));
         user.setActive(dto.isActive());

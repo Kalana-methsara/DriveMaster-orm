@@ -19,17 +19,23 @@ import javafx.util.Duration;
 import lk.ijse.project.drivemaster.bo.BOFactoryImpl;
 import lk.ijse.project.drivemaster.bo.BOType;
 import lk.ijse.project.drivemaster.bo.custom.StudentBO;
+import lk.ijse.project.drivemaster.bo.exception.DuplicateException;
+import lk.ijse.project.drivemaster.bo.exception.InUseException;
+import lk.ijse.project.drivemaster.bo.exception.NotFoundException;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class StudentSearchController implements Initializable {
 
 
+    @FXML
+    private Label textStudentId;
     @FXML
     private AnchorPane ancStudentSearch;
     @FXML
@@ -90,13 +96,28 @@ public class StudentSearchController implements Initializable {
 
     @FXML
     void onActionDelete(ActionEvent event) {
+        boolean confirmed = showConfirmation("Confirm Delete", "Are you sure you want to delete this student?");
+        if (confirmed) {
+            try {
+                String studentId = textStudentId.getText();
+                boolean isDeleted = studentBO.deleteStudent(studentId);
 
+                if (isDeleted) {
+                    clearStudentFields();
+                    loadTableData();
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Student deleted successfully!");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Delete Failed", "No student found with this ID.");
+                }
+            } catch (InUseException e) {
+                showAlert(Alert.AlertType.ERROR, "In Use", "This student is currently in use and cannot be deleted.");
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to delete student. Please try again!");
+            }
+        }
     }
 
-    @FXML
-    void onActionMonth(ActionEvent event) {
-
-    }
 
     @FXML
     void onActionPayment(ActionEvent event) {
@@ -132,18 +153,62 @@ public class StudentSearchController implements Initializable {
             showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
             return;
         }
+        String id =textStudentId.getText() != null ? textStudentId.getText().trim() : "";
+        String firstName = textFirstName.getText() != null ? textFirstName.getText().trim() : "";
+        String secondName = textSecondName.getText() != null ? textSecondName.getText().trim() : "";
+        String nic = textNic.getText() != null ? textNic.getText().trim() : "";
+        String email = textEmail.getText() != null ? textEmail.getText().trim() : "";
+        String phone = textContact.getText() != null ? textContact.getText().trim() : "";
+        String address = textAddress.getText() != null ? textAddress.getText().trim() : "";
+        String gender =textGender.getValue();
+        LocalDate birthday = LocalDate.parse(textDateOfBirth.getValue() != null ? textDateOfBirth.getValue().toString() : "");
+        LocalDate joinDate = LocalDate.parse(textJoinDate.getValue() != null ? textJoinDate.getValue().toString() : "");
 
+        StudentDTO studentDTO = new StudentDTO(id,firstName,secondName,birthday,gender,address,nic,email,phone,joinDate);
+
+        try {
+            studentBO.updateStudent(studentDTO);
+            clearStudentFields();
+            loadTableData();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Student updated successfully!");
+        } catch (NotFoundException e) {
+//            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Student Not Found", "No student found with this ID!");
+        } catch (DuplicateException e) {
+//            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Duplicate Student", "A student with this name or ID already exists!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Failed Update", "Failed to student course. Please try again!");
+        }
     }
+    private boolean showConfirmation(String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, content, ButtonType.YES, ButtonType.NO);
+        alert.initStyle(StageStyle.UNDECORATED);
+        alert.setHeaderText(header);
+        alert.getDialogPane().setStyle(
+                "-fx-border-color: linear-gradient(#7b4397, #dc2430); -fx-border-width: 3px;"
+        );
 
+        // Show and wait for user response
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.YES;
+    }
     @FXML
     void onActionYear(ActionEvent event) {
 
     }
+    @FXML
+    void onActionMonth(ActionEvent event) {
+
+    }
+
 
     @FXML
     void setData(MouseEvent event) {
         StudentDTO selected = tableView.getSelectionModel().getSelectedItem();
         if (selected != null) {
+            textStudentId.setText(selected.getId());
             textFirstName.setText(selected.getFirstName());
             textSecondName.setText(selected.getLastName());
             textEmail.setText(selected.getEmail());
@@ -166,8 +231,6 @@ public class StudentSearchController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colStudentId.setCellValueFactory(new PropertyValueFactory<>("id"));
-
-
         colStudentName.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getFirstName() + " " + cellData.getValue().getLastName())
         );
@@ -365,6 +428,7 @@ public class StudentSearchController implements Initializable {
     }
 
     private void clearStudentFields() {
+        loadNextId();
         textFirstName.clear();
         textSecondName.clear();
         textGender.getSelectionModel().clearSelection();
@@ -376,6 +440,11 @@ public class StudentSearchController implements Initializable {
         textJoinDate.setValue(LocalDate.now());
 
 
+    }
+
+    private void loadNextId() {
+        String nextId = studentBO.getNextId();
+        textStudentId.setText(nextId);
     }
 
     private void initComboBoxes() {

@@ -63,7 +63,7 @@ public class StudentDAOImpl implements StudentDAO {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            Student student = session.get(Student.class, Long.valueOf(id)); // convert String → Long
+            Student student = session.get(Student.class, id);
             if (student != null) {
                 session.remove(student);
                 transaction.commit();
@@ -122,7 +122,7 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public boolean save(Student student, Session session) {
         try {
-            session.merge(student);
+            session.persist(student);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
     private String id;
     private String username;
+    private String password;
     private String email;
     private String role;
     private boolean active;
@@ -17,6 +18,13 @@ public class UserDTO {
     public UserDTO(String id, String username, String email, String role) {
         this.id = id;
         this.username = username;
+        this.email = email;
+        this.role = role;
+    }
+    public UserDTO(String id, String username,String password, String email, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
         this.email = email;
         this.role = role;
     }

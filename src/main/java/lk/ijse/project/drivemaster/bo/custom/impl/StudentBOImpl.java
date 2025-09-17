@@ -48,7 +48,7 @@ public class StudentBOImpl implements StudentBO {
     @Override
     public boolean updateStudent(StudentDTO dto) throws Exception {
         Optional<Student> optionalStudent = studentDAO.findById(dto.getId());
-        if (optionalStudent.isPresent()) {
+        if (!optionalStudent.isPresent()) {
             throw new RuntimeException("Student not found");
         }
         Student student = converter.getStudent(dto);
@@ -96,7 +96,7 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public String getLastId() {
+    public String getNextId() {
         String lastId = studentDAO.getLastId();
         char tableChar = 'S';
         if (lastId != null) {

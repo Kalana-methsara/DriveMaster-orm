@@ -43,7 +43,7 @@ public class UserBOImpl implements UserBO {
     @Override
     public boolean updateUser(UserDTO dto) throws Exception {
         Optional<User> optionalUser = userDAO.findById(dto.getId());
-        if (optionalUser.isPresent()) {
+        if (!optionalUser.isPresent()) {
             throw new RuntimeException("User not found");
         }
         User user = converter.getUser(dto);
