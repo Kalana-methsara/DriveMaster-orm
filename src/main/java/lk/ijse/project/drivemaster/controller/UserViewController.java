@@ -119,12 +119,6 @@ public class UserViewController implements Initializable {
         navigateTo("/view/VerifySuperAdmin.fxml");
     }
 
-    public void onPayment(ActionEvent actionEvent) {
-        resetOtherPages();
-        changePage1(btnPayment, "/images/payment(1).png", pngPayment);
-        navigateTo("/view/PaymentPage.fxml");
-    }
-
 
     private void resetOtherPages() {
         resetButtonStyle(btnDashboard);
@@ -132,7 +126,6 @@ public class UserViewController implements Initializable {
         resetButtonStyle(btnStudent);
         resetButtonStyle(btnCourse);
         resetButtonStyle(btnBooking);
-        resetButtonStyle(btnPayment);
         resetButtonStyle(btnInstructor);
         resetButtonStyle(btnAdminManage);
 
@@ -141,7 +134,6 @@ public class UserViewController implements Initializable {
         changePage("/images/students.png", pngStudent);
         changePage("/images/course.png", pngCourse);
         changePage("/images/booking.png", pngBooking);
-        changePage("/images/payment.png", pngPayment);
         changePage("/images/report.png", pngInstructor);
         changePage("/images/admin.png", pngAdminManage);
 

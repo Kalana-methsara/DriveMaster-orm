@@ -20,4 +20,8 @@ public interface StudentBO extends SuperBO {
      StudentDTO getStudentById(String id);
 
     String getNextId();
+
+    List<StudentDTO> searchStudentByDate(String yearMonth);
+
+    List<StudentDTO> searchStudent(String searchText);
 }

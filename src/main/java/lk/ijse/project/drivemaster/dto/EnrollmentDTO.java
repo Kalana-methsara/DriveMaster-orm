@@ -15,6 +15,5 @@ public class EnrollmentDTO {
     private String studentId;
     private String courseId;
     private LocalDate regDate;
-    private BigDecimal upfrontPaid;
 
 }

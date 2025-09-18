@@ -25,21 +25,21 @@ public class StudentDTO {
     private String phone;
     private LocalDate regDate;
 
-    private ArrayList<Enrollment> enrollments;
-    private ArrayList<Payment> payments;
-    private ArrayList<Lesson> lessons;
+//    private ArrayList<Enrollment> enrollments;
+//    private ArrayList<Payment> payments;
+//    private ArrayList<Lesson> lessons;
 
 
-    public StudentDTO(String id, String firstName,  String lastName,  LocalDate birthday,  String gender,  String address,String nic,  String email, String phone,  LocalDate regDate) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.gender = gender;
-        this.address = address;
-        this.nic = nic;
-        this.email = email;
-        this.phone = phone;
-        this.regDate = regDate;
-    }
+//    public StudentDTO(String id, String firstName,  String lastName,  LocalDate birthday,  String gender,  String address,String nic,  String email, String phone,  LocalDate regDate) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.birthday = birthday;
+//        this.gender = gender;
+//        this.address = address;
+//        this.nic = nic;
+//        this.email = email;
+//        this.phone = phone;
+//        this.regDate = regDate;
+//    }
 }

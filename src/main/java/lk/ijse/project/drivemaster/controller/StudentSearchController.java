@@ -196,11 +196,54 @@ public class StudentSearchController implements Initializable {
     }
     @FXML
     void onActionYear(ActionEvent event) {
+        tableView.getItems().clear();
 
+        String year = textYear.getValue();   // e.g. "2025"
+        String month = textMonth.getValue(); // e.g. "09"
+
+        String yearMonth = year + "-" + month; // "2025-09"
+
+        tableView.setItems(FXCollections.observableArrayList(
+                studentBO.searchStudentByDate(yearMonth).stream().map(studentDTO ->
+                        new StudentDTO(
+                                studentDTO.getId(),
+                                studentDTO.getFirstName(),
+                                studentDTO.getLastName(),
+                                studentDTO.getBirthday(),
+                                studentDTO.getGender(),
+                                studentDTO.getAddress(),
+                                studentDTO.getNic(),
+                                studentDTO.getEmail(),
+                                studentDTO.getPhone(),
+                                studentDTO.getRegDate()
+                        )).toList()
+        ));
     }
+
     @FXML
     void onActionMonth(ActionEvent event) {
+        tableView.getItems().clear();
 
+        String year = textYear.getValue();   // e.g. "2025"
+        String month = textMonth.getValue(); // e.g. "09"
+
+        String yearMonth = year + "-" + month; // "2025-09"
+
+        tableView.setItems(FXCollections.observableArrayList(
+                studentBO.searchStudentByDate(yearMonth).stream().map(studentDTO ->
+                        new StudentDTO(
+                                studentDTO.getId(),
+                                studentDTO.getFirstName(),
+                                studentDTO.getLastName(),
+                                studentDTO.getBirthday(),
+                                studentDTO.getGender(),
+                                studentDTO.getAddress(),
+                                studentDTO.getNic(),
+                                studentDTO.getEmail(),
+                                studentDTO.getPhone(),
+                                studentDTO.getRegDate()
+                        )).toList()
+        ));
     }
 
 
@@ -224,8 +267,27 @@ public class StudentSearchController implements Initializable {
 
 
     @FXML
-    void txtSearchOnAction(ActionEvent event) {
-
+    void txtSearchOnAction(ActionEvent event) throws Exception {
+        String searchText = txtSearch.getText().trim().toLowerCase();
+        if (searchText.isEmpty()) {
+            loadTableData();
+            return;
+        }
+        tableView.setItems(FXCollections.observableArrayList(
+                studentBO.searchStudent(searchText).stream().map(studentDTO ->
+                        new StudentDTO(
+                                studentDTO.getId(),
+                                studentDTO.getFirstName(),
+                                studentDTO.getLastName(),
+                                studentDTO.getBirthday(),
+                                studentDTO.getGender(),
+                                studentDTO.getAddress(),
+                                studentDTO.getNic(),
+                                studentDTO.getEmail(),
+                                studentDTO.getPhone(),
+                                studentDTO.getRegDate()
+                        )).toList()
+        ));
     }
 
     @Override
@@ -486,7 +548,8 @@ public class StudentSearchController implements Initializable {
 
     }
 
-    public void onRefresh(MouseEvent mouseEvent) {
+    public void onRefresh(MouseEvent mouseEvent) throws Exception {
         clearStudentFields();
+        loadTableData();
     }
 }

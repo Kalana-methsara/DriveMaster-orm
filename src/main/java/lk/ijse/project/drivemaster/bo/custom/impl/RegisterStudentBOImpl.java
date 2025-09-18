@@ -44,10 +44,7 @@ public class RegisterStudentBOImpl implements RegisterStudentBO {
 
             // Save Enrollments with reference to Student
             for (EnrollmentDTO enrollmentDTO : enrollments) {
-                Enrollment enrollment = converter.getEnrollment(enrollmentDTO);
-                enrollment.setStudent(converter.getStudent(studentDTO));
-                boolean isEnrollmentSaved = enrollmentDAO.save(enrollment, session);
-
+                boolean isEnrollmentSaved = enrollmentDAO.save(converter.getEnrollment(enrollmentDTO), session);
                 if (!isEnrollmentSaved) {
                     transaction.rollback();
                     return false;
@@ -56,7 +53,7 @@ public class RegisterStudentBOImpl implements RegisterStudentBO {
 
             // Save Payment with reference to Student
             Payment payment = converter.getPayment(paymentDTO);
-            payment.setStudent(converter.getStudent(studentDTO)); // ✅ set relation
+            payment.setStudent(converter.getStudent(studentDTO));
             boolean isPaymentSaved = paymentDAO.save(payment, session);
 
             if (!isPaymentSaved) {

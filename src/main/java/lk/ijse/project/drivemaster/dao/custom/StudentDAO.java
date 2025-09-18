@@ -1,6 +1,7 @@
 package lk.ijse.project.drivemaster.dao.custom;
 
 import lk.ijse.project.drivemaster.dao.CrudDAO;
+import lk.ijse.project.drivemaster.dto.StudentDTO;
 import lk.ijse.project.drivemaster.entity.Student;
 import org.hibernate.Session;
 
@@ -14,4 +15,8 @@ public interface StudentDAO extends CrudDAO<Student> {
 
     String getLastId();
     boolean save(Student student, Session  session);
+
+    List<Student> searchStudentByDate(String yearMonth);
+
+    List<Student> searchStudent(String searchText);
 }

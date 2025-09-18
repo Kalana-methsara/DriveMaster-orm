@@ -27,6 +27,5 @@ public class Enrollment {
 
     @NotNull
     private LocalDate regDate;
-    @NotNull @Column(precision=10, scale=2) private BigDecimal upfrontPaid;
 }
 

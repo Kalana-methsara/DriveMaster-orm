@@ -40,18 +40,17 @@ public class Student {
 
     @Email
     @NotBlank @Column(unique=true) private String email;
-    @Pattern(regexp="^(?:0|\\+94)7\\d{8}$") @NotBlank private String phone; // Sri Lanka mobile
+    @Pattern(regexp="^(?:0|\\+94)7\\d{8}$") @NotBlank private String phone;
     @NotNull
     private LocalDate regDate;
 
-    @OneToMany(mappedBy="student", cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="student", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Enrollment> enrollments ;
 
-    @OneToMany(mappedBy="student", cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy="student", cascade=CascadeType.ALL)
     private List<Payment> payments ;
 
-    @OneToMany(mappedBy="student", cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy="student", cascade=CascadeType.ALL)
     private List<Lesson> lessons;
-
 
 }

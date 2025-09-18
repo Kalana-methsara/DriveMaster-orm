@@ -64,8 +64,6 @@ public class StudentRegistrationController implements Initializable {
     private final ObservableList<CourseDTO> selectedCourses = FXCollections.observableArrayList();
 
 
-
-
     public void onActionAddCourse(ActionEvent actionEvent) {
         CourseDTO selected = (CourseDTO) cmdCourses.getSelectionModel().getSelectedItem();
         if (selected != null && !selectedCourses.contains(selected)) {
@@ -208,7 +206,7 @@ public class StudentRegistrationController implements Initializable {
 
         ObservableList<CourseDTO> courses = tableSelectedCourses.getItems();
         for (CourseDTO course : courses) {
-            EnrollmentDTO dto = new EnrollmentDTO(enrollmentId, studentId, course.getId(), regDate, upfrontPaid);
+            EnrollmentDTO dto = new EnrollmentDTO(enrollmentId, studentId, course.getId(), regDate);
             enrollmentDTOS.add(dto);
         }
 
@@ -216,16 +214,18 @@ public class StudentRegistrationController implements Initializable {
         String paymentId = paymentBO.getNextId();
         String method = textPaymentMethod.getValue();
         String status = String.valueOf(PaymentStatus.PENDING);
-        String reference = "100"+paymentId;
+        String reference = "100" + paymentId;
 
         StudentDTO studentDTO = new StudentDTO(studentId, firstName, secondName, birthday, gender, address, nic, email, phone, regDate);
-        PaymentDTO paymentDTO = new PaymentDTO(paymentId,studentId, upfrontPaid, method, LocalDateTime.now(), status, reference);
+        PaymentDTO paymentDTO = new PaymentDTO(paymentId, studentId, upfrontPaid, method, LocalDateTime.now(), status, reference);
 
         try {
-         boolean isRegister =  registerStudentBO.StudentRegistration(studentDTO, enrollmentDTOS, paymentDTO);
-         if (isRegister){
-
-         }
+            boolean isRegister = registerStudentBO.StudentRegistration(studentDTO, enrollmentDTOS, paymentDTO);
+            if (isRegister) {
+                clearStudentFields();
+                clearCourseFields();
+                clearPaymentFields();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -234,19 +234,20 @@ public class StudentRegistrationController implements Initializable {
     }
 
 
-
-
     public void onActionClear(ActionEvent actionEvent) {
+        clearPaymentFields();
+        clearCourseFields();
+
+    }
+
+    private void clearPaymentFields() {
         lblTotal.setText("0.00");
         textPaymentMethod.getSelectionModel().clearSelection();
         textFirstPayment.setText("");
         lblBalance.setText("0.00");
         lblSelectedCount.setText("0");
         tableSelectedCourses.getItems().clear();
-        clearCourseFields();
-
     }
-
 
     @FXML
     void onKeyBalance(KeyEvent keyEvent) {

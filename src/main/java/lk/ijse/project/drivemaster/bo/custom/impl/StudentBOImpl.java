@@ -108,5 +108,18 @@ public class StudentBOImpl implements StudentBO {
         return tableChar + "001";
     }
 
+    @Override
+    public List<StudentDTO> searchStudentByDate(String yearMonth) {
+        return studentDAO.searchStudentByDate(yearMonth).stream()
+                .map(converter::getStudentDTO)
+                .toList();
+    }
+
+    @Override
+    public List<StudentDTO> searchStudent(String searchText) {
+        return studentDAO.searchStudent(searchText).stream()
+                .map(converter::getStudentDTO)
+                .toList();    }
+
 
 }

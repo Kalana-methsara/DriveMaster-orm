@@ -100,8 +100,7 @@ public class EntityDTOConverter {
                 enrollment.getId(),
                 enrollment.getStudent() != null ? enrollment.getStudent().getId() : null,
                 enrollment.getCourse() != null ? enrollment.getCourse().getId() : null,
-                enrollment.getRegDate(),
-                enrollment.getUpfrontPaid()
+                enrollment.getRegDate()
         );
     }
 
@@ -123,7 +122,6 @@ public class EntityDTOConverter {
         }
 
         enrollment.setRegDate(dto.getRegDate());
-        enrollment.setUpfrontPaid(dto.getUpfrontPaid());
 
         return enrollment;
     }
