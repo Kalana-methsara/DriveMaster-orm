@@ -57,7 +57,6 @@ public class LoadingScreenController {
 
     private final Random random = new Random();
     private Timeline timeline;
-    private int currentStep = 0;
 
     public void initialize() {
         setupAnimations();

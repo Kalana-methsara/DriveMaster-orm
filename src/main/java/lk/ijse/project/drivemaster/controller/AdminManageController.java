@@ -85,7 +85,7 @@ public class AdminManageController implements Initializable {
                 if (isDeleted) {
                     clearUserFields();
                     loadTableData();
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "User deleted successfully!");
+//                    showAlert(Alert.AlertType.INFORMATION, "Success", "User deleted successfully!");
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Delete Failed", "No user found with this ID.");
                 }

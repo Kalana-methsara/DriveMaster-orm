@@ -110,7 +110,7 @@ public class CourseController implements Initializable {
             courseBO.saveCourse(courseDTO);
             clearCourseFields();
             loadTableData();
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Course saved successfully!");
+//            showAlert(Alert.AlertType.INFORMATION, "Success", "Course saved successfully!");
         } catch (DuplicateException e) {
 //            e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Duplicate Course", "A course with this ID already exists!");

@@ -105,7 +105,7 @@ public class StudentSearchController implements Initializable {
                 if (isDeleted) {
                     clearStudentFields();
                     loadTableData();
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "Student deleted successfully!");
+//                    showAlert(Alert.AlertType.INFORMATION, "Success", "Student deleted successfully!");
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Delete Failed", "No student found with this ID.");
                 }

@@ -89,7 +89,7 @@ public class InstructorsPageController implements Initializable {
                 if (isDeleted) {
                     clearInstructorFields();
                     loadTableData();
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "Instructor deleted successfully!");
+//                    showAlert(Alert.AlertType.INFORMATION, "Success", "Instructor deleted successfully!");
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Delete Failed", "No instructor found with this ID.");
                 }
