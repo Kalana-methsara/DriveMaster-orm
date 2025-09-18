@@ -82,9 +82,7 @@ public class StudentRegistrationController implements Initializable {
             selectedCourses.add(selected);
             lblSelectedCount.setText(String.valueOf(selectedCourses.size()));
             EnrollmentDTO course = new EnrollmentDTO(enrollmentId, studentId, selected.getId(), regDate);
-            System.out.println(course);
             courseList.add(course);
-            System.out.println(courseList);
         }
         updateTotalFee();
         clearCourseFields();

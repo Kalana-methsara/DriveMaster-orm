@@ -22,6 +22,7 @@ public class BOFactoryImpl implements BOFactory{
             case REGISTER ->   (T) new RegisterStudentBOImpl();
             case ENROLLMENT ->  (T) new EnrollmentBOImpl();
             case INSTRUCTOR ->   (T) new InstructorBOImpl();
+            case LESSON -> (T) new LessonBOImpl();
             case USER -> (T) new UserBOImpl();
         };
     }

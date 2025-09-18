@@ -7,5 +7,6 @@ public enum BOType {
     REGISTER,
     ENROLLMENT,
     INSTRUCTOR,
+    LESSON,
     USER
 }

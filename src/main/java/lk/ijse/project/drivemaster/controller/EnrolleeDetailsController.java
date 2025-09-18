@@ -1,20 +1,18 @@
 package lk.ijse.project.drivemaster.controller;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import lk.ijse.project.drivemaster.bo.BOFactoryImpl;
 import lk.ijse.project.drivemaster.bo.BOType;
+import lk.ijse.project.drivemaster.bo.custom.LessonBO;
+import lk.ijse.project.drivemaster.bo.custom.PaymentBO;
 import lk.ijse.project.drivemaster.bo.custom.StudentBO;
-import lk.ijse.project.drivemaster.dto.CourseDTO;
-import lk.ijse.project.drivemaster.dto.CourseDetailsDTO;
-import lk.ijse.project.drivemaster.dto.StudentDTO;
+import lk.ijse.project.drivemaster.dto.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +25,18 @@ import java.util.ResourceBundle;
 
 public class EnrolleeDetailsController implements Initializable {
 
+    @FXML
+    private Label lblStudentId;
+    @FXML
+    private TableView<PaymentDTO> tablePayment;
+    @FXML
+    private TableView<LessonDTO> tableLesson;
+    @FXML
+    private TableColumn<?, ?> colDate;
+    @FXML
+    private TableColumn<?, ?> colInTime;
+    @FXML
+    private TableColumn<?, ?> colOutTime;
     @FXML
     private Label lblNextCount;
     @FXML
@@ -52,8 +62,6 @@ public class EnrolleeDetailsController implements Initializable {
     @FXML
     private Button btnUpdateStatus;
 
-    @FXML
-    private TableColumn<?, ?> colAction;
 
     @FXML
     private TableColumn<?, ?> colDateTime;
@@ -121,13 +129,15 @@ public class EnrolleeDetailsController implements Initializable {
     private TextField textPayment;
 
     @FXML
-    private ChoiceBox<?> textPaymentMethod;
+    private ChoiceBox<String> textPaymentMethod;
 
     private StudentDTO student;
 
     public void setStudent(StudentDTO student) {
         this.student = student;
         setStudentData();
+        loadPaymentTableData();
+        loadLessonTableData();
     }
 
     private final List<CourseDetailsDTO> courses = new ArrayList<>();
@@ -164,6 +174,8 @@ public class EnrolleeDetailsController implements Initializable {
 
     }
     private final StudentBO studentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.STUDENT);
+    private final PaymentBO paymentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.PAYMENT);
+    private final LessonBO lessonBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.LESSON);
 
 
     @Override
@@ -183,10 +195,42 @@ public class EnrolleeDetailsController implements Initializable {
 
         btnPrevCourse.setOnAction(e -> showPreviousCourse());
         btnNextCourse.setOnAction(e -> showNextCourse());
+
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colDateTime.setCellValueFactory(new PropertyValueFactory<>("formattedCreatedAt"));
+        colReceiptNumber.setCellValueFactory(new PropertyValueFactory<>("reference"));
+        colPaidAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        colPaymentMethod.setCellValueFactory(new PropertyValueFactory<>("method"));
+
+        loadPaymentTableData();
+        loadLessonTableData();
+
+
+    }
+
+    private void loadLessonTableData() {
+
+    }
+
+    private void loadPaymentTableData() {
+        if (student == null) return;
+        tablePayment.setItems(FXCollections.observableArrayList(
+                paymentBO.getStudentPayments(student.getId()).stream().map(PaymentDTO ->
+                        new PaymentDTO(
+                                PaymentDTO.getId(),
+                                PaymentDTO.getStudentId(),
+                                PaymentDTO.getAmount(),
+                                PaymentDTO.getMethod(),
+                                PaymentDTO.getCreatedAt(),
+                                PaymentDTO.getStatus(),
+                                PaymentDTO.getReference()
+                        )).toList()
+        ));
     }
 
     private void setStudentData() {
         if (student == null) return;
+        lblStudentId.setText(student.getId());
         lblStudentName.setText(student.getFirstName()+" "+student.getLastName());
        lblGender.setText(student.getGender());
        lblBirthday.setText(String.valueOf(student.getBirthday()));

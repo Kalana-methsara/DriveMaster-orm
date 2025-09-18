@@ -26,6 +26,7 @@ public class DAOFactoryImpl implements DAOFactory {
             case USER -> (T) new UserDAOImpl();
             case ENROLLMENT -> (T) new EnrollmentDAOImpl();
             case INSTRUCTOR ->  (T) new InstructorDAOImpl();
+            case LESSON ->  (T) new LessonDAOImpl();
             case QUERY -> (T) new QueryDAOImpl();
         };
     }

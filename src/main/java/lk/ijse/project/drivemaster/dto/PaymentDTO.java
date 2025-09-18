@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @AllArgsConstructor
@@ -19,6 +20,10 @@ public class PaymentDTO {
     private LocalDateTime createdAt;
     private String status;       // "PENDING","COMPLETE","FAILED"
     private String reference;
+    public String getFormattedCreatedAt() {
+        if (createdAt == null) return "";
+        return createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 
 
 

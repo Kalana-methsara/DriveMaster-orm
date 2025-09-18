@@ -54,6 +54,22 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
+    public List<Payment> getStudentPayments(String studentId) {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<Payment> query = session.createQuery(
+                    "FROM Payment p WHERE p.student.id = :studentId ORDER BY p.createdAt DESC",
+                    Payment.class
+            );
+            query.setParameter("studentId", studentId);
+            return query.list();
+        } finally {
+            session.close();
+        }
+    }
+
+
+    @Override
     public boolean save(Payment payment) {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
