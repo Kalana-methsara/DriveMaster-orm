@@ -2,6 +2,7 @@ package lk.ijse.project.drivemaster.controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -254,7 +255,7 @@ public class AdminManageController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        javafx.application.Platform.runLater(() -> textUserName.requestFocus());
+        Platform.runLater(() -> textUserName.requestFocus());
 
     }
 

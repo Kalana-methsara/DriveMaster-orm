@@ -2,6 +2,7 @@ package lk.ijse.project.drivemaster.controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -313,6 +314,8 @@ public class StudentSearchController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        Platform.runLater(() -> textFirstName.requestFocus());
+
     }
 
     private boolean validateInputs() {

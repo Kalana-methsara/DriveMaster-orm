@@ -16,4 +16,11 @@ public class EnrollmentDTO {
     private String courseId;
     private LocalDate regDate;
 
+
+    public EnrollmentDTO(EnrollmentDTO course) {
+        this.id = course.id;
+        this.courseId = course.courseId;
+        this.studentId = course.studentId;
+        this.regDate = course.regDate;
+    }
 }

@@ -79,7 +79,7 @@
 
                             <!-- Personal Details Section -->
                             <VBox prefHeight="430.0" prefWidth="360.0" spacing="10" style="-fx-background-color: white; -fx-background-radius: 6; -fx-padding: 14;">
-                                <VBox prefHeight="296.0" prefWidth="986.0" spacing="8.0">
+                                <VBox prefHeight="296.0" prefWidth="986.0" spacing="10.0">
                                     <children>
                               <HBox prefHeight="100.0" prefWidth="200.0" spacing="165.0">
                                  <children>
@@ -95,8 +95,29 @@
                                     </ImageView>
                                  </children>
                                  <VBox.margin>
-                                    <Insets bottom="17.0" />
+                                    <Insets bottom="20.0" top="3.0" />
                                  </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="35.0" prefWidth="328.0">
+                                 <children>
+                                    <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Student ID">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets top="5.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets right="42.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="lblStudentId" prefHeight="28.0" prefWidth="183.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField onKeyReleased="#onKeyFirstName" prefHeight="28.0" prefWidth="1.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                 </children>
                               </HBox>
                                         <HBox layoutY="5.0" prefHeight="25.0" spacing="40.0">
                                             <children>
@@ -122,19 +143,6 @@
                                                     </padding>
                                                 </Label>
                                                 <TextField fx:id="textSecondName" onKeyReleased="#onKeySecondName" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
-                                            </children>
-                                        </HBox>
-                                        <HBox prefHeight="25.0" spacing="65.0">
-                                            <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Gender">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                    <padding>
-                                                        <Insets top="5.0" />
-                                                    </padding>
-                                                </Label>
-                                                <ChoiceBox fx:id="textGender" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                             </children>
                                         </HBox>
                                         <HBox prefHeight="25.0" spacing="94.0">
@@ -176,23 +184,6 @@
                                                 <TextField fx:id="textContact" onKeyReleased="#onKeyContact" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                             </children>
                                         </HBox>
-                                        <HBox prefHeight="25.0" spacing="55.0">
-                                            <children>
-                                                <Label prefHeight="25.0" prefWidth="62.0" style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Birthday">
-                                                    <font>
-                                                        <Font size="14.0" />
-                                                    </font>
-                                                    <padding>
-                                                        <Insets top="5.0" />
-                                                    </padding>
-                                                </Label>
-                                                <DatePicker fx:id="textDateOfBirth" onKeyReleased="#onKeyBirthday" prefWidth="200.0">
-                                                    <stylesheets>
-                                                        <URL value="@../style/DatePicker.css" />
-                                                    </stylesheets>
-                                                </DatePicker>
-                                            </children>
-                                        </HBox>
                                         <HBox prefHeight="25.0" spacing="60.0">
                                             <children>
                                                 <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Address">
@@ -203,12 +194,12 @@
                                                         <Insets top="5.0" />
                                                     </padding>
                                                 </Label>
-                                                <TextField fx:id="textAddress" onKeyReleased="#onKeyAddress" prefHeight="28.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                <TextField fx:id="textAddress"  prefHeight="28.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                             </children>
                                         </HBox>
-                                        <HBox prefHeight="25.0" spacing="88.0">
+                                        <HBox prefHeight="25.0" spacing="65.0">
                                             <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="City">
+                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Gender">
                                                     <font>
                                                         <Font size="14.0" />
                                                     </font>
@@ -216,12 +207,12 @@
                                                         <Insets top="5.0" />
                                                     </padding>
                                                 </Label>
-                                                <ChoiceBox fx:id="textCity" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                <ChoiceBox fx:id="textGender" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                             </children>
                                         </HBox>
                                         <HBox prefHeight="25.0" spacing="55.0">
                                             <children>
-                                                <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Province">
+                                                <Label prefHeight="25.0" prefWidth="62.0" style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Birthday">
                                                     <font>
                                                         <Font size="14.0" />
                                                     </font>
@@ -229,7 +220,11 @@
                                                         <Insets top="5.0" />
                                                     </padding>
                                                 </Label>
-                                                <ChoiceBox fx:id="textProvince" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                <DatePicker fx:id="textDateOfBirth"  prefWidth="200.0">
+                                                    <stylesheets>
+                                                        <URL value="@../style/DatePicker.css" />
+                                                    </stylesheets>
+                                                </DatePicker>
                                             </children>
                                         </HBox>
                                     </children>
@@ -267,7 +262,10 @@
                                                             <Insets top="5.0" />
                                                         </padding>
                                                     </Label>
-                                                    <Label fx:id="lblCourseId" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                    <Label fx:id="lblCourseId" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;">
+                                          <padding>
+                                             <Insets left="10.0" />
+                                          </padding></Label>
                                                 </children>
                                             </HBox>
                                             <HBox prefHeight="25.0" prefWidth="368.0" spacing="42.0">
@@ -280,7 +278,10 @@
                                                             <Insets top="5.0" />
                                                         </padding>
                                                     </Label>
-                                                    <Label fx:id="lblCourseName" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                    <Label fx:id="lblCourseName" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;">
+                                          <padding>
+                                             <Insets left="10.0" />
+                                          </padding></Label>
                                                 </children>
                                             </HBox>
                                             <HBox prefHeight="25.0" prefWidth="368.0" spacing="73.0">
@@ -293,7 +294,10 @@
                                                             <Insets top="5.0" />
                                                         </padding>
                                                     </Label>
-                                                    <Label fx:id="lblCourseDuration" prefHeight="35.0" prefWidth="190.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                    <Label fx:id="lblCourseDuration" prefHeight="35.0" prefWidth="190.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;">
+                                          <padding>
+                                             <Insets left="10.0" />
+                                          </padding></Label>
                                                 </children>
                                             </HBox>
                                             <HBox prefHeight="25.0" prefWidth="368.0" spacing="105.0">
@@ -306,7 +310,10 @@
                                                             <Insets top="5.0" />
                                                         </padding>
                                                     </Label>
-                                                    <Label fx:id="lblCourseFee" prefHeight="35.0" prefWidth="190.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                    <Label fx:id="lblCourseFee" prefHeight="35.0" prefWidth="190.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;">
+                                          <padding>
+                                             <Insets left="10.0" />
+                                          </padding></Label>
                                                 </children>
                                             </HBox>
                                         </children>

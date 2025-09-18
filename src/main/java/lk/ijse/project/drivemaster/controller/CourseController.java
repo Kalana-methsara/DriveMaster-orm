@@ -2,6 +2,7 @@ package lk.ijse.project.drivemaster.controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -194,7 +195,7 @@ public class CourseController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        javafx.application.Platform.runLater(() -> textCourseName.requestFocus());
+        Platform.runLater(() -> textCourseName.requestFocus());
 
     }
 

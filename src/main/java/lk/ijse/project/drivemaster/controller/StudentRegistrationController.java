@@ -41,15 +41,18 @@ public class StudentRegistrationController implements Initializable {
     @FXML
     private TableView tableSelectedCourses;
     @FXML
-    private Label lblCourseId, lblCourseName, lblCourseDuration, lblCourseFee, lblSelectedCount, lblTotal, lblBalance;
+    private Label lblStudentId,lblCourseId, lblCourseName, lblCourseDuration, lblCourseFee, lblSelectedCount, lblTotal, lblBalance;
     @FXML
     private DatePicker textDateOfBirth;
     @FXML
-    private ChoiceBox<String> textGender, textCity, textProvince, textPaymentMethod;
+    private ChoiceBox<String> textGender, textPaymentMethod;
     @FXML
     private TextField textFirstName, textSecondName, textNic, textEmail, textContact, textAddress, textFirstPayment;
     @FXML
     private Button btnSave, btnUpdate, btnDelete, btnAddCourse, btnConfirm, btnClear;
+
+    private final ObservableList<EnrollmentDTO> courseList = FXCollections.observableArrayList();
+
 
     private final String namePattern = "^[A-Za-z ]+$";
     private final String nicPattern = "^[0-9]{9}[vVxX]||[0-9]{12}$";
@@ -65,17 +68,30 @@ public class StudentRegistrationController implements Initializable {
 
 
     public void onActionAddCourse(ActionEvent actionEvent) {
+        String studentId = lblStudentId.getText();
+        LocalDate regDate = LocalDate.now();
+        String nextId = enrollmentBO.getNextId(); // e.g. E003
+        int baseNumber = Integer.parseInt(nextId.substring(1)); // 3
+        int count = Integer.parseInt(lblSelectedCount.getText());
+
+        int newNumber = baseNumber + count;
+        String enrollmentId = String.format("E%03d", newNumber);
+
         CourseDTO selected = (CourseDTO) cmdCourses.getSelectionModel().getSelectedItem();
         if (selected != null && !selectedCourses.contains(selected)) {
             selectedCourses.add(selected);
             lblSelectedCount.setText(String.valueOf(selectedCourses.size()));
-
+            EnrollmentDTO course = new EnrollmentDTO(enrollmentId, studentId, selected.getId(), regDate);
+            System.out.println(course);
+            courseList.add(course);
+            System.out.println(courseList);
         }
         updateTotalFee();
         clearCourseFields();
     }
 
     private void clearCourseFields() {
+        lblStudentId.setText(studentBO.getNextId());
         cmdCourses.getSelectionModel().clearSelection();
         lblCourseId.setText("");
         lblCourseName.setText("");
@@ -99,8 +115,7 @@ public class StudentRegistrationController implements Initializable {
 
         boolean isValidAddress = !address.isEmpty();
         boolean isValidGender = textGender.getValue() != null;
-        boolean isValidCity = textCity.getValue() != null;
-        boolean isValidProvince = textProvince.getValue() != null;
+
 
         if (!isValidFirstName) showErrorWithTimeout(textFirstName);
         if (!isValidSecondName) showErrorWithTimeout(textSecondName);
@@ -109,8 +124,7 @@ public class StudentRegistrationController implements Initializable {
         if (!isValidPhone) showErrorWithTimeout(textContact);
         if (!isValidAddress) showErrorWithTimeout(textAddress);
         if (!isValidGender) showErrorWithTimeout(textGender);
-        if (!isValidCity) showErrorWithTimeout(textCity);
-        if (!isValidProvince) showErrorWithTimeout(textProvince);
+
 
         return isValidFirstName &&
                 isValidSecondName &&
@@ -118,9 +132,7 @@ public class StudentRegistrationController implements Initializable {
                 isValidEmail &&
                 isValidPhone &&
                 isValidAddress &&
-                isValidGender &&
-                isValidCity &&
-                isValidProvince;
+                isValidGender ;
     }
 
 
@@ -186,10 +198,7 @@ public class StudentRegistrationController implements Initializable {
             return;
         }
 
-        showAlert(Alert.AlertType.INFORMATION, "Success", "Registration confirmed with: " + paymentMethod);
-
-
-        String studentId = studentBO.getNextId();
+        String studentId = lblStudentId.getText();
         String firstName = textFirstName.getText() != null ? textFirstName.getText().trim() : "";
         String secondName = textSecondName.getText() != null ? textSecondName.getText().trim() : "";
         LocalDate birthday = textDateOfBirth.getValue();
@@ -200,24 +209,20 @@ public class StudentRegistrationController implements Initializable {
         String phone = textContact.getText() != null ? textContact.getText().trim() : "";
         LocalDate regDate = LocalDate.now();
 
-        String enrollmentId = enrollmentBO.getNextId();
-        List<EnrollmentDTO> enrollmentDTOS = new ArrayList<>();
-        BigDecimal upfrontPaid = new BigDecimal(textFirstPayment.getText());
-
-        ObservableList<CourseDTO> courses = tableSelectedCourses.getItems();
-        for (CourseDTO course : courses) {
-            EnrollmentDTO dto = new EnrollmentDTO(enrollmentId, studentId, course.getId(), regDate);
-            enrollmentDTOS.add(dto);
+        ArrayList<EnrollmentDTO> enrollmentDTOS = new ArrayList<>();
+        for (EnrollmentDTO course : courseList) {
+            enrollmentDTOS.add(new EnrollmentDTO(course));
         }
 
-
         String paymentId = paymentBO.getNextId();
+        BigDecimal upfrontPaid = new BigDecimal(textFirstPayment.getText());
         String method = textPaymentMethod.getValue();
-        String status = String.valueOf(PaymentStatus.PENDING);
-        String reference = "100" + paymentId;
+        LocalDateTime now = LocalDateTime.now().withNano(0);
+        String status = String.valueOf(PaymentStatus.COMPLETE);
+        String reference = "RCPT-" + System.currentTimeMillis();
 
         StudentDTO studentDTO = new StudentDTO(studentId, firstName, secondName, birthday, gender, address, nic, email, phone, regDate);
-        PaymentDTO paymentDTO = new PaymentDTO(paymentId, studentId, upfrontPaid, method, LocalDateTime.now(), status, reference);
+        PaymentDTO paymentDTO = new PaymentDTO(paymentId, studentId, upfrontPaid, method, now, status, reference);
 
         try {
             boolean isRegister = registerStudentBO.StudentRegistration(studentDTO, enrollmentDTOS, paymentDTO);
@@ -225,6 +230,8 @@ public class StudentRegistrationController implements Initializable {
                 clearStudentFields();
                 clearCourseFields();
                 clearPaymentFields();
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Registration Successful.");
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -277,28 +284,6 @@ public class StudentRegistrationController implements Initializable {
     private void initComboBoxes() {
         textPaymentMethod.setItems(FXCollections.observableArrayList("Cash", "Card", "Online"));
         textGender.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
-        textCity.setItems(FXCollections.observableArrayList(
-                "Colombo", "Gampaha", "Kalutara",
-                "Kandy", "Matale", "Nuwara Eliya",
-                "Galle", "Matara", "Hambantota",
-                "Jaffna", "Kilinochchi", "Mannar",
-                "Vavuniya", "Mullaitivu", "Batticaloa",
-                "Ampara", "Trincomalee", "Kurunegala",
-                "Puttalam", "Anuradhapura", "Polonnaruwa",
-                "Badulla", "Monaragala", "Ratnapura",
-                "Kegalle"
-        ));
-        textProvince.setItems(FXCollections.observableArrayList(
-                "Western",
-                "Central",
-                "Southern",
-                "Northern",
-                "Eastern",
-                "North Western",
-                "North Central",
-                "Uva",
-                "Sabaragamuwa"
-        ));
         try {
             List<CourseDTO> itemList = courseBO.getAllCourses();
             cmdCourses.setItems(FXCollections.observableArrayList(itemList));
@@ -355,7 +340,7 @@ public class StudentRegistrationController implements Initializable {
                 if (textSecondName.getText().isEmpty()) {
                     showErrorWithTimeout(textSecondName);
                 } else {
-                    textGender.requestFocus();
+                    textNic.requestFocus();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -401,7 +386,7 @@ public class StudentRegistrationController implements Initializable {
                 if (textContact.getText().isEmpty()) {
                     showErrorWithTimeout(textContact);
                 } else {
-                    textDateOfBirth.requestFocus();
+                    textAddress.requestFocus();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -410,30 +395,6 @@ public class StudentRegistrationController implements Initializable {
         }
     }
 
-    public void onKeyBirthday(KeyEvent keyEvent) {
-        if (keyEvent.getCode().toString().equals("ENTER")) {
-            try {
-                textAddress.requestFocus();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void onKeyAddress(KeyEvent keyEvent) {
-        if (keyEvent.getCode().toString().equals("ENTER")) {
-            try {
-                if (textAddress.getText().isEmpty()) {
-                    showErrorWithTimeout(textAddress);
-                } else {
-                    textCity.requestFocus();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                showErrorWithTimeout(textAddress);
-            }
-        }
-    }
 
     public void onRefresh(MouseEvent mouseEvent) {
         clearStudentFields();
@@ -448,8 +409,7 @@ public class StudentRegistrationController implements Initializable {
         textContact.clear();
         textDateOfBirth.setValue(LocalDate.now());
         textAddress.clear();
-        textCity.getSelectionModel().clearSelection();
-        textProvince.getSelectionModel().clearSelection();
+
 
 
     }

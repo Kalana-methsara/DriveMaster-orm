@@ -25,7 +25,8 @@ public class Payment {
     @Column(precision=10, scale=2) private BigDecimal amount;
     @NotBlank
     private String method; // 'CASH','CARD','ONLINE'
-    @NotNull private LocalDateTime createdAt = LocalDateTime.now();
+    @NotNull
+    private LocalDateTime createdAt;
 
     @Enumerated(EnumType.STRING) private PaymentStatus status = PaymentStatus.PENDING;
     @Column(unique=true) private String reference; // receipt number

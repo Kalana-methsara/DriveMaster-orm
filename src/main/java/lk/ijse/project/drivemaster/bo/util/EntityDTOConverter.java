@@ -85,7 +85,7 @@ public class EntityDTOConverter {
 
         payment.setAmount(dto.getAmount());
         payment.setMethod(dto.getMethod());
-        payment.setCreatedAt(dto.getCreatedAt() != null ? dto.getCreatedAt() : LocalDateTime.now());
+        payment.setCreatedAt(dto.getCreatedAt() != null ? dto.getCreatedAt() : LocalDateTime.now().withNano(0));
         if (dto.getStatus() != null) {
             payment.setStatus(PaymentStatus.valueOf(dto.getStatus()));
         }
