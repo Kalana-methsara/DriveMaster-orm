@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -77,7 +78,7 @@ public class CourseController implements Initializable {
                 if (isDeleted) {
                     clearCourseFields();
                     loadTableData();
-                    showAlert(Alert.AlertType.INFORMATION, "Success", "Course deleted successfully!");
+//                    showAlert(Alert.AlertType.INFORMATION, "Success", "Course deleted successfully!");
                 } else {
                     showAlert(Alert.AlertType.ERROR, "Delete Failed", "No course found with this ID.");
                 }
@@ -110,7 +111,7 @@ public class CourseController implements Initializable {
             courseBO.saveCourse(courseDTO);
             clearCourseFields();
             loadTableData();
-//            showAlert(Alert.AlertType.INFORMATION, "Success", "Course saved successfully!");
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Course saved successfully!");
         } catch (DuplicateException e) {
 //            e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Duplicate Course", "A course with this ID already exists!");
@@ -193,6 +194,8 @@ public class CourseController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        javafx.application.Platform.runLater(() -> textCourseName.requestFocus());
+
     }
 
     private void clearCourseFields() {
@@ -263,4 +266,27 @@ public class CourseController implements Initializable {
         timeline.setCycleCount(1);
         timeline.play();
     }
+
+    public void onKeyName(KeyEvent keyEvent) {
+        if (keyEvent.getCode().toString().equals("ENTER")) {
+            try {
+                textDuration.requestFocus();
+            } catch (Exception e) {
+                e.printStackTrace();
+                showErrorWithTimeout(textCourseName);
+            }
+        }
+    }
+
+    public void onKeyDuration(KeyEvent keyEvent) {
+        if (keyEvent.getCode().toString().equals("ENTER")) {
+            try {
+                textCourseFee.requestFocus();
+            } catch (Exception e) {
+                e.printStackTrace();
+                showErrorWithTimeout(textDuration);
+            }
+        }
+    }
+
 }

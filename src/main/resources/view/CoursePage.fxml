@@ -115,7 +115,7 @@
                                                    <Insets top="5.0" />
                                                 </padding>
                                              </Label>
-                                             <TextField fx:id="textCourseName" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                             <TextField fx:id="textCourseName" onKeyReleased="#onKeyName" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                           </children>
                                        </HBox>
                                     </children>
@@ -132,7 +132,7 @@
                                                    <Insets top="5.0" />
                                                 </padding>
                                              </Label>
-                                             <TextField fx:id="textDuration" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                             <TextField fx:id="textDuration" onKeyReleased="#onKeyDuration" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                           </children>
                                        </HBox>
                                        <HBox prefHeight="25.0" prefWidth="368.0" spacing="80.0">

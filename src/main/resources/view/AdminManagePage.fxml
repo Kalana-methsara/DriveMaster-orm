@@ -116,7 +116,7 @@
                                                                     <Insets top="5.0" />
                                                                 </padding>
                                                             </Label>
-                                                            <TextField fx:id="textUserName" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                            <TextField fx:id="textUserName" onKeyReleased="#onKeyUsername" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                                         </children>
                                                     </HBox>
                                        <HBox prefHeight="25.0" prefWidth="368.0" spacing="52.0">
@@ -129,7 +129,7 @@
                                                    <Insets top="5.0" />
                                                 </padding>
                                              </Label>
-                                             <TextField fx:id="textPassword" prefHeight="25.0" prefWidth="300.0" promptText="********" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                             <TextField fx:id="textPassword" onKeyReleased="#onKeyPassword" prefHeight="25.0" prefWidth="300.0" promptText="********" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                           </children>
                                        </HBox>
                                                 </children>

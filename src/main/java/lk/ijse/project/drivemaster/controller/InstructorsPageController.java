@@ -196,24 +196,40 @@ public class InstructorsPageController implements Initializable {
 
 
     @FXML
-    void onKeyContact(KeyEvent event) {
+    void onKeyContact(KeyEvent keyEvent) {
+        if (keyEvent.getCode().toString().equals("ENTER")) {
+            try {
+                textEmail.requestFocus();
+            } catch (Exception e) {
+                e.printStackTrace();
+                showErrorWithTimeout(textContact);
+            }
+        }
+    }
 
+
+    @FXML
+    void onKeyNic(KeyEvent keyEvent) {
+        if (keyEvent.getCode().toString().equals("ENTER")) {
+            try {
+                textContact.requestFocus();
+            } catch (Exception e) {
+                e.printStackTrace();
+                showErrorWithTimeout(textNic);
+            }
+        }
     }
 
     @FXML
-    void onKeyEmail(KeyEvent event) {
-
-    }
-
-
-    @FXML
-    void onKeyNic(KeyEvent event) {
-
-    }
-
-    @FXML
-    void onKeyName(KeyEvent event) {
-
+    void onKeyName(KeyEvent keyEvent) {
+        if (keyEvent.getCode().toString().equals("ENTER")) {
+            try {
+                textNic.requestFocus();
+            } catch (Exception e) {
+                e.printStackTrace();
+                showErrorWithTimeout(textName);
+            }
+        }
     }
 
     @FXML
@@ -247,6 +263,8 @@ public class InstructorsPageController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        javafx.application.Platform.runLater(() -> textName.requestFocus());
+
     }
 
 

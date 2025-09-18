@@ -162,7 +162,7 @@
                                                             <Insets top="5.0" />
                                                         </padding>
                                                     </Label>
-                                                    <TextField fx:id="textEmail" onKeyReleased="#onKeyEmail" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                                    <TextField fx:id="textEmail" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                                 </children>
                                             </HBox>
                                             <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="317.0">

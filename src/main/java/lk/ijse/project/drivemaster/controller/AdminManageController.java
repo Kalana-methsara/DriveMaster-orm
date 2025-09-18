@@ -8,17 +8,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import lk.ijse.project.drivemaster.bo.BOFactoryImpl;
 import lk.ijse.project.drivemaster.bo.BOType;
-import lk.ijse.project.drivemaster.bo.custom.InstructorBO;
 import lk.ijse.project.drivemaster.bo.custom.UserBO;
 import lk.ijse.project.drivemaster.bo.exception.DuplicateException;
 import lk.ijse.project.drivemaster.bo.exception.InUseException;
 import lk.ijse.project.drivemaster.bo.exception.NotFoundException;
-import lk.ijse.project.drivemaster.dto.InstructorDTO;
 import lk.ijse.project.drivemaster.dto.UserDTO;
 import lk.ijse.project.drivemaster.enums.Role;
 
@@ -100,7 +99,7 @@ public class AdminManageController implements Initializable {
 
     @FXML
     void onActionSave(ActionEvent event) {
-        if (!validateInputs()) {
+        if (validateInputs()) {
             showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
             return;
         }
@@ -129,7 +128,7 @@ public class AdminManageController implements Initializable {
 
     @FXML
     void onActionUpdate(ActionEvent event) {
-        if (!validateInputs()) {
+        if (validateInputs()) {
             showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
             return;
         }
@@ -174,7 +173,7 @@ public class AdminManageController implements Initializable {
         if (!isValidEmail) showErrorWithTimeout(textEmail);
         if (!isValidRole) showErrorWithTimeout(textRole);
 
-        return isValidUserName && isValidPassword && isValidEmail && isValidRole;
+        return !isValidUserName || !isValidPassword || !isValidEmail || !isValidRole;
     }
 
 
@@ -255,6 +254,8 @@ public class AdminManageController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        javafx.application.Platform.runLater(() -> textUserName.requestFocus());
+
     }
 
     private void initComboBoxes() {
@@ -284,5 +285,26 @@ public class AdminManageController implements Initializable {
         textPassword.clear();
         textEmail.clear();
         textRole.getSelectionModel().clearSelection();
+    }
+
+    public void onKeyUsername(KeyEvent keyEvent) {
+        if (keyEvent.getCode().toString().equals("ENTER")) {
+            try {
+                textPassword.requestFocus();
+            } catch (Exception e) {
+                e.printStackTrace();
+                showErrorWithTimeout(textUserName);
+            }
+        }
+    }
+    public void onKeyPassword(KeyEvent keyEvent) {
+        if (keyEvent.getCode().toString().equals("ENTER")) {
+            try {
+                textEmail.requestFocus();
+            } catch (Exception e) {
+                e.printStackTrace();
+                showErrorWithTimeout(textPassword);
+            }
+        }
     }
 }

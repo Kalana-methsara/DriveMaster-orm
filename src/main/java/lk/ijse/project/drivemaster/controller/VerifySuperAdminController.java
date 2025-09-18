@@ -3,6 +3,7 @@ package lk.ijse.project.drivemaster.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
@@ -10,7 +11,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.StageStyle;
 
-public class VerifySuperAdminController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class VerifySuperAdminController implements Initializable {
 
     @FXML
     private PasswordField pwdFieldVerify;
@@ -53,6 +57,12 @@ public class VerifySuperAdminController {
         dialogPane.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
 
         alert.show();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        javafx.application.Platform.runLater(() -> pwdFieldVerify.requestFocus());
+
     }
 }
 
