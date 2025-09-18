@@ -2,6 +2,7 @@ package lk.ijse.project.drivemaster.dao.custom;
 
 import lk.ijse.project.drivemaster.dao.CrudDAO;
 import lk.ijse.project.drivemaster.entity.Course;
+import lk.ijse.project.drivemaster.entity.Payment;
 
 
 import java.util.List;

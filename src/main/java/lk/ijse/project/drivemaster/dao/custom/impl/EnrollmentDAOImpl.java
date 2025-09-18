@@ -3,6 +3,7 @@ package lk.ijse.project.drivemaster.dao.custom.impl;
 import lk.ijse.project.drivemaster.config.FactoryConfiguration;
 import lk.ijse.project.drivemaster.dao.custom.EnrollmentDAO;
 import lk.ijse.project.drivemaster.entity.Enrollment;
+import lk.ijse.project.drivemaster.entity.Payment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -115,6 +116,21 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
                 return null;
             }
             return list.get(0);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<Enrollment> getStudentCourses(String studentId) {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<Enrollment> query = session.createQuery(
+                    "FROM Enrollment e WHERE e.student.id = :studentId ORDER BY e.regDate DESC",
+                    Enrollment.class
+            );
+            query.setParameter("studentId", studentId);
+            return query.list();
         } finally {
             session.close();
         }

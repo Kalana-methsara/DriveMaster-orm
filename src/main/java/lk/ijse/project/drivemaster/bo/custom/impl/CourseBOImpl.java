@@ -8,7 +8,9 @@ import lk.ijse.project.drivemaster.dao.custom.CourseDAO;
 import lk.ijse.project.drivemaster.dao.util.DAOFactoryImpl;
 import lk.ijse.project.drivemaster.dao.util.DAOType;
 import lk.ijse.project.drivemaster.dto.CourseDTO;
+import lk.ijse.project.drivemaster.dto.StudentDTO;
 import lk.ijse.project.drivemaster.entity.Course;
+import lk.ijse.project.drivemaster.entity.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,5 +81,23 @@ public class CourseBOImpl implements CourseBO {
         }
         return tableChar + "1001"; // start from C1001
     }
+
+    @Override
+    public CourseDTO searchCourse(String courseId) {
+        Optional<Course> optionalCourse = courseDAO.findById(courseId);
+        if (optionalCourse.isPresent()) {
+            Course course = optionalCourse.get();
+            return new CourseDTO(
+                    course.getId(),
+                    course.getName(),
+                    course.getDuration(),
+                    course.getFee()
+            );
+        } else {
+            return null; // or throw exception
+        }
     }
+
+
+}
 

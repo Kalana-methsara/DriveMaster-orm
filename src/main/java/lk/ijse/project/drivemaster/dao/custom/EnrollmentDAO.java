@@ -2,6 +2,7 @@ package lk.ijse.project.drivemaster.dao.custom;
 
 import lk.ijse.project.drivemaster.dao.CrudDAO;
 import lk.ijse.project.drivemaster.entity.Enrollment;
+import lk.ijse.project.drivemaster.entity.Payment;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface EnrollmentDAO extends CrudDAO<Enrollment> {
     boolean save(Enrollment enrollment, Session session);
     String getLastId();
 
+    List<Enrollment> getStudentCourses(String studentId);
 }

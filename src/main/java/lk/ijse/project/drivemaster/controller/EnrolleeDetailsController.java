@@ -9,9 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import lk.ijse.project.drivemaster.bo.BOFactoryImpl;
 import lk.ijse.project.drivemaster.bo.BOType;
-import lk.ijse.project.drivemaster.bo.custom.LessonBO;
-import lk.ijse.project.drivemaster.bo.custom.PaymentBO;
-import lk.ijse.project.drivemaster.bo.custom.StudentBO;
+import lk.ijse.project.drivemaster.bo.custom.*;
 import lk.ijse.project.drivemaster.dto.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -133,14 +131,21 @@ public class EnrolleeDetailsController implements Initializable {
 
     private StudentDTO student;
 
+
     public void setStudent(StudentDTO student) {
         this.student = student;
         setStudentData();
         loadPaymentTableData();
         loadLessonTableData();
+        loadCourse();
+        showCourse(currentIndex);
+        lblNextCount.setText(String.valueOf(courses.size() - 1));
+        lblPrevCount.setText(String.valueOf(currentIndex));
+
     }
 
-    private final List<CourseDetailsDTO> courses = new ArrayList<>();
+
+    private final List<EnrollmentDTO> courses = new ArrayList<>();
     private int currentIndex = 0;
 
 
@@ -171,28 +176,24 @@ public class EnrolleeDetailsController implements Initializable {
 
     @FXML
     void onKeyBalance(KeyEvent event) {
-
+        try {
+            double paid = textPayment.getText().isEmpty() ? 0 : Double.parseDouble(textPayment.getText());
+            double total = Double.parseDouble(lblTotal.getText());
+            lblBalance.setText(String.format("%.2f", total - paid));
+        } catch (NumberFormatException | NullPointerException e) {
+            lblBalance.setText("0.00");
+        }
     }
+
     private final StudentBO studentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.STUDENT);
     private final PaymentBO paymentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.PAYMENT);
     private final LessonBO lessonBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.LESSON);
+    private final EnrollmentBO enrollmentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.ENROLLMENT);
+    private final CourseBO courseBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.COURSE);
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        courses.add(new CourseDetailsDTO("C1001", "Basic Learner Program", "12 weeks",
-                new BigDecimal("50000"), LocalDate.parse("2024-01-10"), "pending"));
-        courses.add(new CourseDetailsDTO("C1002", "Advanced Defensive Driving", "8 weeks",
-                new BigDecimal("65000"), LocalDate.parse("2024-02-05"), "complete"));
-        courses.add(new CourseDetailsDTO("C1003", "Motorcycle License Training", "16 weeks",
-                new BigDecimal("75000"), LocalDate.parse("2024-03-15"), "pending"));
-
-        setStudentData();
-
-        showCourse(currentIndex);
-        lblNextCount.setText(String.valueOf(courses.size()-1));
-        lblPrevCount.setText(String.valueOf(currentIndex));
-
         btnPrevCourse.setOnAction(e -> showPreviousCourse());
         btnNextCourse.setOnAction(e -> showNextCourse());
 
@@ -204,8 +205,16 @@ public class EnrolleeDetailsController implements Initializable {
 
         loadPaymentTableData();
         loadLessonTableData();
+        textPaymentMethod.setItems(FXCollections.observableArrayList("Cash", "Card", "Online"));
 
 
+    }
+
+    private void loadCourse() {
+        if (student == null) return;
+        List<EnrollmentDTO> studentCourses = enrollmentBO.getStudentCourses(student.getId());
+        courses.clear();
+        courses.addAll(studentCourses);
     }
 
     private void loadLessonTableData() {
@@ -231,29 +240,72 @@ public class EnrolleeDetailsController implements Initializable {
     private void setStudentData() {
         if (student == null) return;
         lblStudentId.setText(student.getId());
-        lblStudentName.setText(student.getFirstName()+" "+student.getLastName());
-       lblGender.setText(student.getGender());
-       lblBirthday.setText(String.valueOf(student.getBirthday()));
-       lblContact.setText(student.getPhone());
-       lblNic.setText(student.getNic());
-       lblJoinDate.setText(String.valueOf(student.getRegDate()));
-       lblEmail.setText(student.getEmail());
-       lblAddress.setText(student.getAddress());
+        lblStudentName.setText(student.getFirstName() + " " + student.getLastName());
+        lblGender.setText(student.getGender());
+        lblBirthday.setText(String.valueOf(student.getBirthday()));
+        lblContact.setText(student.getPhone());
+        lblNic.setText(student.getNic());
+        lblJoinDate.setText(String.valueOf(student.getRegDate()));
+        lblEmail.setText(student.getEmail());
+        lblAddress.setText(student.getAddress());
 
     }
 
 
     private void showCourse(int index) {
         if (index >= 0 && index < courses.size()) {
-            CourseDetailsDTO course = courses.get(index);
-            lblCourseId.setText(course.getId());
-            lblCourseName.setText(course.getName());
-            lblDuration.setText(course.getDuration());
-            lblCost.setText(String.valueOf(course.getFee()));
-            lblEndDate.setText(String.valueOf(course.getEndDate()));
-            lblStats.setText(course.getStatus());
+            EnrollmentDTO course = courses.get(index);
+            lblCourseId.setText(course.getCourseId());
+
+            CourseDTO courseDTO = courseBO.searchCourse(course.getCourseId());
+            lblCourseName.setText(courseDTO.getName());
+            lblDuration.setText(courseDTO.getDuration());
+            lblCost.setText(String.valueOf(courseDTO.getFee()));
+
+// Calculate end date based on regDate + duration
+            LocalDate startDate = course.getRegDate();
+            lblJoinDate.setText(String.valueOf(startDate));
+
+            LocalDate endDate = null;
+            try {
+                // Expecting duration like "12 weeks"
+                String[] parts = courseDTO.getDuration().split(" ");
+                int number = Integer.parseInt(parts[0]);
+                String unit = parts[1].toLowerCase();
+
+                if (unit.contains("week")) {
+                    endDate = startDate.plusWeeks(number);
+                } else if (unit.contains("month")) {
+                    endDate = startDate.plusMonths(number);
+                } else if (unit.contains("day")) {
+                    endDate = startDate.plusDays(number);
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid duration format: " + courseDTO.getDuration());
+            }
+
+            if (endDate != null) {
+                lblEndDate.setText(String.valueOf(endDate));
+                if (LocalDate.now().isAfter(endDate)) {
+                    lblStats.setText("Complete");
+                } else {
+                    lblStats.setText("Pending");
+                }
+            } else {
+                lblEndDate.setText("-");
+                lblStats.setText("Unknown");
+            }
+        } else {
+            lblCourseId.setText("-");
+            lblCourseName.setText("-");
+            lblDuration.setText("-");
+            lblCost.setText("-");
+            lblJoinDate.setText("-");
+            lblEndDate.setText("-");
+            lblStats.setText("-");
         }
     }
+
 
     private void showPreviousCourse() {
         if (currentIndex > 0) {

@@ -2,6 +2,7 @@ package lk.ijse.project.drivemaster.bo.custom;
 
 import lk.ijse.project.drivemaster.bo.SuperBO;
 import lk.ijse.project.drivemaster.dto.CourseDTO;
+import lk.ijse.project.drivemaster.dto.PaymentDTO;
 import lk.ijse.project.drivemaster.dto.StudentDTO;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface CourseBO extends SuperBO {
     List<String> getAllIds(String id) ;
 
     String getNextId();
+
+
+    CourseDTO searchCourse(String courseId);
 }
