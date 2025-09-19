@@ -7,16 +7,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.StageStyle;
 import lk.ijse.project.drivemaster.bo.BOFactoryImpl;
 import lk.ijse.project.drivemaster.bo.BOType;
 import lk.ijse.project.drivemaster.bo.custom.*;
 import lk.ijse.project.drivemaster.dto.*;
+import lk.ijse.project.drivemaster.enums.PaymentStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -131,6 +134,10 @@ public class EnrolleeDetailsController implements Initializable {
 
     private StudentDTO student;
 
+    private final PaymentBO paymentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.PAYMENT);
+    private final EnrollmentBO enrollmentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.ENROLLMENT);
+    private final CourseBO courseBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.COURSE);
+
 
     public void setStudent(StudentDTO student) {
         this.student = student;
@@ -151,16 +158,66 @@ public class EnrolleeDetailsController implements Initializable {
 
     @FXML
     void onActionClear(ActionEvent event) {
-
+        clearPaymentFields();
+        loadLessonTableData();
     }
 
     @FXML
     void onActionConfirm(ActionEvent event) {
+        String paymentId = paymentBO.getNextId();
+        String studentId = lblStudentId.getText();
+        BigDecimal upfrontPaid;
+
+        try {
+            upfrontPaid = new BigDecimal(textPayment.getText().trim());
+        } catch (NumberFormatException | NullPointerException e) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a valid payment amount.");
+            return;
+        }
+
+        String method = textPaymentMethod.getValue();
+
+        if (upfrontPaid.compareTo(BigDecimal.ZERO) <= 0 || method == null || method.trim().isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
+            return;
+        }
+
+        LocalDateTime now = LocalDateTime.now().withNano(0);
+        String status = PaymentStatus.COMPLETE.name(); // cleaner
+        String reference = "RCPT-" + System.currentTimeMillis();
+
+        PaymentDTO paymentDTO = new PaymentDTO(paymentId, studentId, upfrontPaid, method, now, status, reference);
+
+        try {
+            boolean isSuccess = paymentBO.savePayment(paymentDTO);
+            if (isSuccess) {
+                clearPaymentFields();
+                loadPaymentTableData();
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Payment Successful.");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to save payment", e);
+        }
 
     }
 
+    private void clearPaymentFields() {
+        textPaymentMethod.getSelectionModel().clearSelection();
+        textPayment.setText("");
+        lblBalance.setText("0.00");
+    }
+
+    private void showAlert(Alert.AlertType type, String header, String content) {
+        Alert alert = new Alert(type);
+        alert.initStyle(StageStyle.UNDECORATED);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.getDialogPane().setStyle("-fx-border-color: linear-gradient(#7b4397, #dc2430); -fx-border-width: 3px;");
+        alert.showAndWait();
+    }
+
     @FXML
-    void onActionPayment(ActionEvent event) {
+    void onActionCourse(ActionEvent event) {
 
     }
 
@@ -184,12 +241,6 @@ public class EnrolleeDetailsController implements Initializable {
             lblBalance.setText("0.00");
         }
     }
-
-    private final StudentBO studentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.STUDENT);
-    private final PaymentBO paymentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.PAYMENT);
-    private final LessonBO lessonBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.LESSON);
-    private final EnrollmentBO enrollmentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.ENROLLMENT);
-    private final CourseBO courseBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.COURSE);
 
 
     @Override

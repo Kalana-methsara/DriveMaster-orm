@@ -108,7 +108,7 @@ public class PaymentDAOImpl implements PaymentDAO {
         Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            Payment payment = session.get(Payment.class, Long.valueOf(id)); // Payment PK = Long
+            Payment payment = session.get(Payment.class, id);
             if (payment != null) {
                 session.remove(payment);
                 transaction.commit();

@@ -58,6 +58,7 @@ public class UserViewController implements Initializable {
             case "ADMIN":
                 break;
             case "RECEPTIONIST":
+                btnPayment.setDisable(true);
                 btnCourse.setDisable(true);
                 btnInstructor.setDisable(true);
                 btnAdminManage.setDisable(true);
@@ -104,6 +105,14 @@ public class UserViewController implements Initializable {
         navigateTo("/view/BookingPage.fxml");
     }
 
+    @FXML
+    void onPayment(ActionEvent event) {
+        resetOtherPages();
+        changePage1(btnPayment, "/images/payment(1).png", pngPayment);
+        navigateTo("/view/PaymentPage.fxml");
+    }
+
+
 
     @FXML
     void onInstructor(ActionEvent event) {
@@ -126,6 +135,7 @@ public class UserViewController implements Initializable {
         resetButtonStyle(btnStudent);
         resetButtonStyle(btnCourse);
         resetButtonStyle(btnBooking);
+        resetButtonStyle(btnPayment);
         resetButtonStyle(btnInstructor);
         resetButtonStyle(btnAdminManage);
 
@@ -134,6 +144,7 @@ public class UserViewController implements Initializable {
         changePage("/images/students.png", pngStudent);
         changePage("/images/course.png", pngCourse);
         changePage("/images/booking.png", pngBooking);
+        changePage("/images/payment.png", pngPayment);
         changePage("/images/report.png", pngInstructor);
         changePage("/images/admin.png", pngAdminManage);
 

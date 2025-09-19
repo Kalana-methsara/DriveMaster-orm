@@ -73,7 +73,7 @@
                                 <HBox prefHeight="28.0" prefWidth="273.0" spacing="20">
                                     <children>
                                         <Button fx:id="btnUpdateStatus" mnemonicParsing="false" onAction="#onActionUpdateStatus" prefHeight="35.0" prefWidth="120.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#0575e6, #021b79); -fx-text-fill: white; -fx-font-weight: bold;" text="Update Status" />
-                                        <Button fx:id="btnPayment" mnemonicParsing="false" onAction="#onActionPayment" prefHeight="35.0" prefWidth="100.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#7b4397, #dc2430); -fx-text-fill: white; -fx-font-weight: bold;" text="+ Course" />
+                                        <Button fx:id="btnPayment" mnemonicParsing="false" onAction="#onActionCourse" prefHeight="35.0" prefWidth="100.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#7b4397, #dc2430); -fx-text-fill: white; -fx-font-weight: bold;" text="+ Course" />
                                         <Button fx:id="btnPrint" mnemonicParsing="false" onAction="#onActionPrint" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#e52d27, #b31217); -fx-text-fill: white; -fx-font-weight: bold;" text="Print" />
                                     </children>
                                 </HBox>
