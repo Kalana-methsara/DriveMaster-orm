@@ -76,6 +76,11 @@ public class AdminManageController implements Initializable {
 
     @FXML
     void onActionDelete(ActionEvent event) {
+        var selectedUser = tableView.getSelectionModel().getSelectedItem();
+        if (selectedUser == null) {
+            showAlert(Alert.AlertType.WARNING, "No User Selected", "Please select a user before proceeding.");
+            return;
+        }
         boolean confirmed = showConfirmation("Confirm Delete", "Are you sure you want to delete this user?");
         if (confirmed) {
             try {
@@ -129,6 +134,11 @@ public class AdminManageController implements Initializable {
 
     @FXML
     void onActionUpdate(ActionEvent event) {
+        var selectedUser = tableView.getSelectionModel().getSelectedItem();
+        if (selectedUser == null) {
+            showAlert(Alert.AlertType.WARNING, "No User Selected", "Please select a user before proceeding.");
+            return;
+        }
         if (validateInputs()) {
             showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
             return;
@@ -286,6 +296,7 @@ public class AdminManageController implements Initializable {
         textPassword.clear();
         textEmail.clear();
         textRole.getSelectionModel().clearSelection();
+        tableView.getSelectionModel().clearSelection();
     }
 
     public void onKeyUsername(KeyEvent keyEvent) {

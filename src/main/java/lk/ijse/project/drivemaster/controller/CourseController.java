@@ -70,6 +70,11 @@ public class CourseController implements Initializable {
 
     @FXML
     void onActionDelete(ActionEvent event) {
+        var selectedUser = tblCourse.getSelectionModel().getSelectedItem();
+        if (selectedUser == null) {
+            showAlert(Alert.AlertType.WARNING, "No Course Selected", "Please select a course before proceeding.");
+            return;
+        }
         boolean confirmed = showConfirmation("Confirm Delete", "Are you sure you want to delete this course?");
         if (confirmed) {
             try {
@@ -124,6 +129,11 @@ public class CourseController implements Initializable {
 
     @FXML
     void onActionUpdate(ActionEvent event) {
+        var selectedUser = tblCourse.getSelectionModel().getSelectedItem();
+        if (selectedUser == null) {
+            showAlert(Alert.AlertType.WARNING, "No Course Selected", "Please select a course before proceeding.");
+            return;
+        }
         if (!validateInputs()) {
             showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
             return;
@@ -204,6 +214,8 @@ public class CourseController implements Initializable {
         textCourseName.clear();
         textCourseFee.clear();
         textDuration.clear();
+        tblCourse.getSelectionModel().clearSelection();
+
     }
 
     private void loadNextId() {

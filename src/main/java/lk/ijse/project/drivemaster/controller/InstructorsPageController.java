@@ -80,6 +80,11 @@ public class InstructorsPageController implements Initializable {
 
     @FXML
     void onActionDelete(ActionEvent event) {
+        var selectedInstructor = tableView.getSelectionModel().getSelectedItem();
+        if (selectedInstructor == null) {
+            showAlert(Alert.AlertType.WARNING, "No Instructor Selected", "Please select a instructor before proceeding.");
+            return;
+        }
         boolean confirmed = showConfirmation("Confirm Delete", "Are you sure you want to delete this instructor?");
         if (confirmed) {
             try {
@@ -131,6 +136,11 @@ public class InstructorsPageController implements Initializable {
     }
     @FXML
     void onActionUpdate(ActionEvent event) {
+        var selectedInstructor = tableView.getSelectionModel().getSelectedItem();
+        if (selectedInstructor == null) {
+            showAlert(Alert.AlertType.WARNING, "No Instructor Selected", "Please select a instructor before proceeding.");
+            return;
+        }
         if (!validateInputs()) {
             showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
             return;
@@ -275,6 +285,7 @@ public class InstructorsPageController implements Initializable {
         textNic.clear();
         textContact.clear();
         textEmail.clear();
+        tableView.getSelectionModel().clearSelection();
     }
 
     private void loadNextId() {

@@ -97,6 +97,11 @@ public class StudentSearchController implements Initializable {
 
     @FXML
     void onActionDelete(ActionEvent event) {
+        var selectedStudent = tableView.getSelectionModel().getSelectedItem();
+        if (selectedStudent == null) {
+            showAlert(Alert.AlertType.WARNING, "No Student Selected", "Please select a student before proceeding.");
+            return;
+        }
         boolean confirmed = showConfirmation("Confirm Delete", "Are you sure you want to delete this student?");
         if (confirmed) {
             try {
@@ -150,6 +155,11 @@ public class StudentSearchController implements Initializable {
 
     @FXML
     void onActionUpdate(ActionEvent event) {
+        var selectedStudent = tableView.getSelectionModel().getSelectedItem();
+        if (selectedStudent == null) {
+            showAlert(Alert.AlertType.WARNING, "No Student Selected", "Please select a student before proceeding.");
+            return;
+        }
         if (!validateInputs()) {
             showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please check your input fields.");
             return;
@@ -504,6 +514,7 @@ public class StudentSearchController implements Initializable {
         textAddress.clear();
         textJoinDate.setValue(LocalDate.now());
 
+        tableView.getSelectionModel().clearSelection();
 
     }
 
