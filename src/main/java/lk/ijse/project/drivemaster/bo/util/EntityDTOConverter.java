@@ -177,6 +177,7 @@ public class EntityDTOConverter {
 
         lesson.setStartTime(dto.getStartTime());
         lesson.setEndTime(dto.getEndTime());
+        lesson.setLessonDate(dto.getLessonDate());
 
         if (dto.getStatus() != null) {
             lesson.setStatus(LessonStatus.valueOf(dto.getStatus()));

@@ -138,7 +138,7 @@
                                  <Insets left="50.0" />
                               </HBox.margin>
                                         </Label>
-                           <DatePicker fx:id="textLessonDate" onAction="#onActionTimeSlot" prefWidth="200.0">
+                           <DatePicker fx:id="textLessonDate"  prefWidth="200.0">
                               <stylesheets>
                                  <URL value="@../style/DatePicker.css" />
                               </stylesheets>
@@ -182,6 +182,9 @@
                               <HBox.margin>
                                  <Insets left="23.0" />
                               </HBox.margin>
+                              <padding>
+                                 <Insets left="10.0" />
+                              </padding>
                            </Label>
                            <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Course Name">
                               <font>
@@ -198,6 +201,9 @@
                               <HBox.margin>
                                  <Insets left="25.0" />
                               </HBox.margin>
+                              <padding>
+                                 <Insets left="10.0" />
+                              </padding>
                            </Label>
                         </children>
                         <opaqueInsets>
@@ -233,6 +239,9 @@
                               <HBox.margin>
                                  <Insets />
                               </HBox.margin>
+                              <padding>
+                                 <Insets left="10.0" />
+                              </padding>
                            </Label>
                            <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Instructor Name">
                               <font>
@@ -249,6 +258,9 @@
                               <HBox.margin>
                                  <Insets />
                               </HBox.margin>
+                              <padding>
+                                 <Insets left="10.0" />
+                              </padding>
                            </Label>
                         </children>
                         <opaqueInsets>
@@ -377,14 +389,14 @@
                     </VBox>
                     <TableView fx:id="tableView" onMouseClicked="#setData" prefHeight="260.0" prefWidth="1085.0" style="-fx-border-color: #1d4ed8;">
                         <columns>
-                     <TableColumn fx:id="colLessonId" prefWidth="84.0" style="-fx-alignment: CENTER;" text="Lesson Id" />
+                            <TableColumn fx:id="colLessonId" prefWidth="84.0" style="-fx-alignment: CENTER;" text="Lesson Id" />
                             <TableColumn fx:id="colStudentId" prefWidth="95.0" style="-fx-alignment: CENTER;" text="Student Id" />
-                            <TableColumn fx:id="colStudentName" prefWidth="253.0" style="-fx-alignment: CENTER;" text="Name" />
-                     <TableColumn fx:id="colCourseId" prefWidth="105.0" style="-fx-alignment: CENTER;" text="Course ID" />
-                     <TableColumn fx:id="colInstructorId" prefWidth="133.0" style="-fx-alignment: CENTER;" text="Instructor Id" />
-                     <TableColumn fx:id="colStartTime" prefWidth="148.0" style="-fx-alignment: CENTER;" text="Start Time" />
-                     <TableColumn fx:id="colEndTime" prefWidth="142.0" style="-fx-alignment: CENTER;" text="End Time" />
-                     <TableColumn fx:id="colStatus" prefWidth="113.0" style="-fx-alignment: CENTER;" text="Status" />
+                            <TableColumn fx:id="colCourseId" prefWidth="105.0" style="-fx-alignment: CENTER;" text="Course ID" />
+                            <TableColumn fx:id="colInstructorId" prefWidth="133.0" style="-fx-alignment: CENTER;" text="Instructor Id" />
+                            <TableColumn fx:id="colStartTime" prefWidth="148.0" style="-fx-alignment: CENTER;" text="Start Time" />
+                            <TableColumn fx:id="colEndTime" prefWidth="142.0" style="-fx-alignment: CENTER;" text="End Time" />
+                            <TableColumn fx:id="colDate" prefWidth="113.0" style="-fx-alignment: CENTER;" text="Lesson Date" />
+                            <TableColumn fx:id="colStatus" prefWidth="113.0" style="-fx-alignment: CENTER;" text="Status" />
                         </columns>
                         <stylesheets>
                             <URL value="@../style/tableViewStyle.css" />

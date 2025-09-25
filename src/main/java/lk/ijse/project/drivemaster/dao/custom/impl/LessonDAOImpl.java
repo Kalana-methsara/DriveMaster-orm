@@ -2,13 +2,16 @@ package lk.ijse.project.drivemaster.dao.custom.impl;
 
 import lk.ijse.project.drivemaster.config.FactoryConfiguration;
 import lk.ijse.project.drivemaster.dao.custom.LessonDAO;
+import lk.ijse.project.drivemaster.entity.Instructor;
 import lk.ijse.project.drivemaster.entity.Lesson;
+import lk.ijse.project.drivemaster.enums.LessonStatus;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class LessonDAOImpl implements LessonDAO {
 
@@ -16,22 +19,66 @@ public class LessonDAOImpl implements LessonDAO {
 
     @Override
     public List<Lesson> getAll() {
-        return List.of();
-    }
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<Lesson> query = session.createQuery("from Lesson ", Lesson.class);
+            List<Lesson> lessonList = query.list();
+            return lessonList;
+        } finally {
+            session.close();
+        }    }
 
     @Override
     public boolean save(Lesson lesson) {
-        return false;
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.persist(lesson);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
     public boolean update(Lesson lesson) {
-        return false;
-    }
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.merge(lesson);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }        }
 
     @Override
     public boolean delete(String id) {
-        return false;
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            Lesson lesson = session.get(Lesson.class, id);
+            if (lesson != null) {
+                session.remove(lesson);
+                transaction.commit();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
@@ -78,4 +125,53 @@ public class LessonDAOImpl implements LessonDAO {
             session.close();
         }
     }
+
+    @Override
+    public Optional<Lesson> findById(String id) {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Lesson lesson = session.get(Lesson.class, id);
+            return Optional.ofNullable(lesson);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<Lesson> getAllLessonsById(String id) {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<Lesson> query = session.createQuery(
+                    "FROM Lesson l WHERE l.student.id = :id", Lesson.class
+            );
+            query.setParameter("id", id);
+            return query.list();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean updateLessonStatus(String id, String choice) {
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            Lesson lesson = session.get(Lesson.class, id);
+            if (lesson != null) {
+                lesson.setStatus(LessonStatus.valueOf(choice)); // use your entity setter
+                session.merge(lesson);    // update the entity
+                transaction.commit();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+    }
+
+
 }

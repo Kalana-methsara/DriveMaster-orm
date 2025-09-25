@@ -124,7 +124,7 @@
                                             <Insets left="70.0" />
                                         </HBox.margin>
                                     </Label>
-                                    <DatePicker fx:id="textLessonDate" onAction="#onActionTimeSlot" prefWidth="200.0">
+                                    <DatePicker fx:id="textLessonDate" prefWidth="200.0">
                                         <stylesheets>
                                             <URL value="@../style/DatePicker.css" />
                                         </stylesheets>
@@ -187,6 +187,9 @@
                               <HBox.margin>
                                  <Insets left="17.0" />
                               </HBox.margin>
+                              <padding>
+                                 <Insets left="10.0" />
+                              </padding>
                            </Label>
                                     <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Student Name">
                                         <font>
@@ -220,12 +223,12 @@
                                        <Insets left="20.0" />
                                     </HBox.margin>
                                  </Label>
-                                 <ChoiceBox fx:id="textHours1" onKeyReleased="#onKeyHours" prefHeight="24.0" prefWidth="50.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;">
+                                 <ChoiceBox fx:id="textHours1" onKeyReleased="#onKeyHours1" prefHeight="24.0" prefWidth="50.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;">
                                     <HBox.margin>
                                        <Insets left="19.0" />
                                     </HBox.margin>
                                  </ChoiceBox>
-                                 <ChoiceBox fx:id="textMinutes1" onKeyReleased="#onKeyMinutes" prefHeight="24.0" prefWidth="50.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
+                                 <ChoiceBox fx:id="textMinutes1" onKeyReleased="#onKeyMinutes1" prefHeight="24.0" prefWidth="50.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;" />
                                  <Label fx:id="textEndTime" alignment="CENTER" prefHeight="28.0" prefWidth="100.0" style="-fx-background-color: E9F1F6; -fx-border-width: 0 0 2 0; -fx-border-color: #2196f3;">
                                     <HBox.margin>
                                        <Insets left="10.0" />
@@ -261,6 +264,9 @@
                                         <HBox.margin>
                                             <Insets left="23.0" />
                                         </HBox.margin>
+                              <padding>
+                                 <Insets left="10.0" />
+                              </padding>
                                     </Label>
                                     <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Course Name">
                                         <font>
@@ -277,6 +283,9 @@
                                         <HBox.margin>
                                             <Insets left="25.0" />
                                         </HBox.margin>
+                              <padding>
+                                 <Insets left="10.0" />
+                              </padding>
                                     </Label>
                            <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Status">
                               <font>
@@ -319,6 +328,9 @@
                                         <HBox.margin>
                                             <Insets />
                                         </HBox.margin>
+                              <padding>
+                                 <Insets left="10.0" />
+                              </padding>
                                     </Label>
                                     <Label style="-fx-font-weight: bold; -fx-text-fill: #1e3a8a;" text="Instructor Name">
                                         <font>
@@ -335,6 +347,9 @@
                                         <HBox.margin>
                                             <Insets />
                                         </HBox.margin>
+                              <padding>
+                                 <Insets left="10.0" />
+                              </padding>
                                     </Label>
                            <ImageView fitHeight="23.0" fitWidth="23.0" onMouseClicked="#onRefresh" pickOnBounds="true" preserveRatio="true">
                               <image>

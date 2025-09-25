@@ -240,7 +240,7 @@ public class PaymentController implements Initializable {
             throw new RuntimeException(e);
         }
         textMethod.setItems(FXCollections.observableArrayList("Cash", "Card", "Online"));
-        textStatus.setItems(FXCollections.observableArrayList("Pending", "Complete", "Failed"));
+        textStatus.setItems(FXCollections.observableArrayList("PENDING", "COMPLETE", "FAILED"));
 
     }
 
