@@ -137,6 +137,7 @@ public class EnrolleeDetailsController implements Initializable {
     private final PaymentBO paymentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.PAYMENT);
     private final EnrollmentBO enrollmentBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.ENROLLMENT);
     private final CourseBO courseBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.COURSE);
+    private final LessonBO lessonBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.LESSON);
 
 
     public void setStudent(StudentDTO student) {
@@ -254,6 +255,10 @@ public class EnrolleeDetailsController implements Initializable {
         colPaidAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         colPaymentMethod.setCellValueFactory(new PropertyValueFactory<>("method"));
 
+        colInTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        colOutTime.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("lessonDate"));
+
         loadPaymentTableData();
         loadLessonTableData();
         textPaymentMethod.setItems(FXCollections.observableArrayList("Cash", "Card", "Online"));
@@ -269,7 +274,20 @@ public class EnrolleeDetailsController implements Initializable {
     }
 
     private void loadLessonTableData() {
-
+        if (student == null) return;
+        tableLesson.setItems(FXCollections.observableArrayList(
+                lessonBO.getAllLessonsById(student.getId()).stream().map(LessonDTO ->
+                        new LessonDTO(
+                                LessonDTO.getId(),
+                                LessonDTO.getStudentId(),
+                                LessonDTO.getCourseId(),
+                                LessonDTO.getInstructorId(),
+                                LessonDTO.getStartTime(),
+                                LessonDTO.getEndTime(),
+                                LessonDTO.getLessonDate(),
+                                LessonDTO.getStatus()
+                        )).toList()
+        ));
     }
 
     private void loadPaymentTableData() {
