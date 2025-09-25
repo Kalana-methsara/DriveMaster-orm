@@ -10,4 +10,6 @@ public interface InstructorDAO extends CrudDAO<Instructor> {
     List<String> getAllIds(String id) ;
     Optional<Instructor> findById(String id);
     String getLastId();
+
+    int getInstructorCount();
 }

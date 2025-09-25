@@ -121,4 +121,16 @@ public class CourseDAOImpl implements CourseDAO {
 
     }
 
+    @Override
+    public int getStudentCount() {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Long count = session.createQuery("SELECT COUNT(s) FROM Course s", Long.class)
+                    .uniqueResult();
+            return count != null ? count.intValue() : 0;
+        } finally {
+            session.close();
+        }
+    }
+
 }

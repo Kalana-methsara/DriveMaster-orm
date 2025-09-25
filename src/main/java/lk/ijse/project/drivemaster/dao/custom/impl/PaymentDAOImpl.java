@@ -93,6 +93,33 @@ public class PaymentDAOImpl implements PaymentDAO {
         }
     }
 
+    @Override
+    public double getMonthlyIncome() {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<?> query = session.createQuery(
+                    "SELECT SUM(p.amount) FROM Payment p " +
+                            "WHERE MONTH(p.createdAt) = MONTH(CURRENT_DATE()) " +
+                            "AND YEAR(p.createdAt) = YEAR(CURRENT_DATE()) " +
+                            "AND p.status = :status"
+            );
+            query.setParameter("status", PaymentStatus.COMPLETE);
+
+            Object result = query.uniqueResult();
+            if (result == null) {
+                return 0.0;
+            }
+
+            // Convert BigDecimal (or Number) to double
+            return ((Number) result).doubleValue();
+        } finally {
+            session.close();
+        }
+    }
+
+
+
+
 
     @Override
     public boolean save(Payment payment) {

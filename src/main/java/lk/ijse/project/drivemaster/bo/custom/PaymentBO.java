@@ -5,6 +5,7 @@ import lk.ijse.project.drivemaster.dto.InstructorDTO;
 import lk.ijse.project.drivemaster.dto.PaymentDTO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PaymentBO extends SuperBO {
     List<PaymentDTO> getAllPayments() throws Exception;
@@ -17,4 +18,7 @@ public interface PaymentBO extends SuperBO {
     List<PaymentDTO> getStudentPayments(String id);
 
     boolean updatePaymentStatus(String id, String choice);
+
+    double getMonthlyIncome();
+
 }

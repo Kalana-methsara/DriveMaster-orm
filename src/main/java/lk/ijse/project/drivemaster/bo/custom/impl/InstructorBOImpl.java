@@ -93,4 +93,9 @@ public class InstructorBOImpl implements InstructorBO {
             return null;
         }
     }
+
+    @Override
+    public int getInstructorCount() {
+        return instructorDAO.getInstructorCount();
+    }
 }

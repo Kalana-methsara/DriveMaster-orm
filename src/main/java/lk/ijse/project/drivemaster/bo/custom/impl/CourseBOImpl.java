@@ -98,6 +98,11 @@ public class CourseBOImpl implements CourseBO {
         }
     }
 
+    @Override
+    public int getStudentCount() {
+        return courseDAO.getStudentCount();
+    }
+
 
 }
 

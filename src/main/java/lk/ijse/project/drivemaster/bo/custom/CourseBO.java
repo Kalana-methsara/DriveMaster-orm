@@ -22,4 +22,6 @@ public interface CourseBO extends SuperBO {
 
 
     CourseDTO searchCourse(String courseId);
+
+    int getStudentCount();
 }

@@ -19,4 +19,6 @@ public interface InstructorBO extends SuperBO {
     String getNextId();
 
     InstructorDTO searchInstructor(String id);
+
+    int getInstructorCount();
 }

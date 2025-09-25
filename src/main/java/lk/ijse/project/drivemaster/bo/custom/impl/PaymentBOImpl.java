@@ -86,5 +86,10 @@ public class PaymentBOImpl implements PaymentBO {
         return paymentDAO.updatePaymentStatus( id, choice);
     }
 
+    @Override
+    public double getMonthlyIncome() {
+        return paymentDAO.getMonthlyIncome();
+    }
+
 
 }

@@ -13,4 +13,5 @@ public interface CourseDAO extends CrudDAO<Course> {
     Optional<Course> findById(String id);
     String getLastId();
 
+    int getStudentCount();
 }

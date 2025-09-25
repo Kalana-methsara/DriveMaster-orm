@@ -115,4 +115,16 @@ public class InstructorDAOImpl implements InstructorDAO {
             session.close();
         }
     }
+
+    @Override
+    public int getInstructorCount() {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Long count = session.createQuery("SELECT COUNT(s) FROM Instructor s", Long.class)
+                    .uniqueResult();
+            return count != null ? count.intValue() : 0;
+        } finally {
+            session.close();
+        }
+    }
 }
