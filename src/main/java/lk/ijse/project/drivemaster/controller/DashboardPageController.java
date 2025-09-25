@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 public class DashboardPageController implements Initializable {
 
     @FXML
-    private Label NoOfStudent;
+    private Label lblTotalStudents;
 
     private final StudentBO studentBO =
             ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.STUDENT);
@@ -21,6 +21,6 @@ public class DashboardPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int count = studentBO.getStudentCount();
-        NoOfStudent.setText(String.valueOf(count));
+        lblTotalStudents.setText(String.valueOf(count));
     }
 }
