@@ -224,12 +224,46 @@ public class EnrolleeDetailsController implements Initializable {
 
     @FXML
     void onActionPrint(ActionEvent event) {
+        PaymentDTO selected = tablePayment.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert(Alert.AlertType.WARNING, "No selection", "Select a payment to print.");
+            return;
+        }
 
+        String content = String.format("Lesson ID: %s\nStudent: %s\nDate/Time: %s\nReceipt Number: %s\nMethod: %s\nAmount: %s\nStatus: %s",
+
+                selected.getId(), selected.getStudentId(), selected.getCreatedAt(), selected.getReference(), selected.getMethod(), selected.getAmount(), selected.getStatus());
+
+        showAlert(Alert.AlertType.INFORMATION, "Print Preview", content);
     }
 
     @FXML
     void onActionUpdateStatus(ActionEvent event) {
+        PaymentDTO selected = tablePayment.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert(Alert.AlertType.WARNING, "No selection", "Please select a payment from the table first.");
+            return;
+        }
 
+        ChoiceDialog<String> dialog = new ChoiceDialog<>(selected.getStatus(),"PENDING", "COMPLETE", "FAILED");
+        dialog.setTitle("Update Status");
+        dialog.setHeaderText("Update payment status");
+        dialog.setContentText("Choose status:");
+        dialog.initStyle(StageStyle.UNDECORATED);
+
+        dialog.showAndWait().ifPresent(choice -> {
+            try {
+                boolean ok = paymentBO.updatePaymentStatus(selected.getId(), choice);
+                if (ok) {
+//                    showAlert(Alert.AlertType.INFORMATION, "Status updated", "Lesson status updated to " + choice);
+                    loadLessonTableData();
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Update failed", "Could not update status. Please try again.");
+                }
+            } catch (Exception ex) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to update status: " + ex.getMessage());
+            }
+        });
     }
 
     @FXML

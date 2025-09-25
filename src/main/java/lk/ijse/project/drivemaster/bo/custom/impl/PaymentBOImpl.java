@@ -81,5 +81,10 @@ public class PaymentBOImpl implements PaymentBO {
                 .toList();
     }
 
+    @Override
+    public boolean updatePaymentStatus(String id, String choice) {
+        return paymentDAO.updatePaymentStatus( id, choice);
+    }
+
 
 }

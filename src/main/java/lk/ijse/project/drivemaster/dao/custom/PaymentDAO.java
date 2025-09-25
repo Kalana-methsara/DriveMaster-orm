@@ -17,4 +17,6 @@ public interface PaymentDAO extends CrudDAO<Payment> {
     String getLastId();
 
     List<Payment> getStudentPayments(String id);
+
+    boolean updatePaymentStatus(String id, String choice);
 }

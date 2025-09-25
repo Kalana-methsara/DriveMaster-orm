@@ -2,7 +2,10 @@ package lk.ijse.project.drivemaster.dao.custom.impl;
 
 import lk.ijse.project.drivemaster.config.FactoryConfiguration;
 import lk.ijse.project.drivemaster.dao.custom.PaymentDAO;
+import lk.ijse.project.drivemaster.entity.Lesson;
 import lk.ijse.project.drivemaster.entity.Payment;
+import lk.ijse.project.drivemaster.enums.LessonStatus;
+import lk.ijse.project.drivemaster.enums.PaymentStatus;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -63,6 +66,28 @@ public class PaymentDAOImpl implements PaymentDAO {
             );
             query.setParameter("studentId", studentId);
             return query.list();
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean updatePaymentStatus(String id, String choice) {
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            Payment payment = session.get(Payment.class, id);
+            if (payment != null) {
+                payment.setStatus(PaymentStatus.valueOf(choice));
+                session.merge(payment);    // update the entity
+                transaction.commit();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            return false;
         } finally {
             session.close();
         }

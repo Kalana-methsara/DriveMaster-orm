@@ -15,4 +15,6 @@ public interface PaymentBO extends SuperBO {
     boolean deletePayment(String id) throws Exception;
 
     List<PaymentDTO> getStudentPayments(String id);
+
+    boolean updatePaymentStatus(String id, String choice);
 }
