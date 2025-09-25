@@ -24,4 +24,7 @@ public interface StudentBO extends SuperBO {
     List<StudentDTO> searchStudentByDate(String yearMonth);
 
     List<StudentDTO> searchStudent(String searchText);
+
+    int getStudentCount();
+
 }

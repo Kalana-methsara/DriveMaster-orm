@@ -121,5 +121,10 @@ public class StudentBOImpl implements StudentBO {
                 .map(converter::getStudentDTO)
                 .toList();    }
 
+    @Override
+    public int getStudentCount() {
+        return studentDAO.getStudentCount();
+    }
+
 
 }

@@ -36,6 +36,8 @@ public class StudentSearchController implements Initializable {
 
 
     @FXML
+    private Button btnLesson;
+    @FXML
     private Label textStudentId;
     @FXML
     private AnchorPane ancStudentSearch;
@@ -565,5 +567,32 @@ public class StudentSearchController implements Initializable {
     public void onRefresh(MouseEvent mouseEvent) throws Exception {
         clearStudentFields();
         loadTableData();
+    }
+
+    public void onActionLesson(ActionEvent actionEvent) {
+        var selectedStudent = tableView.getSelectionModel().getSelectedItem();
+        if (selectedStudent == null) {
+            showAlert(Alert.AlertType.WARNING, "No Student Selected", "Please select a student before proceeding.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/BookingPage.fxml"));
+            AnchorPane anchorPane = loader.load();
+
+            // Get controller and pass student
+            BookingPageController controller = loader.getController();
+            controller.setStudent(selectedStudent);
+
+            // Load into parent
+            ancStudentSearch.getChildren().clear();
+            anchorPane.prefWidthProperty().bind(ancStudentSearch.widthProperty());
+            anchorPane.prefHeightProperty().bind(ancStudentSearch.heightProperty());
+            ancStudentSearch.getChildren().add(anchorPane);
+
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Page Not Found", "The requested page could not be loaded. Please check and try again.");
+            e.printStackTrace();
+        }
     }
 }

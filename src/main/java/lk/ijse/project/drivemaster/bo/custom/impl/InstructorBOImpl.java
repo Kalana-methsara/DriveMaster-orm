@@ -7,6 +7,7 @@ import lk.ijse.project.drivemaster.bo.util.EntityDTOConverter;
 import lk.ijse.project.drivemaster.dao.custom.InstructorDAO;
 import lk.ijse.project.drivemaster.dao.util.DAOFactoryImpl;
 import lk.ijse.project.drivemaster.dao.util.DAOType;
+import lk.ijse.project.drivemaster.dto.CourseDTO;
 import lk.ijse.project.drivemaster.dto.InstructorDTO;
 import lk.ijse.project.drivemaster.entity.Instructor;
 
@@ -75,4 +76,21 @@ public class InstructorBOImpl implements InstructorBO {
             return String.format("%c%03d", tableChar, nextIdNumber);
         }
         return tableChar + "001";   }
+
+    @Override
+    public InstructorDTO searchInstructor(String id) {
+        Optional<Instructor> optionalInstructor = instructorDAO.findById(id);
+        if (optionalInstructor.isPresent()) {
+            Instructor instructor = optionalInstructor.get();
+            return new InstructorDTO(
+                    instructor.getId(),
+                    instructor.getName(),
+                    instructor.getNic(),
+                    instructor.getEmail(),
+                    instructor.getPhone()
+            );
+        } else {
+            return null;
+        }
+    }
 }

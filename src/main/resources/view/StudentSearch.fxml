@@ -77,7 +77,8 @@
                             <children>
                                 <HBox alignment="BOTTOM_RIGHT" prefHeight="28.0" prefWidth="390.0" spacing="20">
                                     <children>
-                                        <Button fx:id="btnPayment" mnemonicParsing="false" onAction="#onActionPayment" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#0575e6, #021b79); -fx-text-fill: white; -fx-font-weight: bold;" text="Payment" />
+                              <Button fx:id="btnLesson" mnemonicParsing="false" onAction="#onActionLesson" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: green; -fx-text-fill: white; -fx-font-weight: bold;" text="+ Lesson" />
+                                        <Button fx:id="btnPayment" mnemonicParsing="false" onAction="#onActionPayment" prefHeight="28.0" prefWidth="88.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#0575e6, #021b79); -fx-text-fill: white; -fx-font-weight: bold;" text="+ Payment" />
                                         <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#onActionUpdate" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#7b4397, #dc2430); -fx-text-fill: white; -fx-font-weight: bold;" text="^ Update" />
                                         <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#e52d27, #b31217); -fx-text-fill: white; -fx-font-weight: bold;" text="-  Delete" />
                                     </children>

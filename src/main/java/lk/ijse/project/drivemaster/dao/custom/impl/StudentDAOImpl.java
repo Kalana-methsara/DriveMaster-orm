@@ -181,5 +181,18 @@ public class StudentDAOImpl implements StudentDAO {
         }
     }
 
+    @Override
+    public int getStudentCount() {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Long count = session.createQuery("SELECT COUNT(s) FROM Student s", Long.class)
+                    .uniqueResult();
+            return count != null ? count.intValue() : 0;
+        } finally {
+            session.close();
+        }
+    }
+
+
 
 }

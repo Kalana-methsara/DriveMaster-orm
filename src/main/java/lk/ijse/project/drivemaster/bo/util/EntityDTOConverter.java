@@ -149,6 +149,7 @@ public class EntityDTOConverter {
                 lesson.getInstructor() != null ? lesson.getInstructor().getId() : null,
                 lesson.getStartTime(),
                 lesson.getEndTime(),
+                lesson.getLessonDate(),
                 lesson.getStatus() != null ? lesson.getStatus().name() : null
         );
     }
