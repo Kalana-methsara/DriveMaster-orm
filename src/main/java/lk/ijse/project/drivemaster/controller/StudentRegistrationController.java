@@ -189,6 +189,23 @@ public class StudentRegistrationController implements Initializable {
             showAlert(Alert.AlertType.WARNING, "Insufficient Payment", "Please pay at least 10% of the total fee.");
             return;
         }
+        String balanceText = lblBalance.getText().trim();
+
+        if (balanceText.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Balance", "Balance cannot be empty.");
+            return;
+        }
+
+        try {
+            BigDecimal balance = new BigDecimal(balanceText);
+
+            if (balance.compareTo(BigDecimal.ZERO) <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Payment Over", "Please enter a balance greater than 0.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Balance", "Balance must be a valid number.");
+        }
 
         String paymentMethod = textPaymentMethod.getValue();
         if (paymentMethod == null) {

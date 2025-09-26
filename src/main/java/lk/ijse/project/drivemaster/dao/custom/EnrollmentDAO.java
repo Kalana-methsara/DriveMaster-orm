@@ -15,4 +15,6 @@ public interface EnrollmentDAO extends CrudDAO<Enrollment> {
     String getLastId();
 
     List<Enrollment> getStudentCourses(String studentId);
+
+    boolean getStudentDuplicateCourses(String studentId, String courseId);
 }

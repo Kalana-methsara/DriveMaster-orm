@@ -595,4 +595,32 @@ public class StudentSearchController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void onActionCourse(ActionEvent actionEvent) {
+        var selectedStudent = tableView.getSelectionModel().getSelectedItem();
+        if (selectedStudent == null) {
+            showAlert(Alert.AlertType.WARNING, "No Student Selected", "Please select a student before proceeding.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddCourse.fxml"));
+            AnchorPane anchorPane = loader.load();
+
+            // Get controller and pass student
+            AddCourseController controller = loader.getController();
+            controller.setStudent(selectedStudent);
+
+            // Load into parent
+            ancStudentSearch.getChildren().clear();
+            anchorPane.prefWidthProperty().bind(ancStudentSearch.widthProperty());
+            anchorPane.prefHeightProperty().bind(ancStudentSearch.heightProperty());
+            ancStudentSearch.getChildren().add(anchorPane);
+
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Page Not Found", "The requested page could not be loaded. Please check and try again.");
+            e.printStackTrace();
+        }
+
+    }
 }

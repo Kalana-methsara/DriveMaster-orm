@@ -136,6 +136,17 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
+    public boolean update(Student student, Session session) {
+        try {
+            session.merge(student);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
     public List<Student> searchStudentByDate(String yearMonth) {
         Session session = factoryConfiguration.getSession();
         try {

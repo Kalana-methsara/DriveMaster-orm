@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface RegisterStudentBO extends SuperBO {
     boolean StudentRegistration(StudentDTO student, List<EnrollmentDTO> enrollments, PaymentDTO payment);
+    boolean UpdateRegistration(StudentDTO student, List<EnrollmentDTO> enrollments, PaymentDTO payment);
 }

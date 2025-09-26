@@ -18,6 +18,9 @@ public interface StudentDAO extends CrudDAO<Student> {
 
     boolean save(Student student, Session  session);
 
+    boolean update(Student student, Session  session);
+
+
     List<Student> searchStudentByDate(String yearMonth);
 
     List<Student> searchStudent(String searchText);

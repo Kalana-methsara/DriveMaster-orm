@@ -11,4 +11,5 @@ public interface EnrollmentBO extends SuperBO {
     String getNextId();
     List<EnrollmentDTO> getStudentCourses(String studentId);
 
+    boolean getStudentDuplicateCourses(String studentId, String courseId);
 }

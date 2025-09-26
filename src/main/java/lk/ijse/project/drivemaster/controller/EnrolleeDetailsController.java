@@ -139,14 +139,13 @@ public class EnrolleeDetailsController implements Initializable {
     private final CourseBO courseBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.COURSE);
     private final LessonBO lessonBO = ((BOFactoryImpl) BOFactoryImpl.getInstance()).getBO(BOType.LESSON);
 
-
     public void setStudent(StudentDTO student) {
         this.student = student;
         setStudentData();
-        loadPaymentTableData();
         loadLessonTableData();
         loadCourse();
         showCourse(currentIndex);
+        loadPaymentTableData();
         lblNextCount.setText(String.valueOf(courses.size() - 1));
         lblPrevCount.setText(String.valueOf(currentIndex));
 
@@ -175,6 +174,24 @@ public class EnrolleeDetailsController implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a valid payment amount.");
             return;
         }
+        String balanceText = lblBalance.getText().trim();
+
+        if (balanceText.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Balance", "Balance cannot be empty.");
+            return;
+        }
+
+        try {
+            BigDecimal balance = new BigDecimal(balanceText);
+
+            if (balance.compareTo(BigDecimal.ZERO) <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Payment Over", "Please enter a balance greater than 0.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Balance", "Balance must be a valid number.");
+        }
+
 
         String method = textPaymentMethod.getValue();
 
@@ -326,19 +343,40 @@ public class EnrolleeDetailsController implements Initializable {
 
     private void loadPaymentTableData() {
         if (student == null) return;
-        tablePayment.setItems(FXCollections.observableArrayList(
-                paymentBO.getStudentPayments(student.getId()).stream().map(PaymentDTO ->
-                        new PaymentDTO(
-                                PaymentDTO.getId(),
-                                PaymentDTO.getStudentId(),
-                                PaymentDTO.getAmount(),
-                                PaymentDTO.getMethod(),
-                                PaymentDTO.getCreatedAt(),
-                                PaymentDTO.getStatus(),
-                                PaymentDTO.getReference()
-                        )).toList()
-        ));
+
+        List<PaymentDTO> payments = paymentBO.getStudentPayments(student.getId()).stream()
+                .map(p -> new PaymentDTO(
+                        p.getId(),
+                        p.getStudentId(),
+                        p.getAmount(),
+                        p.getMethod(),
+                        p.getCreatedAt(),
+                        p.getStatus(),
+                        p.getReference()
+                ))
+                .toList();
+
+        tablePayment.setItems(FXCollections.observableArrayList(payments));
+
+        BigDecimal allCoursesPayment = payments.stream()
+                .map(PaymentDTO::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal allCoursesFees = BigDecimal.ZERO;
+        for (int index = 0; index < courses.size(); index++) {
+            EnrollmentDTO course = courses.get(index);
+            CourseDTO courseDTO = courseBO.searchCourse(course.getCourseId());
+            if (courseDTO != null && courseDTO.getFee() != null) {
+                allCoursesFees = allCoursesFees.add(courseDTO.getFee());
+            }
+        }
+
+        BigDecimal balance = allCoursesFees.subtract(allCoursesPayment);
+
+        lblTotal.setText(String.format("%.2f", balance));
     }
+
+
 
     private void setStudentData() {
         if (student == null) return;
@@ -365,7 +403,6 @@ public class EnrolleeDetailsController implements Initializable {
             lblDuration.setText(courseDTO.getDuration());
             lblCost.setText(String.valueOf(courseDTO.getFee()));
 
-// Calculate end date based on regDate + duration
             LocalDate startDate = course.getRegDate();
             lblJoinDate.setText(String.valueOf(startDate));
 

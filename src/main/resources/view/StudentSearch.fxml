@@ -61,11 +61,11 @@
 
                     <!-- Buttons Section -->
                     <HBox alignment="BOTTOM_LEFT" spacing="50.0">
-                        <VBox prefHeight="38.0" prefWidth="243.0">
+                        <VBox prefHeight="38.0" prefWidth="153.0">
                             <children>
 
                                 <!-- Title -->
-                                <Label prefHeight="35.0" prefWidth="257.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="All Students ">
+                                <Label prefHeight="35.0" prefWidth="219.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="All Students ">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
@@ -73,17 +73,21 @@
                             </children>
                         </VBox>
                   <TextField fx:id="txtSearch" onAction="#txtSearchOnAction" prefHeight="28.0" prefWidth="293.0" promptText="Search" style="-fx-background-color: #98ff98; -fx-background-radius: 5; -fx-border-color: #98ff98; -fx-border-radius: 5;" />
-                        <VBox alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="432.0">
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="492.0">
                             <children>
                                 <HBox alignment="BOTTOM_RIGHT" prefHeight="28.0" prefWidth="390.0" spacing="20">
                                     <children>
                               <Button fx:id="btnLesson" mnemonicParsing="false" onAction="#onActionLesson" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: green; -fx-text-fill: white; -fx-font-weight: bold;" text="+ Lesson" />
                                         <Button fx:id="btnPayment" mnemonicParsing="false" onAction="#onActionPayment" prefHeight="28.0" prefWidth="88.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#0575e6, #021b79); -fx-text-fill: white; -fx-font-weight: bold;" text="+ Payment" />
+                              <Button fx:id="btnCourse" mnemonicParsing="false" onAction="#onActionCourse" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#f7971e, #ffd200); -fx-text-fill: white; -fx-font-weight: bold;" text="+ Course" />
                                         <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#onActionUpdate" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#7b4397, #dc2430); -fx-text-fill: white; -fx-font-weight: bold;" text="^ Update" />
                                         <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#onActionDelete" prefHeight="35.0" prefWidth="80.0" style="-fx-background-radius: 6; -fx-background-color: linear-gradient(#e52d27, #b31217); -fx-text-fill: white; -fx-font-weight: bold;" text="-  Delete" />
                                     </children>
                                 </HBox>
                             </children>
+                     <HBox.margin>
+                        <Insets left="45.0" />
+                     </HBox.margin>
                         </VBox>
                   <VBox.margin>
                      <Insets bottom="10.0" />

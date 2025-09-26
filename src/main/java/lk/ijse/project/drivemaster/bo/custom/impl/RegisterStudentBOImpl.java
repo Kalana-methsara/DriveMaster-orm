@@ -72,4 +72,49 @@ public class RegisterStudentBOImpl implements RegisterStudentBO {
             session.close();
         }
     }
+
+    @Override
+    public boolean UpdateRegistration(StudentDTO studentDTO, List<EnrollmentDTO> enrollments, PaymentDTO paymentDTO) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+
+            // Save Student
+            boolean isStudentSaved = studentDAO.update(converter.getStudent(studentDTO), session);
+            if (!isStudentSaved) {
+                transaction.rollback();
+                return false;
+            }
+
+            // Save Enrollments with reference to Student
+            for (EnrollmentDTO enrollmentDTO : enrollments) {
+                boolean isEnrollmentSaved = enrollmentDAO.save(converter.getEnrollment(enrollmentDTO), session);
+                if (!isEnrollmentSaved) {
+                    transaction.rollback();
+                    return false;
+                }
+            }
+
+            // Save Payment with reference to Student
+            Payment payment = converter.getPayment(paymentDTO);
+            payment.setStudent(converter.getStudent(studentDTO));
+            boolean isPaymentSaved = paymentDAO.save(payment, session);
+
+            if (!isPaymentSaved) {
+                transaction.rollback();
+                return false;
+            }
+
+            transaction.commit();
+            return true;
+
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+    }
 }

@@ -48,4 +48,9 @@ public class EnrollmentBOImpl implements EnrollmentBO {
                 .map(converter::getEnrollmentDTO)
                 .toList();    }
 
+    @Override
+    public boolean getStudentDuplicateCourses(String studentId, String courseId) {
+        return enrollmentDAO.getStudentDuplicateCourses(studentId,courseId);
+    }
+
 }

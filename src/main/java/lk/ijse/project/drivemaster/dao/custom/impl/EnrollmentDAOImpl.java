@@ -137,6 +137,25 @@ public class EnrollmentDAOImpl implements EnrollmentDAO {
     }
 
     @Override
+    public boolean getStudentDuplicateCourses(String studentId, String courseId) {
+        Session session = factoryConfiguration.getSession();
+        try {
+            Query<Long> query = session.createQuery(
+                    "SELECT COUNT(e.id) FROM Enrollment e " +
+                            "WHERE e.student.id = :studentId AND e.course.id = :courseId",
+                    Long.class
+            );
+            query.setParameter("studentId", studentId);
+            query.setParameter("courseId", courseId);
+            Long count = query.uniqueResult();
+            return count != null && count > 0;
+        } finally {
+            session.close();
+        }
+    }
+
+
+    @Override
     public List<String> getAllIds() {
         Session session = factoryConfiguration.getSession();
         try {
